@@ -20,7 +20,22 @@
 
 <h3>좌석 번호</h3>
 <c:import url="/WEB-INF/views/keypad.jsp"/>
-<form action="payment" method="post">
+<c:choose>
+<c:when test="${title == 'p' }">
+<h4>당일 좌석은 1~20번 입니다</h4>
+</c:when>
+
+<c:when test="${title == 'r' }">
+<h4>예약 좌석은 21~40번 입니다</h4>
+</c:when>
+
+<c:when test="${title == 's' }">
+<h4>스터디룸은 41~43번 입니다</h4>
+</c:when>
+</c:choose>
+
+<form action="payment" method="get">
+	<input type="hidden" name="title" value="${title }">
 	<input type="text" id="Num" name="setNum" readonly="readonly"><br>
 	<input type="submit" value="확인">
 	<button type="button" onclick="location.href='/main'">취소</button>
