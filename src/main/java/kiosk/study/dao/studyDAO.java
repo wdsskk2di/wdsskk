@@ -54,8 +54,13 @@ public class studyDAO {
 	public int seatEmptyCheck(String seatNum) {		
 		try {
 			String sql = "select EndTIME from kiosk where seatNum='"+seatNum+"'";
-			template.queryForObject(sql, String.class);		//null이면 비어있는 자리. 값이 있으면 사용자가 있는 자리
-			return 1;
+			String result = template.queryForObject(sql, String.class);		//null이면 비어있는 자리. 값이 있으면 사용자가 있는 자리
+			
+			if(result.equals("null")) {
+				return 0;
+			}else {
+				return 1;
+			}			
 		} catch (Exception e) {
 			return 0;
 		}

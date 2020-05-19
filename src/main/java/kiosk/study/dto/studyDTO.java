@@ -37,3 +37,12 @@ public class studyDTO {
 	public void setEndTime(String EndTime) {this.EndTime = EndTime;}
 
 }
+/*
+kiosk 테이블
+create table kiosk(title char(1) NOT NULL,seatNum number NOT NULL, timeNum number,
+peopleNum number, totalmoney integer, phoneNum integer,
+startTime varchar2(14), endTime varchar2(14));
+
+ insert into kiosk VALUES('s', 41, null, null, null, null, null, null);
+
+*/
