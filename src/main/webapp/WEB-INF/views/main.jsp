@@ -13,8 +13,14 @@
 <img alt="가격표" src="">
 
 <table>
-	<tr><th><button onclick="location.href='chooseSeatNum?title=p'">당일 좌석</button></th><th><button onclick="location.href='chooseSeatNum?title=r'">예약 좌석</button></th></tr>
-	<tr><th><button onclick="location.href='chooseSeatNum?title=s'">스터디룸</button></th><th><button onclick="location.href='check?title=c'">예약확인</button></th></tr>
+	<tr>
+		<th><button onclick="location.href='chooseSeatNum?title=p'">당일 좌석</button></th>
+		<th><button onclick="location.href='chooseSeatNum?title=r'">예약 좌석</button></th>
+	</tr>
+	<tr>
+		<th><button onclick="location.href='chooseSeatNum?title=s'">스터디룸</button></th>
+		<th><button onclick="location.href='check?title=c'">예약확인</button></th>
+	</tr>
 </table>
 
 </div>

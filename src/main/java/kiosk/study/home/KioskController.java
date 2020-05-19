@@ -1,13 +1,13 @@
 package kiosk.study.home;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -31,19 +31,22 @@ public class KioskController {
 		model.addAttribute("title", title);
 		
 		//입력값 없을때
-		if(request.getParameter("setNum")=="") {
+		if(request.getParameter("seatNum")=="") {
 			return "redirect:chooseSeatNum";
 			
 		}else {	//입력값이 있고
-			int num = Integer.parseInt(request.getParameter("setNum"));		
+			int num = Integer.parseInt(request.getParameter("seatNum"));		
 			
-			if(title.equals("p") && num > 0 && num < 21) {  //당일 좌서 + 입력값이 1~20 사이
+			if(title.equals("p") && num > 0 && num < 21) {  //당일 좌석 + 입력값이 1~20 사이
+				model.addAttribute("seatNum", num);
 				return "payment";	//결제 페이지로
 				
 			}else if(title.equals("r") && num > 20 && num < 41){  //예약 좌석 + 입력값이21~40 사이
+				model.addAttribute("seatNum", num);
 				return "payment";	//결제 페이지로
 				
 			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이
+				model.addAttribute("seatNum", num);
 				return "payment";	//결제 페이지로
 				
 			}else {//입력된 좌석에 문제가 있는 경우
@@ -60,6 +63,11 @@ public class KioskController {
 			}
 		}
 
-
+	}
+	
+	@PostMapping("paymentCheck")
+	public String paymenyCheck(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		return "paymentSuccess";
 	}
 }

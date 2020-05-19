@@ -19,15 +19,17 @@
 
 $( document ).ready( function() {    
 		$('[name="Nbutton"]').click(function(){		
-			//좌석 자릿수 넘버링 최대치 == 텍스트 최대 문자 길이
-			var MaxPositionNum = 2;		
+			//휴대폰 번호 길이 == 텍스트 최대 문자 길이
+			var MaxPositionNum = 8;		
 			
 			//텍스트창에 입력된 문자 길이
 			var NumLength = $("#Num").val().length;
 			console.log(NumLength);		
+			
 			//텍스트 창에 입력되있는 문자
 			var Num = $("#Num").val();
 			console.log(Num);		
+			
 			//버튼 이벤트 발생한 숫자
 			var Nbutton = $(this).attr('value');
 			
@@ -39,9 +41,9 @@ $( document ).ready( function() {
 					$("#Num").val(cancelNum);
 				}						
 			}else{	//숫자 버튼 입력
-				if(NumLength == MaxPositionNum){//입력되어 있는 문자 길이 2
+				if(NumLength == MaxPositionNum){//입력되어 있는 문자 길이 8
 					$("#Num").val(Num);
-				}else{//입력되어 있는 문자 길이 2 미만				
+				}else{//입력되어 있는 문자 길이 8 미만				
 					$("#Num").val(Num+Nbutton);
 				}
 
@@ -57,10 +59,10 @@ $( document ).ready( function() {
 <body>
 
 <table id="chooseNum">
-	<tr><th><button name="Nbutton" value="7">7</button></th><th><button name="Nbutton" value="8">8</button></th><th><button name="Nbutton" value="9">9</button></th></tr>
-	<tr><th><button name="Nbutton" value="4">4</button></th><th><button name="Nbutton" value="5">5</button></th><th><button name="Nbutton" value="6">6</button></th></tr>
-	<tr><th><button name="Nbutton" value="1">1</button></th><th><button name="Nbutton" value="2">2</button></th><th><button name="Nbutton" value="3">3</button></th></tr>
-	<tr><th><button name="Nbutton" value="0">0</button></th><th colspan="2"><button name="Nbutton" value="지움">지움</button></th></tr>
+	<tr><th><button type="button" name="Nbutton" value="7">7</button></th><th><button type="button" name="Nbutton" value="8">8</button></th><th><button type="button" name="Nbutton" value="9">9</button></th></tr>
+	<tr><th><button type="button" name="Nbutton" value="4">4</button></th><th><button type="button" name="Nbutton" value="5">5</button></th><th><button type="button" name="Nbutton" value="6">6</button></th></tr>
+	<tr><th><button type="button" name="Nbutton" value="1">1</button></th><th><button type="button" name="Nbutton" value="2">2</button></th><th><button type="button" name="Nbutton" value="3">3</button></th></tr>
+	<tr><th><button type="button" name="Nbutton" value="0">0</button></th><th colspan="2"><button type="button" name="Nbutton" value="지움">지움</button></th></tr>
 </table>
 
 </body>
