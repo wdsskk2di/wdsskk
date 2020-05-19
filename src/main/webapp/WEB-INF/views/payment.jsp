@@ -54,7 +54,8 @@ $( document ).ready( function() {
 
 </head>
 <body>
-
+<c:choose>
+<c:when test="${result == 0 }">
 <h3>결제</h3>
 <form action="paymentCheck" method="post">
 	<input type="hidden" name="title" value="${title }">
@@ -78,6 +79,11 @@ $( document ).ready( function() {
 	<input type="submit" value="결제">
 	<button type="button" onclick="main">취소</button>
 </form>
+</c:when>
 
+<c:otherwise>
+<script type="text/javascript">location.href="chooseSeatNum?title=${title}";</script>
+</c:otherwise>
+</c:choose>
 </body>
 </html>
