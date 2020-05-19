@@ -5,10 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
 
-<div>
+<style type="text/css">
+ .div_main{background-color: gray; height:800px; width:600px; text-align: center; text-align: center; margin: 0 auto;}
+ .div_main img{margin-top: 100px; margin-bottom: 100px;}
+ .div_main table{margin: 0 auto; margin-top: 150px;}
+ .div_main button{color:white; background-color: silver; width: 250px; height: 80px; margin: 5px; font-size: 20px; font-weight: bold;}
+</style>
+
+</head>
+<body class="main_body">
+
+<div class="div_main">
+
 <img alt="로고" src=""><br>
 <img alt="가격표" src="">
 
