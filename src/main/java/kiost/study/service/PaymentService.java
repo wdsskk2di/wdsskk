@@ -17,7 +17,7 @@ public class PaymentService implements KioskService {
 		//정보입력
 		studyDAO dao = new studyDAO();
 		int result = dao.updateSeat(dto);
-		
+
 		//입력된 정보 가져오기
 		if(result == 1) {
 			dto = dao.checkSeatInfo(dto.getSeatNum());

@@ -63,8 +63,8 @@ public class studyDAO {
 			}			
 		} catch (Exception e) {
 			return 0;
-		}
-		
-
+		}		
 	}
+	
+	//예약 확인을 위한 sql문
 }

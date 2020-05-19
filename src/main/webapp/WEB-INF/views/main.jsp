@@ -15,11 +15,11 @@
 <table>
 	<tr>
 		<th><button onclick="location.href='chooseSeatNum?title=p'">당일 좌석</button></th>
-		<th><button onclick="location.href='chooseSeatNum?title=r'">예약 좌석</button></th>
+		<th><button onclick="location.href='reserve?title=r'">예약 좌석</button></th>
 	</tr>
 	<tr>
-		<th><button onclick="location.href='chooseSeatNum?title=s'">스터디룸</button></th>
-		<th><button onclick="location.href='check?title=c'">예약확인</button></th>
+		<th><button onclick="location.href='studyRoom'">스터디룸</button></th>
+		<th><button onclick="location.href='checkReserve?title=c'">예약확인</button></th>
 	</tr>
 </table>
 

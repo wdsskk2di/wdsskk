@@ -37,6 +37,12 @@ public class KioskController {
 		return "main";
 	}
 	
+	@RequestMapping("studyRoom")
+	public String studyRoom() {
+		
+		return "studyRoom";
+	}
+	
 	@RequestMapping("chooseSeatNum")
 	public String chooseSeatNum(HttpServletRequest request, Model model) {
 		model.addAttribute("title", request.getParameter("title"));
@@ -44,6 +50,15 @@ public class KioskController {
 		ks.execute(model);
 		
 		return "chooseSeatNum";
+	}
+	
+	@RequestMapping("reserve")
+	public String reserve(HttpServletRequest request, Model model) {
+		model.addAttribute("title", request.getParameter("title"));
+		ks = new UpdateSeatInfo();
+		ks.execute(model);
+		
+		return "reserve";
 	}
 	
 	@RequestMapping("payment")
