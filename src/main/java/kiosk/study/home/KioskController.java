@@ -5,13 +5,30 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.care.template.Constant;
+
+import kiosk.study.dto.studyDTO;
+import kiost.study.service.KioskService;
+import kiost.study.service.PaymentService;
+
 @Controller
 public class KioskController {
+	
+	private KioskService ks;
+	
+	public KioskController() {
+		String config = "classpath:applicationJDBC.xml";
+		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(config);
+		JdbcTemplate template = ctx.getBean("template", JdbcTemplate.class);
+		Constant.template = template;
+	}
 	
 	@RequestMapping("main")
 	public String main() {
@@ -66,8 +83,12 @@ public class KioskController {
 	}
 	
 	@PostMapping("paymentCheck")
-	public String paymenyCheck(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request);
+	public String paymenyCheck(HttpServletRequest request, Model model, studyDTO dto) {
+		//model.addAttribute("request", request);
+		model.addAttribute("dto", dto);
+		ks = new PaymentService();
+		ks.execute(model);
+		
 		return "paymentSuccess";
 	}
 }

@@ -57,7 +57,8 @@ $( document ).ready( function() {
 
 <h3>결제</h3>
 <form action="paymentCheck" method="post">
-	선택 번호: ${seatNum }번<input type="hidden" name="${seatNum }"><br>
+	<input type="hidden" name="title" value="${title }">
+	선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }"><br>
 	사용 시간: <select id="TimeNum" name="TimeNum"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select> <br>	
 	<c:choose>
 	<c:when test="${title == 's' }">

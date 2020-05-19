@@ -7,7 +7,9 @@ public class studyDTO {
 	private int TimeNum;	//사용 시간
 	private int PeopleNum;	//스터디룸 사용 인원
 	private int TotalMoney;	//총 금액
-	private String PhoneNum; //핸드폰 번호
+	private int PhoneNum; //핸드폰 번호
+	private String StartTime; //시작 시간
+	private String EndTime; //종료 시간
 	
 	public String getTitle() {return title;}
 	public void setTitle(String title) {this.title = title;}
@@ -16,15 +18,22 @@ public class studyDTO {
 	public void setSeatNum(int seatNum) {this.seatNum = seatNum;}
 	
 	public int getTimeNum() {return TimeNum;}
-	public void setTimeNum(int timeNum) {TimeNum = timeNum;}
+	public void setTimeNum(int timeNum) {this.TimeNum = timeNum;}
 	
 	public int getPeopleNum() {return PeopleNum;}
-	public void setPeopleNum(int peopleNum) {PeopleNum = peopleNum;}
+	public void setPeopleNum(int peopleNum) {this.PeopleNum = peopleNum;}
 	
 	public int getTotalMoney() {return TotalMoney;}
-	public void setTotalMoney(int totalMoney) {TotalMoney = totalMoney;}
+	public void setTotalMoney(int totalMoney) {this.TotalMoney = totalMoney;}
 	
-	public String getPhoneNum() {return PhoneNum;}
-	public void setPhoneNum(String phoneNum) {PhoneNum = phoneNum;}	
+	public int getPhoneNum() {return PhoneNum;}
+	public void setPhoneNum(int phoneNum) {this.PhoneNum = phoneNum;}
 	
+	//사용시간
+	public String getStartTime() {return StartTime;}
+	public void setStartTime(String StartTime) {this.StartTime = StartTime;}
+	
+	public String getEndTime() {return EndTime;	}
+	public void setEndTime(String EndTime) {this.EndTime = EndTime;}
+
 }
