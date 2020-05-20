@@ -35,7 +35,7 @@ $( document ).ready( function() {
 		//버튼 이벤트 발생
 		startTime = $(this).val();					
 
-		$("#startTime").val(startTime+":00시");		
+		$("#startTime").val(startTime+":00시");	
 		$("#TimeNum").removeAttr("disabled") ;
 	});	
 	
@@ -45,7 +45,13 @@ $( document ).ready( function() {
 		
 		//총 시간
 		var endTime = Number(startTime)+Number(TimeNum);
-		$("#startTime").val(startTime+":00 시 ~ "+endTime+":00 시");
+
+		if(endTime>24){
+			endTime -= 24;
+			$("#startTime").val(startTime+":00 시 ~ 0"+endTime+":00 시");
+		}else{
+			$("#startTime").val(startTime+":00 시 ~ "+endTime+":00 시");
+		}		
 		
 		//가격
 		if("${title}"=="p"){

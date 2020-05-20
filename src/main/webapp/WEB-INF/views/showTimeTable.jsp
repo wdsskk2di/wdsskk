@@ -37,27 +37,27 @@
 		<tr>
 			<th><c:choose>
 				<c:when test="${reState.p17 == null }"><button name="startBtn" type="button" value="17">예약 가능</button></c:when>
-				<c:otherwise>예약 불가</c:otherwise>
+				<c:otherwise><span id="17">예약 불가</span></c:otherwise>
 			</c:choose></th>
 			<th><c:choose>
 				<c:when test="${reState.p18 == null }"><button name="startBtn" type="button" value="18">예약 가능</button></c:when>
-				<c:otherwise>예약 불가</c:otherwise>
+				<c:otherwise><span id="18">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
 				<c:when test="${reState.p19 == null }"><button name="startBtn" type="button" value="19">예약 가능</button></c:when>
-				<c:otherwise>예약 불가</c:otherwise>
+				<c:otherwise><span id="19">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
 				<c:when test="${reState.p20 == null }"><button name="startBtn" type="button" value="20">예약 가능</button></c:when>
-				<c:otherwise>예약 불가</c:otherwise>
+				<c:otherwise><span id="20">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
 				<c:when test="${reState.p21 == null }"><button name="startBtn" type="button" value="21">예약 가능</button></c:when>
-				<c:otherwise>예약 불가</c:otherwise>
+				<c:otherwise><span id="21">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
 				<c:when test="${reState.p22 == null }"><button name="startBtn" type="button" value="22">예약 가능</button></c:when>
-				<c:otherwise>예약 불가</c:otherwise>
+				<c:otherwise><span id="22">예약 불가</span></c:otherwise>
 			</c:choose></th>
 		</tr>
 	</table>
