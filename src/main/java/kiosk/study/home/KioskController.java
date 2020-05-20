@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.care.template.Constant;
 
-import kiosk.study.dao.studyDAO;
 import kiosk.study.dto.studyDTO;
 import kiost.study.service.KioskService;
 import kiost.study.service.PaymentService;
@@ -59,7 +58,6 @@ public class KioskController {
 			ks = new roomPState();
 			ks.execute(model);
 		}
-
 		
 		return "chooseSeatNum";
 	}

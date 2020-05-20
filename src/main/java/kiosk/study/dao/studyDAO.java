@@ -1,7 +1,6 @@
 package kiosk.study.dao;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -76,7 +75,7 @@ public class studyDAO {
 	public ArrayList<seatDTO> seatPState() {	
 		ArrayList<seatDTO> list = null;
 		try {
-			String sql = "select seatNum, phoneNum from kiosk where seatNum<21 order by seatNum asc";
+			String sql = "select seatNum, phoneNum, endTime from kiosk where seatNum<21 order by seatNum asc";
 			list = (ArrayList<seatDTO>)template.query(sql, new BeanPropertyRowMapper<seatDTO>(seatDTO.class));
 		} catch (Exception e) {}	
 		
