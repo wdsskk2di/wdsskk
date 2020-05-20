@@ -1,10 +1,14 @@
 package kiosk.study.dao;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.care.template.Constant;
 
+import kiosk.study.dto.seatDTO;
 import kiosk.study.dto.studyDTO;
 
 public class studyDAO {
@@ -67,4 +71,37 @@ public class studyDAO {
 	}
 	
 	//예약 확인을 위한 sql문
+	
+	//당일좌석 배치도 확인
+	public ArrayList<seatDTO> seatPState() {	
+		ArrayList<seatDTO> list = null;
+		try {
+			String sql = "select seatNum, phoneNum from kiosk where seatNum<21 order by seatNum asc";
+			list = (ArrayList<seatDTO>)template.query(sql, new BeanPropertyRowMapper<seatDTO>(seatDTO.class));
+		} catch (Exception e) {}	
+		
+		return list;
+	}
+	
+	//스터디룸 배치도 확인
+	public ArrayList<seatDTO> roomPState() {	
+		ArrayList<seatDTO> list = null;
+		try {
+			String sql = "select seatNum, phoneNum from kiosk where seatNum>40 order by seatNum asc";
+			list = (ArrayList<seatDTO>)template.query(sql, new BeanPropertyRowMapper<seatDTO>(seatDTO.class));
+		} catch (Exception e) {}	
+		
+		return list;
+	}
+	
+	//예약좌석 배치도 확인
+	public ArrayList<seatDTO> seatRState() {	
+		ArrayList<seatDTO> list = null;
+		try {
+			String sql = "select seatNum, phoneNum from kiosk where seatNum>20 and seatNum<41 order by seatNum asc";
+			list = (ArrayList<seatDTO>)template.query(sql, new BeanPropertyRowMapper<seatDTO>(seatDTO.class));
+		} catch (Exception e) {}	
+		
+		return list;
+	}
 }

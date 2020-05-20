@@ -16,8 +16,9 @@
 
 <div>
 
-<img alt="배치도" src="">
+<img alt="배치도" src=""><br>
 
+<c:import url="/WEB-INF/views/showSeatTable.jsp"/>
 <h3>좌석 번호</h3>
 
 <c:choose>

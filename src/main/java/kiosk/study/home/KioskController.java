@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.care.template.Constant;
 
+import kiosk.study.dao.studyDAO;
 import kiosk.study.dto.studyDTO;
 import kiost.study.service.KioskService;
 import kiost.study.service.PaymentService;
 import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.UpdateSeatInfo;
+import kiost.study.service.roomPState;
+import kiost.study.service.seatPState;
+import kiost.study.service.seatRState;
 
 @Controller
 public class KioskController {
@@ -39,7 +43,6 @@ public class KioskController {
 	
 	@RequestMapping("studyRoom")
 	public String studyRoom() {
-		
 		return "studyRoom";
 	}
 	
@@ -49,6 +52,15 @@ public class KioskController {
 		ks = new UpdateSeatInfo();
 		ks.execute(model);
 		
+		if(request.getParameter("title").equals("p")) { //당일좌석 사용자 유무
+			ks = new seatPState();
+			ks.execute(model);
+		}else {//스터디룸 사용자 유무
+			ks = new roomPState();
+			ks.execute(model);
+		}
+
+		
 		return "chooseSeatNum";
 	}
 	
@@ -57,6 +69,14 @@ public class KioskController {
 		model.addAttribute("title", request.getParameter("title"));
 		ks = new UpdateSeatInfo();
 		ks.execute(model);
+		
+		if(request.getParameter("title").equals("r")) { //예약좌석 사용자 유무
+			ks = new seatRState();
+			ks.execute(model);
+		}else {//스터디룸 사용자 유무
+			ks = new roomPState();
+			ks.execute(model);
+		}
 		
 		return "reserve";
 	}
