@@ -6,8 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- ajax 사용을 위한 연결 -->
+<script type="text/javascript" src="resources/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>
 
 <script type="text/javascript">
+	//날짜 계산
 	function getFormatDate(date){
 	    var year = date.getFullYear();              //yyyy
 	    var month = (1 + date.getMonth());          //M
@@ -32,27 +36,27 @@
 		<tr> <th>17:00</th><th>18:00</th><th>19:00</th><th>20:00</th><th>21:00</th><th>22:00</th> </tr>
 		<tr>
 			<th><c:choose>
-				<c:when test="${reState.p17 == null }"><button>예약 가능</button></c:when>
+				<c:when test="${reState.p17 == null }"><button name="startBtn" type="button" value="17">예약 가능</button></c:when>
 				<c:otherwise>예약 불가</c:otherwise>
 			</c:choose></th>
 			<th><c:choose>
-				<c:when test="${reState.p18 == null }"><button>예약 가능</button></c:when>
+				<c:when test="${reState.p18 == null }"><button name="startBtn" type="button" value="18">예약 가능</button></c:when>
 				<c:otherwise>예약 불가</c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
-				<c:when test="${reState.p19 == '' }"><button>예약 가능</button></c:when>
+				<c:when test="${reState.p19 == null }"><button name="startBtn" type="button" value="19">예약 가능</button></c:when>
 				<c:otherwise>예약 불가</c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
-				<c:when test="${reState.p20 == 'null' }"><button>예약 가능</button></c:when>
+				<c:when test="${reState.p20 == null }"><button name="startBtn" type="button" value="20">예약 가능</button></c:when>
 				<c:otherwise>예약 불가</c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
-				<c:when test="${reState.p21 == '' }"><button>예약 가능</button></c:when>
+				<c:when test="${reState.p21 == null }"><button name="startBtn" type="button" value="21">예약 가능</button></c:when>
 				<c:otherwise>예약 불가</c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
-				<c:when test="${reState.p22 == '' }"><button>예약 가능</button></c:when>
+				<c:when test="${reState.p22 == null }"><button name="startBtn" type="button" value="22">예약 가능</button></c:when>
 				<c:otherwise>예약 불가</c:otherwise>
 			</c:choose></th>
 		</tr>

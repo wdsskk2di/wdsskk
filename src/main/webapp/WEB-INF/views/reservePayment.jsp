@@ -15,7 +15,7 @@
 
 <%
 //시간 1~6
-int[] Tlist = {1,2,3,4,5,6};
+int[] Tlist = {1,2,3,4};
 request.setAttribute("Tlist",Tlist);
 
 //스터디룸 정원
@@ -27,12 +27,27 @@ request.setAttribute("Plist",Plist);
 %>
 
 //시간 선택시
+
 $( document ).ready( function() { 
+	var startTime;
+	
+	$('[name="startBtn"]').click(function(){			
+		//버튼 이벤트 발생
+		startTime = $(this).val();					
+
+		$("#startTime").val(startTime+":00시");		
+		$("#TimeNum").removeAttr("disabled") ;
+	});	
 	
 	$("#TimeNum").click(function(){			
 		//버튼 이벤트 발생한 숫자
 		var TimeNum = $(this).val();					
-				
+		
+		//총 시간
+		var endTime = Number(startTime)+Number(TimeNum);
+		$("#startTime").val(startTime+":00 시 ~ "+endTime+":00 시");
+		
+		//가격
 		if("${title}"=="p"){
 			$("#TotalMoney").val(TimeNum*1000);	
 		}else if("${title}"=="r"){
@@ -63,7 +78,9 @@ $( document ).ready( function() {
 	
 	<input type="hidden" name="title" value="${title }">
 	선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }"><br>
-	사용 시간: <select id="TimeNum" name="TimeNum"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select> <br>	
+	시작 시간: <input type="text" id="startTime" name="startTime" readonly="readonly">
+	사용 시간: <select id="TimeNum" name="TimeNum" disabled="disabled"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select> <br>	
+	
 	<c:choose>
 	<c:when test="${title == 's' }">
 		<c:choose>
@@ -76,9 +93,12 @@ $( document ).ready( function() {
 		</c:choose>
 	</c:when>
 	</c:choose>	
+	
 	결제 금액: <input type="text" id="TotalMoney" name="TotalMoney" readonly="readonly"><br>
+	
 	휴대폰 번호: 010 - <input type="text" id="Num" name="PhoneNum" readonly="readonly"  style="width: 80px;"><br>
 	<c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/>
+	
 	<input type="submit" value="결제">
 	<button type="button" onclick="location.href='main'">취소</button>
 </form>

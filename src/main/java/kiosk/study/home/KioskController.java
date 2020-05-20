@@ -156,16 +156,15 @@ public class KioskController {
 			int num = Integer.parseInt(request.getParameter("seatNum"));		
 			
 			if(title.equals("r") && num > 20 && num < 41){  //예약 좌석 + 입력값이21~40 사이				
-				//스터디룸의 타임테이블
-				ks = new ReserveState();
-				ks.execute(model);
-				
 				//좌석 번호
 				model.addAttribute("seatNum", num);
 				return "reservePayment";	//결제 페이지로
 				
 			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이				
-
+				//스터디룸의 타임테이블
+				ks = new ReserveState();
+				ks.execute(model);			
+				
 				model.addAttribute("seatNum", num);
 				return "reservePayment";	//결제 페이지로
 				
