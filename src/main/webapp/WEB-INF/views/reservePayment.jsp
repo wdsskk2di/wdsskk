@@ -37,6 +37,12 @@ $( document ).ready( function() {
 
 		$("#startTime").val(startTime+":00시");	
 		$("#TimeNum").removeAttr("disabled") ;
+
+		var oneTime = Number(startTime)+1;
+
+		if($("#"+oneTime).val() == "예약 불가"){
+			$("select option[value*='2']").attr('disabled',true);
+		}
 	});	
 	
 	$("#TimeNum").click(function(){			
