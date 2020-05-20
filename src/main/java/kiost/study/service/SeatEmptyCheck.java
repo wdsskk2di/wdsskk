@@ -20,10 +20,8 @@ public class SeatEmptyCheck implements KioskService{
 		studyDAO dao = new studyDAO();
 		
 		if(dao.seatEmptyCheck(seatNum)==0) {
-			System.out.println(0);
 			model.addAttribute("result", 0);
 		}else {
-			System.out.println(1);
 			model.addAttribute("result", 1);
 		}
 		

@@ -54,10 +54,13 @@ $( document ).ready( function() {
 
 </head>
 <body>
-<c:choose>
-<c:when test="${result == 0 }">
-<h3>결제</h3>
+
+<h3>예약 결제</h3>
 <form action="paymentCheck" method="post">
+
+	<h3>${seatNum }번 타임 테이블</h3>
+	<c:import url="/WEB-INF/views/showTimeTable.jsp"/>
+	
 	<input type="hidden" name="title" value="${title }">
 	선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }"><br>
 	사용 시간: <select id="TimeNum" name="TimeNum"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select> <br>	
@@ -79,11 +82,6 @@ $( document ).ready( function() {
 	<input type="submit" value="결제">
 	<button type="button" onclick="location.href='main'">취소</button>
 </form>
-</c:when>
 
-<c:otherwise>
-<script type="text/javascript">location.href="chooseSeatNum?title=${title}";</script>
-</c:otherwise>
-</c:choose>
 </body>
 </html>

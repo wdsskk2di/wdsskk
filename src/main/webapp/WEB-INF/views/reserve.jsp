@@ -35,7 +35,7 @@
 </c:when>
 </c:choose>
 
-<form action="payment" method="get">
+<form action="reservePayment" method="get">
 	<input type="hidden" name="title" value="${title }">
 	<input type="text" id="Num" name="seatNum" readonly="readonly" style="text-align: right; width: 80px;">번<br>
 	<c:import url="/WEB-INF/views/keypad/timeKeypad.jsp"/>

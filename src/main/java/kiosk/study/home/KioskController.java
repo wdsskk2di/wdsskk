@@ -17,6 +17,7 @@ import com.care.template.Constant;
 import kiosk.study.dto.studyDTO;
 import kiost.study.service.KioskService;
 import kiost.study.service.PaymentService;
+import kiost.study.service.ReserveState;
 import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.UpdateSeatInfo;
 import kiost.study.service.roomPState;
@@ -139,5 +140,43 @@ public class KioskController {
 		ks.execute(model);
 		
 		return "paymentSuccess";
+	}
+	
+	@RequestMapping("reservePayment")
+	public String reservePayment(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		String title = request.getParameter("title");
+		model.addAttribute("title", title);
+
+		//입력값 없을때
+		if(request.getParameter("seatNum")=="") {
+			return "redirect:reserve";
+			
+		}else {	//입력값이 있고
+			int num = Integer.parseInt(request.getParameter("seatNum"));		
+			
+			if(title.equals("r") && num > 20 && num < 41){  //예약 좌석 + 입력값이21~40 사이				
+				//스터디룸의 타임테이블
+				ks = new ReserveState();
+				ks.execute(model);
+				
+				//좌석 번호
+				model.addAttribute("seatNum", num);
+				return "reservePayment";	//결제 페이지로
+				
+			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이				
+
+				model.addAttribute("seatNum", num);
+				return "reservePayment";	//결제 페이지로
+				
+			}else {//입력된 좌석에 문제가 있는 경우
+				try {
+					//좌석 선택창으로
+					return "redirect:reserve";
+				} catch (Exception e) {return "redirect:reserve";}
+
+			}
+		}
+
 	}
 }

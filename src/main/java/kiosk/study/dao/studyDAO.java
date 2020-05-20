@@ -68,10 +68,8 @@ public class studyDAO {
 			return 0;
 		}		
 	}
-	
-	//예약 확인을 위한 sql문
-	
-	//당일좌석 배치도 확인
+
+	//당일좌석 현재 배치도 확인
 	public ArrayList<seatDTO> seatPState() {	
 		ArrayList<seatDTO> list = null;
 		try {
@@ -82,22 +80,22 @@ public class studyDAO {
 		return list;
 	}
 	
-	//스터디룸 배치도 확인
+	//스터디룸 현재 배치도 확인
 	public ArrayList<seatDTO> roomPState() {	
 		ArrayList<seatDTO> list = null;
 		try {
-			String sql = "select seatNum, phoneNum from kiosk where seatNum>40 order by seatNum asc";
+			String sql = "select seatNum, phoneNum, endTime from kiosk where seatNum>40 order by seatNum asc";
 			list = (ArrayList<seatDTO>)template.query(sql, new BeanPropertyRowMapper<seatDTO>(seatDTO.class));
 		} catch (Exception e) {}	
 		
 		return list;
 	}
 	
-	//예약좌석 배치도 확인
+	//예약좌석 현재 배치도 확인
 	public ArrayList<seatDTO> seatRState() {	
 		ArrayList<seatDTO> list = null;
 		try {
-			String sql = "select seatNum, phoneNum from kiosk where seatNum>20 and seatNum<41 order by seatNum asc";
+			String sql = "select seatNum, phoneNum, endTime from kiosk where seatNum>20 and seatNum<41 order by seatNum asc";
 			list = (ArrayList<seatDTO>)template.query(sql, new BeanPropertyRowMapper<seatDTO>(seatDTO.class));
 		} catch (Exception e) {}	
 		
