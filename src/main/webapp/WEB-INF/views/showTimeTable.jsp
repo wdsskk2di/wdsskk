@@ -11,6 +11,8 @@
 <script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>
 
 <script type="text/javascript">
+	var contDateBtn = 0;
+
 	//날짜 계산
 	function getFormatDate(date){
 	    var year = date.getFullYear();              //yyyy
@@ -38,13 +40,47 @@
 			}
 		}
 	}
+	
+	function get_tomoDate() {
+		if(contDateBtn == 0){
+			$.ajax({
+				url:"reserveTomorrow?seatNum="+${seatNum },
+				type: "GET",	//방식
+				success: function(data){	//성공시
+					$("#timeTable1").html(data);
+				},
+				error:function(){	//실패시
+					console.log("실패")
+				}
+			});
+		
+		contDateBtn += 1;
+		}else{}
+	}
+	
+	function get_toDate() {
+		if(contDateBtn == 1){
+			$.ajax({
+				url:"reserveToday?seatNum="+${seatNum },
+				type: "GET",	//방식
+				success: function(data){	//성공시
+					$("#timeTable1").html(data);
+				},
+				error:function(){	//실패시
+					console.log("실패")
+				}
+			});
+
+		contDateBtn -= 1;
+		}else{}
+	}
 </script>
 
 </head>
 
 <body onload="reDate()">
-	<table border="1">
-		<caption id="reserveDate"><button type="button"><</button>${reState.reDate }<button type="button">></button></caption>
+	<table border="1" id="timeTable1">
+		<caption id="reserveDate"><button type="button" onclick="get_toDate()"><</button>${reState.reDate }<button type="button" onclick="get_tomoDate()">></button></caption>
 		<tr> <th>17:00</th><th>18:00</th><th>19:00</th><th>20:00</th><th>21:00</th><th>22:00</th> </tr>
 		<tr>
 			<th><c:choose>

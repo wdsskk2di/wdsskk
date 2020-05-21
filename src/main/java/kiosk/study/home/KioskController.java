@@ -1,6 +1,7 @@
 package kiosk.study.home;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,15 +10,19 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.care.template.Constant;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import kiosk.study.dto.studyDTO;
 import kiost.study.service.KioskService;
 import kiost.study.service.PaymentService;
 import kiost.study.service.ReserveState;
+import kiost.study.service.ReserveState2;
 import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.UpdateSeatInfo;
 import kiost.study.service.roomPState;
@@ -185,5 +190,31 @@ public class KioskController {
 			}
 		}
 
+	}
+	
+	@GetMapping(value="reserveTomorrow", produces = "application/json;charset=utf8")	//네번째. Json사용을 위해 test->json으로 변경	
+	public String reserveTomorrow(HttpServletRequest request, Model model) //throws JsonProcessingException 
+	{	//네번째. DB연결 후 받아온 값을 넘겨주는 상황을 가정. 반환값은 JSON형태만 가능
+		model.addAttribute("request", request);
+		//스터디룸의 타임테이블
+		ks = new ReserveState2();
+		ks.execute(model);	
+		
+//		ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+//		String strJson = mapper.writeValueAsString(list);		
+		return "showTimeTable";
+	}
+	
+	@GetMapping(value="reserveToday", produces = "application/json;charset=utf8")	//네번째. Json사용을 위해 test->json으로 변경	
+	public String reserveToday(HttpServletRequest request, Model model) //throws JsonProcessingException 
+	{	//네번째. DB연결 후 받아온 값을 넘겨주는 상황을 가정. 반환값은 JSON형태만 가능
+		model.addAttribute("request", request);
+		//스터디룸의 타임테이블
+		ks = new ReserveState();
+		ks.execute(model);	
+		
+//		ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+//		String strJson = mapper.writeValueAsString(list);		
+		return "showTimeTable";
 	}
 }
