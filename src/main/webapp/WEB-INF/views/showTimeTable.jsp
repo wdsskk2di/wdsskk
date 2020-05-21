@@ -26,6 +26,17 @@
 		date = getFormatDate(date);
 		$("#reserveDate").text(date);	
 		$('[name="reDate"]').val(date);
+		
+		var todate = new Date();
+		var chkTime = todate.getHours();
+		
+		//현재 시간보다 전 시간대면 클릭 못하게 막기
+		for(var i = 8; i<Number(chkTime); i++){
+			if(i<Number(chkTime)){
+				$('#'+i).html("예약 불가");
+				$('#'+i).attr("disabled",true);
+			}
+		}
 	}
 </script>
 
@@ -37,11 +48,11 @@
 		<tr> <th>17:00</th><th>18:00</th><th>19:00</th><th>20:00</th><th>21:00</th><th>22:00</th> </tr>
 		<tr>
 			<th><c:choose>
-				<c:when test="${reState.p17 == null }"><button name="startBtn" type="button" value="17">예약 가능</button></c:when>
+				<c:when test="${reState.p17 == null }"><button id="17" name="startBtn" type="button" value="17">예약 가능</button></c:when>
 				<c:otherwise><span id="17">예약 불가</span></c:otherwise>
 			</c:choose></th>
 			<th><c:choose>
-				<c:when test="${reState.p18 == null }"><button name="startBtn" type="button" value="18">예약 가능</button></c:when>
+				<c:when test="${reState.p18 == null }"><button id="18" name="startBtn" type="button" value="18">예약 가능</button></c:when>
 				<c:otherwise><span id="18">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>

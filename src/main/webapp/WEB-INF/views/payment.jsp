@@ -61,8 +61,8 @@ $( document ).ready( function() {
 	<input type="hidden" name="title" value="${title }">
 	선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }"><br>
 	사용 시간: <select id="TimeNum" name="TimeNum"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select> <br>	
-	<c:choose>
-	<c:when test="${title == 's' }">
+	
+	<c:if test="${title == 's' }">
 		<c:choose>
 		<c:when test="${seatNum == 43 }">
 		사용 인원: <select id="PeopleNum" name="PeopleNum"> <c:forEach var="people" items="${Plist43 }"> <option id="selectPeople">${people }</option> </c:forEach> </select> <br>
@@ -71,8 +71,8 @@ $( document ).ready( function() {
 		사용 인원: <select id="PeopleNum" name="PeopleNum"> <c:forEach var="people" items="${Plist }"> <option id="selectPeople">${people }</option> </c:forEach> </select> <br>
 		</c:otherwise>
 		</c:choose>
-	</c:when>
-	</c:choose>	
+	</c:if>
+	
 	결제 금액: <input type="text" id="TotalMoney" name="TotalMoney" readonly="readonly"><br>
 	휴대폰 번호: 010 - <input type="text" id="Num" name="PhoneNum" readonly="readonly"  style="width: 80px;"><br>
 	<c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/>

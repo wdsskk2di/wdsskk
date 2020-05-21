@@ -141,8 +141,7 @@ $( document ).ready( function() {
 	사용 시간: <select id="TimeNum" name="TimeNum" disabled="disabled"> <option id="selectTime">${time }</option> </select> <br>	
 	종료 시간: <input type="text" id="endTime" readonly="readonly">
 	
-	<c:choose>
-	<c:when test="${title == 's' }">
+	<c:if test="${title == 's' }">
 		<c:choose>
 		<c:when test="${seatNum == 43 }">
 		사용 인원: <select id="PeopleNum" name="PeopleNum"> <c:forEach var="people" items="${Plist43 }"> <option id="selectPeople">${people }</option> </c:forEach> </select> <br>
@@ -151,8 +150,7 @@ $( document ).ready( function() {
 		사용 인원: <select id="PeopleNum" name="PeopleNum"> <c:forEach var="people" items="${Plist }"> <option id="selectPeople">${people }</option> </c:forEach> </select> <br>
 		</c:otherwise>
 		</c:choose>
-	</c:when>
-	</c:choose>	
+	</c:if>
 	
 	결제 금액: <input type="text" id="TotalMoney" name="TotalMoney" readonly="readonly"><br>
 	

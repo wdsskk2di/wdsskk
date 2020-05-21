@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import kiosk.study.dao.ReserveDAO;
-import kiosk.study.dto.ShowReserveDTO;
 
 public class ReserveState implements KioskService {
 
@@ -20,6 +19,7 @@ public class ReserveState implements KioskService {
 		
 		ReserveDAO dao = new ReserveDAO();
 		model.addAttribute("reState", dao.checkReserveInfo(seatNum));
+		
 	}
 
 }
