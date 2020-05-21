@@ -1,11 +1,11 @@
-//시간 선택시
-
-$( document ).ready( function() { 
-	var startTime;	//시작 시간
-	var itemTime;	//시간 선택에 따른 사용시간 선택지
+var startTime;	//시작 시간
+var itemTime;	//시간 선택에 따른 사용시간 선택지
 	
-	//마지막 사용 시간(22= 10시~11시가 마지막 인것)
-	var lastUseTime = 22;
+//마지막 사용 시간(22= 10시~11시가 마지막 인것)
+var lastUseTime = 22;
+
+$(document).on('click','[name="startBtn"]',function(e){
+	e.stopImmediatePropagation();
 	
 	//시작시간 선택
 	$('[name="startBtn"]').click(function(){			
@@ -64,8 +64,12 @@ $( document ).ready( function() {
             }
 		}
 	});	
+
+});
+
+$( document ).ready( function() {
 	
-	//시간 선택
+	//사용 시간 선택
 	$("#TimeNum").click(function(){			
 		//버튼 이벤트 발생한 숫자
 		var TimeNum = $(this).val();					
@@ -74,13 +78,12 @@ $( document ).ready( function() {
 		var endTime = Number(startTime)+Number(TimeNum);
 		
 		$('[name="endTime"]').val(endTime);	//시작 시간 값 넘겨줄 name
-		$("#shoEndTime").val(EndTime+":00시");	//시작 시간 값 보여줄 id
 		
 		if(endTime>24){
 			endTime -= 24;
-			$("#endTime").val(startTime+":00 시 ~ 0"+endTime+":00 시");
+			$("#showEndTime").val(startTime+":00 시 ~ 0"+endTime+":00 시");
 		}else{
-			$("#endTime").val(startTime+":00 시 ~ "+endTime+":00 시");
+			$("#showEndTime").val(startTime+":00 시 ~ "+endTime+":00 시");
 		}		
 		
 		//가격

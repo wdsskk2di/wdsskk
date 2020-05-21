@@ -13,25 +13,10 @@
 <script type="text/javascript">
 	var contDateBtn = 0;
 
-	//날짜 계산
-	function getFormatDate(date){
-	    var year = date.getFullYear();              //yyyy
-	    var month = (1 + date.getMonth());          //M
-	    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-	    var day = date.getDate();                   //d
-	    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-	    return  year + '/' + month + '/' + day;
-	}
-
-	function reDate() {
-//		var date = new Date();
-//		date = getFormatDate(date);
-//		$("#reserveDate").text(date);	
-//		$('[name="reDate"]').val(date);
-		
+	function reDate() {		
 		var todate = new Date();
 		var chkTime = todate.getHours();
-		
+			
 		//현재 시간보다 전 시간대면 클릭 못하게 막기
 		for(var i = 8; i<Number(chkTime); i++){
 			if(i<Number(chkTime)){
@@ -70,7 +55,6 @@
 					console.log("실패")
 				}
 			});
-
 		contDateBtn -= 1;
 		}else{}
 	}

@@ -68,15 +68,15 @@ public class KioskController {
 	@RequestMapping("reserve")
 	public String reserve(HttpServletRequest request, Model model) {
 		model.addAttribute("title", request.getParameter("title"));
-		ks = new UpdateSeatInfo();
-		ks.execute(model);
+//		ks = new UpdateSeatInfo();
+//		ks.execute(model);
 		
 		if(request.getParameter("title").equals("r")) { //예약좌석 사용자 유무
 			ks = new seatRState();
 			ks.execute(model);
 		}else {//스터디룸 사용자 유무
-			ks = new roomPState();
-			ks.execute(model);
+//			ks = new roomPState();
+//			ks.execute(model);
 		}
 		
 		return "reserve";
