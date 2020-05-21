@@ -12,12 +12,11 @@
 <script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>
 
 <script type="text/javascript">
-
-<%
+//사용 시간: <select id="TimeNum" name="TimeNum" disabled="disabled"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select> <br>	
 //시간 1~6
-int[] Tlist = {1,2,3,4};
-request.setAttribute("Tlist",Tlist);
-
+//int[] Tlist = {1, 2, 3, 4};
+//request.setAttribute("Tlist",Tlist);
+<%
 //스터디룸 정원
 int[] Plist43 = {1,2,3,4,5,6};
 request.setAttribute("Plist43",Plist43);
@@ -29,22 +28,63 @@ request.setAttribute("Plist",Plist);
 //시간 선택시
 
 $( document ).ready( function() { 
-	var startTime;
+	var startTime;	//시작 시간
+	var itemTime;	//시간 선택에 따른 사용시간 선택지
 	
+	//마지막 사용 시간(22= 10시~11시가 마지막 인것)
+	var lastUseTime = 22;
+	
+	//시작시간 선택
 	$('[name="startBtn"]').click(function(){			
 		//버튼 이벤트 발생
 		startTime = $(this).val();					
 
-		$("#startTime").val(startTime+":00시");	
+		$('[name="startTime"]').val(startTime);	//시작 시간 값 넘겨줄 name
+		$("#showStartTime").val(startTime+":00시");	//시작 시간 값 보여줄 id
+	
+		//사용 시간 선택 제한
 		$("#TimeNum").removeAttr("disabled") ;
-
 		var oneTime = Number(startTime)+1;
+		var twoTime = Number(startTime)+2;
+		var threeTime = Number(startTime)+3;
+		var fourTime = Number(startTime)+4;
 
-		if($("#"+oneTime).val() == "예약 불가"){
-			$("select option[value*='2']").attr('disabled',true);
+		if($('#'+oneTime).text() == "예약 불가" || oneTime>lastUseTime){
+			itemTime = [1];
+			$("#TimeNum").empty();
+			
+			for(var count = 0; count < 1; count++){                
+                var option = $("<option>"+itemTime[count]+"</option>");
+                $('#TimeNum').append(option);
+            }
+		}else if($('#'+twoTime).text() == "예약 불가" || twoTime>lastUseTime){
+			itemTime = [1,2];
+			$("#TimeNum").empty();
+			
+			for(var count = 0; count < 2; count++){                
+                var option = $("<option>"+itemTime[count]+"</option>");
+                $('#TimeNum').append(option);
+            }
+		}else if($('#'+threeTime).text() == "예약 불가" || threeTime>lastUseTime){
+			itemTime = [1,2,3];
+			$("#TimeNum").empty();
+			
+			for(var count = 0; count < 3; count++){                
+                var option = $("<option>"+itemTime[count]+"</option>");
+                $('#TimeNum').append(option);
+            }
+		}else if($('#'+fourTime).text() == "예약 불가" || fourTime>lastUseTime){
+			itemTime = [1,2,3,4];
+			$("#TimeNum").empty();
+			
+			for(var count = 0; count < 4; count++){                
+                var option = $("<option>"+itemTime[count]+"</option>");
+                $('#TimeNum').append(option);
+            }
 		}
 	});	
 	
+	//시간 선택
 	$("#TimeNum").click(function(){			
 		//버튼 이벤트 발생한 숫자
 		var TimeNum = $(this).val();					
@@ -54,9 +94,9 @@ $( document ).ready( function() {
 
 		if(endTime>24){
 			endTime -= 24;
-			$("#startTime").val(startTime+":00 시 ~ 0"+endTime+":00 시");
+			$("endTime").val(startTime+":00 시 ~ 0"+endTime+":00 시");
 		}else{
-			$("#startTime").val(startTime+":00 시 ~ "+endTime+":00 시");
+			$("#endTime").val(startTime+":00 시 ~ "+endTime+":00 시");
 		}		
 		
 		//가격
@@ -70,6 +110,7 @@ $( document ).ready( function() {
 		}							
 	});	
 	
+	//인원 선택
 	$("#PeopleNum").click(function(){
 		var TimeNum = $("#TimeNum").val();
 		var PeopleNum = $(this).val();
@@ -90,8 +131,10 @@ $( document ).ready( function() {
 	
 	<input type="hidden" name="title" value="${title }">
 	선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }"><br>
-	시작 시간: <input type="text" id="startTime" name="startTime" readonly="readonly">
-	사용 시간: <select id="TimeNum" name="TimeNum" disabled="disabled"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select> <br>	
+	<input type="hidden" name="startTime">
+	시작 시간: <input type="text" id="showStartTime" readonly="readonly">
+	사용 시간: <select id="TimeNum" name="TimeNum" disabled="disabled"> <option id="selectTime">${time }</option> </select> <br>	
+	종료 시간: <input type="text" id="endTime" readonly="readonly">
 	
 	<c:choose>
 	<c:when test="${title == 's' }">
