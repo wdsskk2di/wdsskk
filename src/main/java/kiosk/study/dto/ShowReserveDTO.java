@@ -1,6 +1,6 @@
 package kiosk.study.dto;
 
-public class reserveDTO {
+public class ShowReserveDTO {
 	private int seatNum;
 	private String reDate;
 	private String p17;	private String p18;	private String p19;

@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.care.template.Constant;
 
-import kiosk.study.dto.reserveDTO;
+import kiosk.study.dto.ShowReserveDTO;
 
 public class ReserveDAO {
 	private JdbcTemplate template;
@@ -13,9 +13,9 @@ public class ReserveDAO {
 	
 	
 	//사용자가 선택한 자리 예약 정보 확인
-	public reserveDTO checkReserveInfo(String seatNum) {
+	public ShowReserveDTO checkReserveInfo(String seatNum) {
 		String sql = "select * from test_reserve where seatNum='"+seatNum+"'";
 		
-		return template.queryForObject(sql, new BeanPropertyRowMapper<reserveDTO>(reserveDTO.class));
+		return template.queryForObject(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
 	}
 }

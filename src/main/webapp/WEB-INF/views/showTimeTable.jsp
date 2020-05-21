@@ -24,7 +24,8 @@
 	function reDate() {
 		var date = new Date();
 		date = getFormatDate(date);
-		$("#reDate").text(date);	
+		$("#reserveDate").text(date);	
+		$('[name="reDate"]').val(date);
 	}
 </script>
 
@@ -32,7 +33,7 @@
 
 <body onload="reDate()">
 	<table border="1">
-		<caption id="reDate"></caption>
+		<caption id="reserveDate"></caption>
 		<tr> <th>17:00</th><th>18:00</th><th>19:00</th><th>20:00</th><th>21:00</th><th>22:00</th> </tr>
 		<tr>
 			<th><c:choose>

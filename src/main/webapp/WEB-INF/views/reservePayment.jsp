@@ -12,10 +12,7 @@
 <script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>
 
 <script type="text/javascript">
-//사용 시간: <select id="TimeNum" name="TimeNum" disabled="disabled"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select> <br>	
-//시간 1~6
-//int[] Tlist = {1, 2, 3, 4};
-//request.setAttribute("Tlist",Tlist);
+
 <%
 //스터디룸 정원
 int[] Plist43 = {1,2,3,4,5,6};
@@ -81,6 +78,14 @@ $( document ).ready( function() {
                 var option = $("<option>"+itemTime[count]+"</option>");
                 $('#TimeNum').append(option);
             }
+		}else{
+			itemTime = [1,2,3,4];
+			$("#TimeNum").empty();
+			
+			for(var count = 0; count < 4; count++){                
+                var option = $("<option>"+itemTime[count]+"</option>");
+                $('#TimeNum').append(option);
+            }
 		}
 	});	
 	
@@ -131,7 +136,7 @@ $( document ).ready( function() {
 	
 	<input type="hidden" name="title" value="${title }">
 	선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }"><br>
-	<input type="hidden" name="startTime">
+	<input type="hidden" name="startTime">	<input type="hidden" name="reDate">
 	시작 시간: <input type="text" id="showStartTime" readonly="readonly">
 	사용 시간: <select id="TimeNum" name="TimeNum" disabled="disabled"> <option id="selectTime">${time }</option> </select> <br>	
 	종료 시간: <input type="text" id="endTime" readonly="readonly">

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import kiosk.study.dao.ReserveDAO;
-import kiosk.study.dto.reserveDTO;
+import kiosk.study.dto.ShowReserveDTO;
 
 public class ReserveState implements KioskService {
 
