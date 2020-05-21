@@ -96,10 +96,13 @@ $( document ).ready( function() {
 		
 		//총 시간
 		var endTime = Number(startTime)+Number(TimeNum);
-
+		
+		$('[name="endTime"]').val(endTime);	//시작 시간 값 넘겨줄 name
+		$("#shoEndTime").val(EndTime+":00시");	//시작 시간 값 보여줄 id
+		
 		if(endTime>24){
 			endTime -= 24;
-			$("endTime").val(startTime+":00 시 ~ 0"+endTime+":00 시");
+			$("#endTime").val(startTime+":00 시 ~ 0"+endTime+":00 시");
 		}else{
 			$("#endTime").val(startTime+":00 시 ~ "+endTime+":00 시");
 		}		
@@ -128,7 +131,7 @@ $( document ).ready( function() {
 </head>
 <body>
 
-<h3>예약 결제</h3>
+<h3 id="studyRoomTitle">스터디룸 예약</h3>
 <form action="paymentCheck" method="post">
 
 	<h3>${seatNum }번 타임 테이블</h3>
@@ -136,7 +139,7 @@ $( document ).ready( function() {
 	
 	<input type="hidden" name="title" value="${title }">
 	선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }"><br>
-	<input type="hidden" name="startTime">	<input type="hidden" name="reDate">
+	<input type="hidden" name="startTime"> <input type="hidden" name="endTime">	<input type="hidden" name="reDate">
 	시작 시간: <input type="text" id="showStartTime" readonly="readonly">
 	사용 시간: <select id="TimeNum" name="TimeNum" disabled="disabled"> <option id="selectTime">${time }</option> </select> <br>	
 	종료 시간: <input type="text" id="endTime" readonly="readonly">

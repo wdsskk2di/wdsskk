@@ -1,6 +1,7 @@
 package kiosk.study.dto;
 
 public class ShowReserveDTO {
+	//예약 상탱
 	private int seatNum;
 	private String reDate;
 	private String p17;	private String p18;	private String p19;

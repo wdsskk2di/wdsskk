@@ -22,10 +22,10 @@
 	}
 
 	function reDate() {
-		var date = new Date();
-		date = getFormatDate(date);
-		$("#reserveDate").text(date);	
-		$('[name="reDate"]').val(date);
+//		var date = new Date();
+//		date = getFormatDate(date);
+//		$("#reserveDate").text(date);	
+//		$('[name="reDate"]').val(date);
 		
 		var todate = new Date();
 		var chkTime = todate.getHours();
@@ -44,7 +44,7 @@
 
 <body onload="reDate()">
 	<table border="1">
-		<caption id="reserveDate"></caption>
+		<caption id="reserveDate"><button type="button"><</button>${reState.reDate }<button type="button">></button></caption>
 		<tr> <th>17:00</th><th>18:00</th><th>19:00</th><th>20:00</th><th>21:00</th><th>22:00</th> </tr>
 		<tr>
 			<th><c:choose>

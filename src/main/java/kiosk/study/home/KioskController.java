@@ -114,6 +114,10 @@ public class KioskController {
 				ks = new SeatEmptyCheck();
 				ks.execute(model);	
 				
+				//스터디룸의 타임테이블
+				ks = new ReserveState();
+				ks.execute(model);	
+				
 				model.addAttribute("seatNum", num);
 				return "payment";	//결제 페이지로
 				

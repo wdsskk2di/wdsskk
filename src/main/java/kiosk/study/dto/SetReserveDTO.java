@@ -1,6 +1,7 @@
 package kiosk.study.dto;
 
 public class SetReserveDTO {
+	//예약 좌석, 예약 스터디룸 DB
 	private int seatNum;	//좌석
 	private String reDate;	//예약일
 	private String startTime; //시작 시간

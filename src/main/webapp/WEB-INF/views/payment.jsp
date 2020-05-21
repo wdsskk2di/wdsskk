@@ -50,40 +50,65 @@ $( document ).ready( function() {
 		$("#TotalMoney").val(TimeNum*3000*PeopleNum);	
 	});	
 });
+
+function IsStudyRoom() {
+	if(${title =='s'}){
+		//타이틀 변경
+		$("#studyRoomTitle").html("스터디룸 결제");
+		//버튼 값 변경
+		$('[name="startBtn"]').html("사용 가능");
+		
+		//span값 변경
+		for(var i = 8; i<25;i++){
+			$('#'+i).text("사용 불가");
+		}
+		
+		//현재 시간보다 전 시간대면 클릭 못하게 막기
+		var todate = new Date();
+		var chkTime = todate.getHours();
+		
+		//현재 시간보다 전 시간대면 클릭 못하게 막기
+		for(var i = 8; i<Number(chkTime); i++){
+			if(i<Number(chkTime)){
+				$('#'+i).html("사용 불가");
+				$('#'+i).attr("disabled",true);
+			}
+		}
+	}
+}
+
 </script>
 
 </head>
-<body>
+<body onload="IsStudyRoom()">
 <c:choose>
 <c:when test="${result == 0 }">
-<h3>결제</h3>
-<form action="paymentCheck" method="post">
-	<input type="hidden" name="title" value="${title }">
-	선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }"><br>
-	사용 시간: <select id="TimeNum" name="TimeNum"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select> <br>	
-	
-	<c:if test="${title == 's' }">
-		<c:choose>
-		<c:when test="${seatNum == 43 }">
-		사용 인원: <select id="PeopleNum" name="PeopleNum"> <c:forEach var="people" items="${Plist43 }"> <option id="selectPeople">${people }</option> </c:forEach> </select> <br>
+	<c:choose>
+		<c:when test="${title == 'p' }">
+		<h3>당일 좌석 결제</h3>
+		<form action="paymentCheck" method="post">
+			<input type="hidden" name="title" value="${title }">
+			선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }"><br>
+			사용 시간: <select id="TimeNum" name="TimeNum"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select> <br>	
+			
+			결제 금액: <input type="text" id="TotalMoney" name="TotalMoney" readonly="readonly"><br>
+			휴대폰 번호: 010 - <input type="text" id="Num" name="PhoneNum" readonly="readonly"  style="width: 80px;"><br>
+			<c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/>
+			<input type="submit" value="결제">
+			<button type="button" onclick="location.href='main'">취소</button>
+		</form>
 		</c:when>
+		
 		<c:otherwise>
-		사용 인원: <select id="PeopleNum" name="PeopleNum"> <c:forEach var="people" items="${Plist }"> <option id="selectPeople">${people }</option> </c:forEach> </select> <br>
+		<c:import url="/WEB-INF/views/reservePayment.jsp"/>
 		</c:otherwise>
-		</c:choose>
-	</c:if>
-	
-	결제 금액: <input type="text" id="TotalMoney" name="TotalMoney" readonly="readonly"><br>
-	휴대폰 번호: 010 - <input type="text" id="Num" name="PhoneNum" readonly="readonly"  style="width: 80px;"><br>
-	<c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/>
-	<input type="submit" value="결제">
-	<button type="button" onclick="location.href='main'">취소</button>
-</form>
+	</c:choose>
 </c:when>
 
 <c:otherwise>
 <script type="text/javascript">location.href="chooseSeatNum?title=${title}";</script>
 </c:otherwise>
+
 </c:choose>
 </body>
 </html>
