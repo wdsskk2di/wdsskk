@@ -48,7 +48,7 @@ startTime varchar2(14), endTime varchar2(14));
 */
 /* 새로운 DB 생성
  create table dayUse(title char(1) NOT NULL,seatNum number NOT NULL,
-phoneNum integer, toDate date, startTime varchar2(14), endTime varchar2(14),
+phoneNum integer, toDate varchar2(10), startTime varchar2(14), endTime varchar2(14),
 timeNum number, PRIMARY KEY(seatNum));
 
 값 넣을때
