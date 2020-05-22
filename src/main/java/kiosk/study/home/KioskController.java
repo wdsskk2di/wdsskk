@@ -127,11 +127,6 @@ public class KioskController {
 				
 			}else {//입력된 좌석에 문제가 있는 경우
 				try {
-					//알림창
-					response.setContentType("text/html; charset=UTF-8");
-					PrintWriter out = response.getWriter();
-					out.println("<script>alert('좌석 번호를 확인해주세요.');</script>");
-
 					//좌석 선택창으로
 					return "redirect:chooseSeatNum";
 				} catch (Exception e) {return "redirect:chooseSeatNum";}
