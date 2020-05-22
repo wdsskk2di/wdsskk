@@ -12,6 +12,7 @@
 
 <script type="text/javascript">
 	var contDateBtn = 0;
+<<<<<<< HEAD
 	
 	//날짜 계산
 	function getFormatDate(date){
@@ -27,9 +28,13 @@
 		var date = new Date();
 		date = getFormatDate(date);
 		
+=======
+
+	function reDate() {		
+>>>>>>> branch 'master' of https://github.com/wdsskk2di/study_kiosk.git
 		var todate = new Date();
 		var chkTime = todate.getHours();
-		
+			
 		//현재 시간보다 전 시간대면 클릭 못하게 막기
 		for(var i = 8; i<Number(chkTime); i++){
 			if(${reState.reDate } == date && i<Number(chkTime)){
