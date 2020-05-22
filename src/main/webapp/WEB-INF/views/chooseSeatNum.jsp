@@ -19,7 +19,7 @@
 <img alt="배치도" src="">
 <c:import url="/WEB-INF/views/showSeatTable.jsp"/>
 
-<h3>좌석 번호</h3>
+<h3>좌석 번호 선택</h3>
 
 <c:choose>
 <c:when test="${title == 'p' }">

@@ -7,6 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<style type="text/css">
+ .reserve{background-color: white; height:400px; width:600px; text-align: center; text-align: center; margin: 0 auto;}
+ .reserve img{margin-top: 100px; margin-bottom: 100px;}
+ .reserve table{margin: 0 auto; margin-top: 150px;}
+ .reserve button{color:white; background-color: silver; width: 250px; height: 80px; margin: 5px; font-size: 20px; font-weight: bold;}
+</style>
+
 <!-- ajax 사용을 위한 연결 -->
 <script type="text/javascript" src="resources/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>
@@ -19,7 +26,7 @@
 <img alt="배치도" src=""><br>
 
 <c:import url="/WEB-INF/views/showSeatTable.jsp"/>
-<h3>좌석 번호</h3>
+<h3>좌석 번호 선택</h3>
 
 <c:choose>
 <c:when test="${title == 'p' }">

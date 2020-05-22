@@ -40,12 +40,14 @@ public class KioskController {
 	
 	@RequestMapping("main")
 	public String main() {
-		return "main";
+		return "default/main";
 	}
 	
 	@RequestMapping("studyRoom")
-	public String studyRoom() {
-		return "studyRoom";
+	public String studyRoom(HttpServletRequest request, Model model) {
+		String title = request.getParameter("title");
+		model.addAttribute("title", title);
+		return "default/studyRoom";
 	}
 	
 	@RequestMapping("chooseSeatNum")
@@ -83,7 +85,7 @@ public class KioskController {
 	}
 	
 	@RequestMapping("payment")
-	public String payment(HttpServletRequest request, HttpServletResponse response, Model model){
+	public String payment(HttpServletRequest request, Model model){
 		model.addAttribute("request", request);
 		String title = request.getParameter("title");
 		model.addAttribute("title", title);
@@ -145,7 +147,7 @@ public class KioskController {
 		ks = new PaymentService();
 		ks.execute(model);
 		
-		return "paymentSuccess";
+		return "default/paymentSuccess";
 	}
 	
 	@RequestMapping("reservePayment")
@@ -189,29 +191,23 @@ public class KioskController {
 
 	}
 	
-	@GetMapping(value="reserveTomorrow", produces = "application/json;charset=utf8")	//네번째. Json사용을 위해 test->json으로 변경	
-	public String reserveTomorrow(HttpServletRequest request, Model model) //throws JsonProcessingException 
-	{	//네번째. DB연결 후 받아온 값을 넘겨주는 상황을 가정. 반환값은 JSON형태만 가능
+	@GetMapping(value="reserveTomorrow", produces = "application/json;charset=utf8")
+	public String reserveTomorrow(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
 		//스터디룸의 타임테이블
 		ks = new ReserveState2();
 		ks.execute(model);	
-		
-//		ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
-//		String strJson = mapper.writeValueAsString(list);		
+	
 		return "showTimeTable";
 	}
 	
-	@GetMapping(value="reserveToday", produces = "application/json;charset=utf8")	//네번째. Json사용을 위해 test->json으로 변경	
-	public String reserveToday(HttpServletRequest request, Model model) //throws JsonProcessingException 
-	{	//네번째. DB연결 후 받아온 값을 넘겨주는 상황을 가정. 반환값은 JSON형태만 가능
+	@GetMapping(value="reserveToday", produces = "application/json;charset=utf8")
+	public String reserveToday(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
 		//스터디룸의 타임테이블
 		ks = new ReserveState();
 		ks.execute(model);	
-		
-//		ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
-//		String strJson = mapper.writeValueAsString(list);		
+	
 		return "showTimeTable";
 	}
 }
