@@ -56,7 +56,7 @@ $( document ).ready( function() {
 </head>
 <body>
 
-<table id="chooseNum">
+<table id="chooseNum" style="margin:0 auto;">
 	<tr><th><button type="button" name="Nbutton" value="7">7</button></th><th><button type="button" name="Nbutton" value="8">8</button></th><th><button type="button" name="Nbutton" value="9">9</button></th></tr>
 	<tr><th><button type="button" name="Nbutton" value="4">4</button></th><th><button type="button" name="Nbutton" value="5">5</button></th><th><button type="button" name="Nbutton" value="6">6</button></th></tr>
 	<tr><th><button type="button" name="Nbutton" value="1">1</button></th><th><button type="button" name="Nbutton" value="2">2</button></th><th><button type="button" name="Nbutton" value="3">3</button></th></tr>

@@ -12,7 +12,6 @@
 
 <script type="text/javascript">
 	var contDateBtn = 0;
-<<<<<<< HEAD
 	
 	//날짜 계산
 	function getFormatDate(date){
@@ -27,11 +26,10 @@
 	function compareDate() {
 		var date = new Date();
 		date = getFormatDate(date);
-		
-=======
+	}		
+
 
 	function reDate() {		
->>>>>>> branch 'master' of https://github.com/wdsskk2di/study_kiosk.git
 		var todate = new Date();
 		var chkTime = todate.getHours();
 			
@@ -82,8 +80,8 @@
 
 </head>
 
-<body onload="compareDate()">
-	<table border="1" id="timeTable1">
+<body onload="reDate()">
+	<table border="1" id="timeTable1" style="margin:0 auto;">
 		<caption id="reserveDate"><button type="button" onclick="get_toDate()"><</button>${reState.reDate }<button type="button" onclick="get_tomoDate()">></button></caption>
 		<tr> <th>17:00</th><th>18:00</th><th>19:00</th><th>20:00</th><th>21:00</th><th>22:00</th> </tr>
 		<tr>

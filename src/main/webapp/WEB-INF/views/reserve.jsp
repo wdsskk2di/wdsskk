@@ -8,10 +8,7 @@
 <title>Insert title here</title>
 
 <style type="text/css">
- .reserve{background-color: white; height:400px; width:600px; text-align: center; text-align: center; margin: 0 auto;}
- .reserve img{margin-top: 100px; margin-bottom: 100px;}
- .reserve table{margin: 0 auto; margin-top: 150px;}
- .reserve button{color:white; background-color: silver; width: 250px; height: 80px; margin: 5px; font-size: 20px; font-weight: bold;}
+ .default{background-color: white; height:400px; width:600px; text-align: center; text-align: center; margin: 0 auto;}
 </style>
 
 <!-- ajax 사용을 위한 연결 -->
@@ -20,8 +17,9 @@
 
 </head>
 <body>
+<c:import url="/WEB-INF/views/default/header.jsp"/>
 
-<div>
+<div class="default">
 
 <img alt="배치도" src=""><br>
 
@@ -49,8 +47,8 @@
 	<input type="submit" value="확인">
 	<button type="button" onclick="location.href='/main'">취소</button>
 </form>
-
 </div>
 
+<c:import url="/WEB-INF/views/default/footer.jsp"/>
 </body>
 </html>

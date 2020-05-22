@@ -6,9 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style type="text/css">
+ .payment_success{background-color: white; height:400px; width:600px; text-align: center; text-align: center; margin: 0 auto;}
+</style>
+
 </head>
 <body>
+<c:import url="/WEB-INF/views/default/header.jsp"/>
 
+<div class="payment_success">
 <c:choose>
 <c:when test="${result == 'fail' }">
 <h4>오류 발생! 관리자에게 문의하세요.</h4>
@@ -31,6 +38,7 @@
 
 </c:otherwise>
 </c:choose>
+</div>
 
 </body>
 </html>

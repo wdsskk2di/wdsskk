@@ -81,6 +81,9 @@ function IsStudyRoom() {
 
 </head>
 <body onload="IsStudyRoom()">
+<c:import url="/WEB-INF/views/default/header.jsp"/>
+
+<div class="default">
 <c:choose>
 <c:when test="${result == 0 }">
 	<c:choose>
@@ -110,5 +113,8 @@ function IsStudyRoom() {
 </c:otherwise>
 
 </c:choose>
+</div>
+
+<c:import url="/WEB-INF/views/default/footer.jsp"/>
 </body>
 </html>
