@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
 	var contDateBtn = 0;
-
+	
 	//날짜 계산
 	function getFormatDate(date){
 	    var year = date.getFullYear();              //yyyy
@@ -23,24 +23,23 @@
 	    return  year + '/' + month + '/' + day;
 	}
 
-	function reDate() {
-//		var date = new Date();
-//		date = getFormatDate(date);
-//		$("#reserveDate").text(date);	
-//		$('[name="reDate"]').val(date);
+	function compareDate() {
+		var date = new Date();
+		date = getFormatDate(date);
 		
 		var todate = new Date();
 		var chkTime = todate.getHours();
 		
 		//현재 시간보다 전 시간대면 클릭 못하게 막기
 		for(var i = 8; i<Number(chkTime); i++){
-			if(i<Number(chkTime)){
+			if(${reState.reDate } == date && i<Number(chkTime)){
 				$('#'+i).html("예약 불가");
 				$('#'+i).attr("disabled",true);
 			}
 		}
 	}
 	
+	//내일날짜 타임테이블 보여주기
 	function get_tomoDate() {
 		if(contDateBtn == 0){
 			$.ajax({
@@ -58,6 +57,7 @@
 		}else{}
 	}
 	
+	//오늘날짜 타임테이블 보여주기
 	function get_toDate() {
 		if(contDateBtn == 1){
 			$.ajax({
@@ -70,7 +70,6 @@
 					console.log("실패")
 				}
 			});
-
 		contDateBtn -= 1;
 		}else{}
 	}
@@ -78,7 +77,7 @@
 
 </head>
 
-<body onload="reDate()">
+<body onload="compareDate()">
 	<table border="1" id="timeTable1">
 		<caption id="reserveDate"><button type="button" onclick="get_toDate()"><</button>${reState.reDate }<button type="button" onclick="get_tomoDate()">></button></caption>
 		<tr> <th>17:00</th><th>18:00</th><th>19:00</th><th>20:00</th><th>21:00</th><th>22:00</th> </tr>
