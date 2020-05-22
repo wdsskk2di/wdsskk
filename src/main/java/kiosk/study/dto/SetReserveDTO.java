@@ -3,7 +3,7 @@ package kiosk.study.dto;
 public class SetReserveDTO {
 	//예약 좌석, 예약 스터디룸 DB
 	private int seatNum;	//좌석
-	private String reDate;	//예약일
+	private String reDate;	//예약일(yyyy/MM/dd로 하자)
 	private String startTime; //시작 시간
 	private String TimeNum; //사용 시간
 	private int PeopleNum;	//스터디룸 사용 인원

@@ -26,21 +26,21 @@
 	function compareDate() {
 		var date = new Date();
 		date = getFormatDate(date);
-	}		
-
-
-	function reDate() {		
+		
 		var todate = new Date();
 		var chkTime = todate.getHours();
-			
+		
+		console.log(chkTime);
+		
 		//현재 시간보다 전 시간대면 클릭 못하게 막기
+		if(${reState.reDate } == date){
 		for(var i = 8; i<Number(chkTime); i++){
-			if(${reState.reDate } == date && i<Number(chkTime)){
+			if(i<Number(chkTime)){
 				$('#'+i).html("예약 불가");
 				$('#'+i).attr("disabled",true);
 			}
-		}
-	}
+		}}
+	}		
 	
 	//내일날짜 타임테이블 보여주기
 	function get_tomoDate() {
@@ -80,7 +80,7 @@
 
 </head>
 
-<body onload="reDate()">
+<body onload="compareDate()">
 	<table border="1" id="timeTable1" style="margin:0 auto;">
 		<caption id="reserveDate"><button type="button" onclick="get_toDate()"><</button>${reState.reDate }<button type="button" onclick="get_tomoDate()">></button></caption>
 		<tr> <th>17:00</th><th>18:00</th><th>19:00</th><th>20:00</th><th>21:00</th><th>22:00</th> </tr>

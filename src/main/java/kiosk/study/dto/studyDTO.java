@@ -46,3 +46,14 @@ startTime varchar2(14), endTime varchar2(14));
  insert into kiosk VALUES('s', 41, null, null, null, null, null, null);
 
 */
+/* 새로운 DB 생성
+ create table dayUse(title char(1) NOT NULL,seatNum number NOT NULL,
+phoneNum integer, toDate date, startTime varchar2(14), endTime varchar2(14),
+timeNum number, PRIMARY KEY(seatNum));
+
+값 넣을때
+ insert into dayUse VALUES('p', 1, null, to_char(sysdate,'yyyyMMdd'), null, null, null);
+ 
+일자 바뀔때 날짜를 갱신하거나 == update dayUse set toDate=to_char(sysdate,'yyyyMMdd'); 
+또는 insert로 새로 넣어줘야할것.
+ */

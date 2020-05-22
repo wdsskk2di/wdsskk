@@ -98,7 +98,7 @@ function IsStudyRoom() {
 			휴대폰 번호: 010 - <input type="text" id="Num" name="PhoneNum" readonly="readonly"  style="width: 80px;"><br>
 			<c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/>
 			<input type="submit" value="결제">
-			<button type="button" onclick="location.href='main'">취소</button>
+			<button type="button" onclick="location.href='javascript:history.go(1-)'">뒤로가기</button>
 		</form>
 		</c:when>
 		
@@ -109,7 +109,7 @@ function IsStudyRoom() {
 </c:when>
 
 <c:otherwise>
-<script type="text/javascript">location.href="chooseSeatNum?title=${title}";</script>
+<script type="text/javascript">location.href="chooseSeatNum?title=${title}"</script>
 </c:otherwise>
 
 </c:choose>

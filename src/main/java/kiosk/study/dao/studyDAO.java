@@ -14,7 +14,7 @@ public class studyDAO {
 	private JdbcTemplate template;
 	public studyDAO() {this.template = Constant.template;}
 	
-	//결제시 정보 저장
+	//당일 결제시 정보 저장
 	public int updateSeat(studyDTO dto) {
 		try {
 			String sql = "update kiosk set timeNum='"+dto.getTimeNum()+"', peopleNum='"+dto.getPeopleNum()+
@@ -43,7 +43,7 @@ public class studyDAO {
 		return template.queryForObject(sql, new BeanPropertyRowMapper<studyDTO>(studyDTO.class));
 	}
 	
-	//카테고리 선택 시(배치도 보여줄때마다 작동) 좌석 사용중인지 확인해서 시간 지난건 지우고, 시간 지나지 않은건 그대로..
+	//당일 좌석 카테고리 선택 시(배치도 보여줄때마다 작동) 좌석 사용중인지 확인해서 시간 지난건 지우고, 시간 지나지 않은건 그대로..
 	//select EndTIME from kiosk where EndTIME<to_char(sysdate, 'yy/MM/dd hh:mi');
 	public void updateSeatInfo() {
 		String sql ="update kiosk set timeNum = null, peopleNum = null, totalMoney = null, phoneNum = null, STARTTIME = null, EndTime = null "
@@ -51,9 +51,7 @@ public class studyDAO {
 		template.update(sql);
 	}
 	
-	//위 seatInfo 후에 실행. 배치도에 좌석 사용 유무를 보여주기 위한 sql문
-	
-	//만일 사람이 있는 좌석을 선택했다면 결제창으로 넘어가지 못하게 하기 위한 sql문
+	//(당일) 좌석에서 만일 사람이 있는 좌석을 선택했다면 결제창으로 넘어가지 못하게 하기 위한 sql문... -> 스터디룸과 예약좌석은 DB를 따로 둘거면 다른 메소드 생성 필요
 	public int seatEmptyCheck(String seatNum) {		
 		try {
 			String sql = "select EndTIME from kiosk where seatNum='"+seatNum+"'";
@@ -79,7 +77,8 @@ public class studyDAO {
 		
 		return list;
 	}
-	
+
+//분리 필요?
 	//스터디룸 현재 배치도 확인
 	public ArrayList<seatDTO> roomPState() {	
 		ArrayList<seatDTO> list = null;
@@ -101,4 +100,5 @@ public class studyDAO {
 		
 		return list;
 	}
+
 }
