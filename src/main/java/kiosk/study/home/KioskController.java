@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.care.template.Constant;
 
@@ -153,7 +154,8 @@ public class KioskController {
 			return "redirect:reserve";
 			
 		}else {	//입력값이 있고
-			int num = Integer.parseInt(request.getParameter("seatNum"));		
+			int num = Integer.parseInt(request.getParameter("seatNum"));	
+			model.addAttribute("seatNum", request.getParameter("seatNum"));
 			
 			if(title.equals("r") && num > 20 && num < 41){  //예약 좌석 + 입력값이21~40 사이		
 				//스터디룸의 타임테이블
@@ -164,11 +166,11 @@ public class KioskController {
 				model.addAttribute("seatNum", num);
 				return "reservePayment";	//결제 페이지로
 				
-			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이				
+			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이						
 				//스터디룸의 타임테이블
 				ks = new ReserveState();
 				ks.execute(model);			
-				
+
 				model.addAttribute("seatNum", num);
 				return "reservePayment";	//결제 페이지로
 				
@@ -184,8 +186,8 @@ public class KioskController {
 	}
 	
 	@GetMapping(value="reserveTomorrow", produces = "application/json;charset=utf8")
-	public String reserveTomorrow(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request);
+	public String reserveTomorrow(@RequestParam("seatNum") String seatNum, Model model) {		
+		model.addAttribute("seatNum", seatNum);
 		//스터디룸의 타임테이블
 		ks = new ReserveState2();
 		ks.execute(model);	
@@ -194,8 +196,9 @@ public class KioskController {
 	}
 	
 	@GetMapping(value="reserveToday", produces = "application/json;charset=utf8")
-	public String reserveToday(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request);
+	public String reserveToday(@RequestParam("seatNum") String seatNum, Model model) {
+		model.addAttribute("seatNum", seatNum);
+
 		//스터디룸의 타임테이블
 		ks = new ReserveState();
 		ks.execute(model);	

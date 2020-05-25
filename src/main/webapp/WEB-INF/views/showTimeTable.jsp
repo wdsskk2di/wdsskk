@@ -9,78 +9,89 @@
 <!-- ajax 사용을 위한 연결 -->
 <script type="text/javascript" src="resources/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>
-
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript">
-	var contDateBtn = 0;
+//날짜 계산
+function getFormatDate(date){
+    var year = date.getFullYear();              //yyyy
+    var month = (1 + date.getMonth());          //M
+    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+    var day = date.getDate();                   //d
+    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+    return  year + '/' + month + '/' + day;
+}
+function compareDate() {
+	var date = new Date();
+	date = getFormatDate(date);
 	
-	//날짜 계산
-	function getFormatDate(date){
-	    var year = date.getFullYear();              //yyyy
-	    var month = (1 + date.getMonth());          //M
-	    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-	    var day = date.getDate();                   //d
-	    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-	    return  year + '/' + month + '/' + day;
-	}
+	var todate = new Date();
+	var chkTime = todate.getHours();
+	
+	//현재 시간보다 전 시간대면 클릭 못하게 막기
+	if(${reState.reDate } == date){
+	for(var i = 8; i<Number(chkTime); i++){
+		if(i<Number(chkTime)){
+			$('#'+i).html("예약 불가");
+			$('#'+i).attr("disabled",true);
+		}
+	}}
+}		
 
-	function compareDate() {
-		var date = new Date();
-		date = getFormatDate(date);
-		
-		var todate = new Date();
-		var chkTime = todate.getHours();
-		
-		console.log(chkTime);
-		
-		//현재 시간보다 전 시간대면 클릭 못하게 막기
-		if(${reState.reDate } == date){
-		for(var i = 8; i<Number(chkTime); i++){
-			if(i<Number(chkTime)){
-				$('#'+i).html("예약 불가");
-				$('#'+i).attr("disabled",true);
-			}
-		}}
-	}		
-	
-	//내일날짜 타임테이블 보여주기
-	function get_tomoDate() {
-		if(contDateBtn == 0){
+var contDateBtn = 0;
+//내일날짜 타임테이블 보여주기
+function get_tomoDate() {
+	var dateT = new Date();	dateT = getFormatDate(dateT);
+	var reDate = '${reState.reDate }';
+
+	try {		
+		if(reDate == dateT){
+			console.log("123");
 			$.ajax({
-				url:"reserveTomorrow?seatNum="+${seatNum },
+				url:"reserveTomorrow",
 				type: "GET",	//방식
-				success: function(data){	//성공시
-					$("#timeTable1").html(data);
-				},
-				error:function(){	//실패시
-					console.log("실패")
-				}
+				data: {seatNum: '${seatNum }'},
+			})
+			.done(function(data){	//성공시				
+				$("#timeTable1").html(data);
+			})
+			.fail(function(){	//실패시
+				console.log("실패")
 			});
-		
-		contDateBtn += 1;
-		}else{}
-	}
+		}
+		contDateBtn = 1;
+	} catch (e) {}
 	
-	//오늘날짜 타임테이블 보여주기
-	function get_toDate() {
-		if(contDateBtn == 1){
+}
+
+//오늘날짜 타임테이블 보여주기
+function get_toDate() {
+	var dateT = new Date();	dateT = getFormatDate(dateT);
+	var reDate = '${reState.reDate }';
+
+	try {
+		if(reDate != dateT){
+			console.log("456");
 			$.ajax({
-				url:"reserveToday?seatNum="+${seatNum },
+				url:"reserveToday",
 				type: "GET",	//방식
-				success: function(data){	//성공시
-					$("#timeTable1").html(data);
-				},
-				error:function(){	//실패시
-					console.log("실패")
-				}
-			});
-		contDateBtn -= 1;
-		}else{}
-	}
+				data: {seatNum: '${seatNum }'},
+			})
+			.done(function(data){	//성공시
+				$("#timeTable1").html(data);
+			})
+			.fail(function(){	//실패시
+				console.log("실패")
+			});		
+		}
+		contDateBtn = 0;
+	} catch (e) {}	
+}
 </script>
 
 </head>
 
 <body onload="compareDate()">
+<div>
 	<table border="1" id="timeTable1" style="margin:0 auto;">
 		<caption id="reserveDate"><button type="button" onclick="get_toDate()"><</button>${reState.reDate }<button type="button" onclick="get_tomoDate()">></button></caption>
 		<tr> <th>17:00</th><th>18:00</th><th>19:00</th><th>20:00</th><th>21:00</th><th>22:00</th> </tr>
@@ -112,6 +123,7 @@
 		</tr>
 	</table>
 	<br>
+</div>
 </body>
 
 </html>

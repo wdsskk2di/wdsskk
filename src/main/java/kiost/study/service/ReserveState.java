@@ -13,10 +13,8 @@ public class ReserveState implements KioskService {
 	@Override
 	public void execute(Model model) {
 		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		
-		String seatNum = request.getParameter("seatNum");
-		
+		String seatNum = (String) map.get("seatNum");
+
 		ReserveDAO dao = new ReserveDAO();
 		model.addAttribute("reState", dao.checkReserveInfo(seatNum));
 		
