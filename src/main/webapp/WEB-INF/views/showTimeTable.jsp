@@ -37,7 +37,6 @@ function compareDate() {
 	}}
 }		
 
-var contDateBtn = 0;
 //내일날짜 타임테이블 보여주기
 function get_tomoDate() {
 	var dateT = new Date();	dateT = getFormatDate(dateT);
@@ -45,11 +44,10 @@ function get_tomoDate() {
 
 	try {		
 		if(reDate == dateT){
-			console.log("123");
 			$.ajax({
 				url:"reserveTomorrow",
 				type: "GET",	//방식
-				data: {seatNum: '${seatNum }'},
+				data: {seatNum: '${seatNum }'}
 			})
 			.done(function(data){	//성공시				
 				$("#timeTable1").html(data);
@@ -58,7 +56,6 @@ function get_tomoDate() {
 				console.log("실패")
 			});
 		}
-		contDateBtn = 1;
 	} catch (e) {}
 	
 }
@@ -70,11 +67,10 @@ function get_toDate() {
 
 	try {
 		if(reDate != dateT){
-			console.log("456");
 			$.ajax({
 				url:"reserveToday",
 				type: "GET",	//방식
-				data: {seatNum: '${seatNum }'},
+				data: {seatNum: '${seatNum }'}
 			})
 			.done(function(data){	//성공시
 				$("#timeTable1").html(data);
@@ -83,7 +79,6 @@ function get_toDate() {
 				console.log("실패")
 			});		
 		}
-		contDateBtn = 0;
 	} catch (e) {}	
 }
 </script>
@@ -93,7 +88,7 @@ function get_toDate() {
 <body onload="compareDate()">
 <div>
 	<table border="1" id="timeTable1" style="margin:0 auto;">
-		<caption id="reserveDate"><button type="button" onclick="get_toDate()"><</button>${reState.reDate }<button type="button" onclick="get_tomoDate()">></button></caption>
+		<caption id="reserveDate"><button type="button" onclick="get_toDate()">&lt;</button>${reState.reDate }<button type="button" onclick="get_tomoDate()">&gt;</button></caption>
 		<tr> <th>17:00</th><th>18:00</th><th>19:00</th><th>20:00</th><th>21:00</th><th>22:00</th> </tr>
 		<tr>
 			<th><c:choose>

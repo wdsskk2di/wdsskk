@@ -2,8 +2,6 @@ package kiost.study.service;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.ui.Model;
 
 import kiosk.study.dao.ReserveDAO;

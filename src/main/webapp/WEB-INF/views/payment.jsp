@@ -7,6 +7,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<style type="text/css">
+ .default{background-color: white; height:500px; width:600px; text-align: center; text-align: center; margin: 0 auto;}
+</style>
+
 <!-- ajax 사용을 위한 연결 -->
 <script type="text/javascript" src="resources/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>

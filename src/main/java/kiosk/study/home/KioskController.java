@@ -21,7 +21,6 @@ import kiost.study.service.ReserveState2;
 import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.UpdateSeatInfo;
 import kiost.study.service.roomPState;
-import kiost.study.service.seatPState;
 import kiost.study.service.seatRState;
 
 @Controller
@@ -179,10 +178,8 @@ public class KioskController {
 					//좌석 선택창으로
 					return "redirect:reserve";
 				} catch (Exception e) {return "redirect:reserve";}
-
 			}
 		}
-
 	}
 	
 	@GetMapping(value="reserveTomorrow", produces = "application/json;charset=utf8")
