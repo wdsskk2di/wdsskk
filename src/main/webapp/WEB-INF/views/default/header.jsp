@@ -22,12 +22,12 @@
 <c:choose>
 <c:when test="${title == null }">
 	<div class="main_header">
-	<img alt="로고" src="resources/images/studyLogo.png"><span>Study R</span><br>
+	<img alt="로고" src="resources/images/studyLogo.png" ondragstart="return false"><span onselect="return false">Study R</span><br>
 	</div>
 </c:when>
 <c:otherwise>
 	<div class="other_header">
-	<img alt="로고" src="resources/images/studyLogo.png"><span>Study R</span><br>
+	<img alt="로고" src="resources/images/studyLogo.png" ondragstart="return false"><span onselect="return false">Study R</span><br>
 	</div>
 </c:otherwise>
 </c:choose>
