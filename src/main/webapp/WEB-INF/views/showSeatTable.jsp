@@ -16,7 +16,7 @@
 <div class="left_Div_in">
 <table>
 <tr><th style="border-right: 1px solid;">좌석 번호</th><th style="border-right: 1px solid;">현재 사용자</th><th>종료 시간</th></tr>
-
+<tr><td>체크:<c:out value="${seatState[0].seatNum}"/> </td></tr>
 <c:forEach var="seatState" items="${seatState }">
 <tr><th colspan="3"  style="border-bottom: 1px solid;"></th></tr>
 <tr><th style="border-right: 1px solid;"><a>${seatState.seatNum }</a></th>
