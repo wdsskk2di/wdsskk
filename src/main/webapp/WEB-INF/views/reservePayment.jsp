@@ -8,7 +8,7 @@
 <title>예약 일정 선택</title>
 
 <style type="text/css">
- .default{background-color: white; height:500px; width:600px; text-align: center; text-align: center; margin: 0 auto;}
+ .default{background-color: white; height:500px; width:600px; text-align: center; text-align: center; margin: 0 auto; margin-top: 10%; margin-bottom: 10%;}
  table{margin: 0 auto;}
  .inputBorder{border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;}
  

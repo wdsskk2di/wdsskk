@@ -8,10 +8,10 @@
 <title>당일 번호 선택</title>
 
 <style type="text/css">
- .default{background-color: white; height:500px; width:600px; text-align: center; }
- .left_Div{position: absolute; left: 150px; top: 170px; width: 400px;}
+ .default{background-color: white; height:500px; width:600px; text-align: center; margin-top: 20%;}
+ .left_Div{position: absolute; left: 150px; top: 170px; width: 400px; margin-top: 10%;}
  .left_Div img{width: 100px; height: 100px;}
- .right_Div{position: absolute; right: 170px; top: 150px; width: 30%;}
+ .right_Div{position: absolute; right: 170px; top: 150px; width: 30%; margin-top: 10%;}
  
  .checkBtn{color:white; border:1 solid #005766; outline:1; border-radius: 5px; background-color: #005766;
 		 padding: 3px 5px; font-size: 15px; font-weight: bold; margin-right: 10px;}

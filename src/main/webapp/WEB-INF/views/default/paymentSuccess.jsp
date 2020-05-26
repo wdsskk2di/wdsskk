@@ -8,9 +8,11 @@
 <title>결제 완료</title>
 
 <style type="text/css">
- .payment_success{background-color: white; height:500px; width:600px; text-align: center; text-align: center; margin: 0 auto;}
+ .payment_success{background-color: white; height:500px; width:600px; text-align: center; text-align: center; margin:0 auto; margin-top: 10%;}
  .payment_success table{margin: 0 auto;}
- .payment_success button{color:white; border:0; outline:1; border-radius: 5px; background-color: #005766; padding: 3px 5px; font-size: 15px; font-weight: bold;}
+ 
+ .checkBtn{color:white; border:1 solid #005766; outline:1; border-radius: 5px; background-color: #005766;
+		 padding: 3px 5px; font-size: 15px; font-weight: bold;}
 </style>
 
 </head>
@@ -42,7 +44,7 @@
 	</c:choose>
 	
 	<tr><td style="padding: 10px 0px 10px 0px">결제 금액: ${dto.getTotalMoney() }</td></tr>
-	<tr><td><button type="button" onclick="location.href='main'">확인</button></td></tr>	
+	<tr><td><button type="button" onclick="location.href='main'" class="checkBtn">확인</button></td></tr>	
 	</table>
 </c:otherwise>
 </c:choose>
