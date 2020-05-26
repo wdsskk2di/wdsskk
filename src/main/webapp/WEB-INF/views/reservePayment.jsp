@@ -5,10 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>예약 일정 선택</title>
 
 <style type="text/css">
  .default{background-color: white; height:500px; width:600px; text-align: center; text-align: center; margin: 0 auto;}
+ table{margin: 0 auto;}
+ .inputBorder{border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;}
+ 
+ .checkBtn{color:white; border:1 solid #005766; outline:1; border-radius: 5px; background-color: #005766;
+ 		padding: 3px 5px; font-size: 15px; font-weight: bold; margin-right: 10px; width: 80px;}
+ .cancelBtn{color:#005766; border:1 solid #005766; outline:1; border-radius: 5px; background-color: white;
+		padding: 3px 5px; font-size: 15px; font-weight: bold; margin-left: 10px;}
 </style>
 
 <!-- ajax 사용을 위한 연결 -->
@@ -24,6 +31,48 @@ request.setAttribute("Plist43",Plist43);
 int[] Plist = {1,2,3,4};
 request.setAttribute("Plist",Plist);
 %>
+
+$(document).ready( function() {
+	console.log("ready");
+	//사용 시간 선택
+	$("#TimeNum").click(function(){		
+		
+		//버튼 이벤트 발생한 숫자
+		var TimeNum = $(this).val();					
+		
+		//총 시간
+		var endTime = Number(startTime)+Number(TimeNum);
+		
+		$('[name="endTime"]').val(endTime);	//시작 시간 값 넘겨줄 name
+		
+		if(endTime>24){
+			endTime -= 24;
+			$("#showEndTime").val(startTime+":00 시 ~ 0"+endTime+":00 시");
+		}else{
+			$("#showEndTime").val(startTime+":00 시 ~ "+endTime+":00 시");
+		}		
+		
+		//가격
+		if("${title}"=="p"){
+			$("#TotalMoney").val(TimeNum*1000);	
+			
+		}else if("${title}"=="r"){
+			$("#TotalMoney").val(TimeNum*2000);	
+			
+		}else if("${title}"=="s"){		
+			var PeopleNum = $("#PeopleNum").val();
+			$("#TotalMoney").val(TimeNum*3000*PeopleNum);	
+		}							
+	});	
+	
+	//인원 선택
+	$("#PeopleNum").click(function(){
+		var TimeNum = $("#TimeNum").val();
+		var PeopleNum = $(this).val();
+		
+		$("#TotalMoney").val(TimeNum*3000*PeopleNum);	
+	});	
+});
 </script>
 
 </head>
@@ -36,31 +85,52 @@ request.setAttribute("Plist",Plist);
 	<h3>${seatNum }번 타임 테이블</h3>
 	<c:import url="/WEB-INF/views/showTimeTable.jsp"/>
 	
-	<input type="hidden" name="title" value="${title }">
-	선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }"><br>
-	<input type="hidden" name="startTime"> <input type="hidden" name="endTime">	<input type="hidden" name="reDate">
-	시작 시간: <input type="text" id="showStartTime" readonly="readonly">
-	사용 시간: <select id="TimeNum" name="TimeNum" disabled="disabled"> <option id="selectTime">${time }</option> </select> <br>	
-	종료 시간: <input type="text" id="showEndTime" readonly="readonly">
+	<table>
+	<tr>
+	<td><input type="hidden" name="title" value="${title }"></td>
+	<td><input type="hidden" name="startTime"> <input type="hidden" name="endTime">	<input type="hidden" name="reDate"></td>
+	</tr>
 	
+	<tr>
+	<td colspan="2" style="text-align: left;">선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }">
+	</tr>
+	
+	<tr>
+	<td>시작 시간: <input type="text" id="showStartTime" readonly="readonly" class="inputBorder"></td>
+	<td>사용 시간: <select id="TimeNum" name="TimeNum" disabled="disabled"> <option id="selectTime">${time }</option> </select></td>		
+	</tr>
+	
+	<tr>
+	<td>종료 시간: <input type="text" id="showEndTime" readonly="readonly"  class="inputBorder"></td>
+	<td>
 	<c:if test="${title == 's' }">
 		<c:choose>
 		<c:when test="${seatNum == 43 }">
-		사용 인원: <select id="PeopleNum" name="PeopleNum"> <c:forEach var="people" items="${Plist43 }"> <option id="selectPeople">${people }</option> </c:forEach> </select> <br>
+		사용 인원: <select id="PeopleNum" name="PeopleNum"> <c:forEach var="people" items="${Plist43 }"> <option id="selectPeople">${people }</option> </c:forEach> </select>
 		</c:when>
 		<c:otherwise>
-		사용 인원: <select id="PeopleNum" name="PeopleNum"> <c:forEach var="people" items="${Plist }"> <option id="selectPeople">${people }</option> </c:forEach> </select> <br>
+		사용 인원: <select id="PeopleNum" name="PeopleNum"> <c:forEach var="people" items="${Plist }"> <option id="selectPeople">${people }</option> </c:forEach> </select>
 		</c:otherwise>
 		</c:choose>
 	</c:if>
+	</td>
+	</tr>
 	
-	결제 금액: <input type="text" id="TotalMoney" name="TotalMoney" readonly="readonly"><br>
+	<tr><td>
+	결제 금액: <input type="text" id="TotalMoney" name="TotalMoney" readonly="readonly"  class="inputBorder">
+	<td rowspan="2"><c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/></td>
+	</td></tr>
+
+	<tr>
+	<td style="text-align: left; padding-bottom: 100px;">휴대폰 번호: 010 - <input type="text" id="Num" name="PhoneNum" readonly="readonly"  style="width: 80px;"></td>
+	</tr>
 	
-	휴대폰 번호: 010 - <input type="text" id="Num" name="PhoneNum" readonly="readonly"  style="width: 80px;"><br>
-	<c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/>
-	
-	<input type="submit" value="결제">
-	<button type="button" onclick="location.href='javascript:history.go(1-)'">뒤로가기</button>
+	<tr>
+		<td colspan="2" style="padding-top: 10px;"><input type="submit" value="결  제" class="checkBtn">
+		<button type="button" onclick="location.href='javascript:history.go(-1)'" class="cancelBtn">뒤로가기</button>
+		</td>
+	</tr>
+	</table>
 </form>
 </div>
 

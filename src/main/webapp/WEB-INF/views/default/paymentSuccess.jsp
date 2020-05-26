@@ -5,10 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>결제 완료</title>
 
 <style type="text/css">
  .payment_success{background-color: white; height:500px; width:600px; text-align: center; text-align: center; margin: 0 auto;}
+ .payment_success table{margin: 0 auto;}
+ .payment_success button{color:white; border:0; outline:1; border-radius: 5px; background-color: #005766; padding: 3px 5px; font-size: 15px; font-weight: bold;}
 </style>
 
 </head>
@@ -24,18 +26,24 @@
 
 <c:otherwise>
 	<h3>결제 확인창</h3>
-
-	좌석: ${dto.getSeatNum() }<br>
-	사용 시간: ${dto.getStartTime() } ~ ${dto.getEndTime() }<br>
-	(총 ${dto.getTimeNum() } 시간)<br>
-		<c:choose>
-		<c:when test="${dto.getTitle() == 's' }">
-		사용 인원: ${dto.getPeopleNum() }명<br>
-		</c:when>
-		</c:choose>
-	결제 금액: ${dto.getTotalMoney() }<br>
-	<button type="button" onclick="location.href='main'">확인</button>
-
+	
+	<table>
+	<tr><td>선택 번호: ${dto.getSeatNum() }</td></tr>
+	<tr><td>시작 시간: ${dto.getStartTime() }</td></tr>
+	<tr><td>종료 시간: ${dto.getEndTime() }</td></tr>
+	<tr><td>(총 ${dto.getTimeNum() } 시간)</td></tr>
+	
+	<c:choose>		
+	<c:when test="${dto.getTitle() == 's' }">
+		<tr><td>
+		사용 인원: ${dto.getPeopleNum() }명
+		</td></tr>
+	</c:when>		
+	</c:choose>
+	
+	<tr><td style="padding: 10px 0px 10px 0px">결제 금액: ${dto.getTotalMoney() }</td></tr>
+	<tr><td><button type="button" onclick="location.href='main'">확인</button></td></tr>	
+	</table>
 </c:otherwise>
 </c:choose>
 </div>

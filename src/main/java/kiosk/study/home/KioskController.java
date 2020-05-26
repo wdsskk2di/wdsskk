@@ -21,6 +21,7 @@ import kiost.study.service.ReserveState2;
 import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.UpdateSeatInfo;
 import kiost.study.service.roomPState;
+import kiost.study.service.seatPState;
 import kiost.study.service.seatRState;
 
 @Controller
@@ -54,8 +55,8 @@ public class KioskController {
 		ks.execute(model);
 		
 		if(request.getParameter("title").equals("p")) { //당일좌석 사용자 유무
-			//ks = new seatPState();
-			//ks.execute(model);
+			ks = new seatPState();
+			ks.execute(model);
 		}else {//스터디룸 사용자 유무
 			//ks = new roomPState();
 			//ks.execute(model);

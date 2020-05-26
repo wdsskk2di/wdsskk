@@ -9,7 +9,11 @@
 
 
 <style type="text/css">
-	#chooseNum{background-color: gray;}
+	button,
+	button::after {	  -webkit-transition: all 0.3s;		-moz-transition: all 0.3s;	  -o-transition: all 0.3s;		transition: all 0.3s;	}
+	
+	#chooseNum button{color:white; background-color: #005766; border:0; outline:0; padding: 10px; font-size: 15px;}
+	#chooseNum button:hover{color:#005766; background-color: white; outline: 1px solid #005766;}
 </style>
 
 <!-- ajax 사용을 위한 연결 -->
@@ -23,12 +27,10 @@ $( document ).ready( function() {
 			var MaxPositionNum = 8;		
 			
 			//텍스트창에 입력된 문자 길이
-			var NumLength = $("#Num").val().length;
-			console.log(NumLength);		
+			var NumLength = $("#Num").val().length;		
 			
 			//텍스트 창에 입력되있는 문자
-			var Num = $("#Num").val();
-			console.log(Num);		
+			var Num = $("#Num").val();	
 			
 			//버튼 이벤트 발생한 숫자
 			var Nbutton = $(this).attr('value');
@@ -62,7 +64,7 @@ $( document ).ready( function() {
 	<tr><th><button type="button" name="Nbutton" value="7">7</button></th><th><button type="button" name="Nbutton" value="8">8</button></th><th><button type="button" name="Nbutton" value="9">9</button></th></tr>
 	<tr><th><button type="button" name="Nbutton" value="4">4</button></th><th><button type="button" name="Nbutton" value="5">5</button></th><th><button type="button" name="Nbutton" value="6">6</button></th></tr>
 	<tr><th><button type="button" name="Nbutton" value="1">1</button></th><th><button type="button" name="Nbutton" value="2">2</button></th><th><button type="button" name="Nbutton" value="3">3</button></th></tr>
-	<tr><th><button type="button" name="Nbutton" value="0">0</button></th><th colspan="2"><button type="button" name="Nbutton" value="지움">지움</button></th></tr>
+	<tr><th><button type="button" name="Nbutton" value="0">0</button></th><th colspan="2"><button type="button" name="Nbutton" value="지움" style="width:60px; height: 38px;">지움</button></th></tr>
 </table>
 
 </body>

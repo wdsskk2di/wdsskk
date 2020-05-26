@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<style type="text/css">
+	.nextBtnSty{color:#005766; border:1 solid #005766; border-radius:50px; background-color: white; margin: 3px; font-size: 20px; font-weight: bold;}
+</style>
+
 <!-- ajax 사용을 위한 연결 -->
 <script type="text/javascript" src="resources/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>
@@ -88,7 +93,7 @@ function get_toDate() {
 <body onload="compareDate()">
 <div>
 	<table border="1" id="timeTable1" style="margin:0 auto;">
-		<caption id="reserveDate"><button type="button" onclick="get_toDate()">&lt;</button>${reState.reDate }<button type="button" onclick="get_tomoDate()">&gt;</button></caption>
+		<caption id="reserveDate"><button type="button" class="nextBtnSty" onclick="get_toDate()">&lt;</button>${reState.reDate }<button type="button" class="nextBtnSty" onclick="get_tomoDate()">&gt;</button></caption>
 		<tr> <th>17:00</th><th>18:00</th><th>19:00</th><th>20:00</th><th>21:00</th><th>22:00</th> </tr>
 		<tr>
 			<th><c:choose>

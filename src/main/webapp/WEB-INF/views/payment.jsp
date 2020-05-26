@@ -5,10 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>당일 일정 선택</title>
 
 <style type="text/css">
  .default{background-color: white; height:500px; width:600px; text-align: center; text-align: center; margin: 0 auto;}
+ table{margin: 0 auto;}
+ .inputBorder{border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;}
+ 
+ .checkBtn{color:white; border:1 solid #005766; outline:1; border-radius: 5px; background-color: #005766;
+ 	padding: 3px 5px; font-size: 15px; font-weight: bold; margin-right: 10px; width: 80px;}
+ .cancelBtn{color:#005766; border:1 solid #005766; outline:1; border-radius: 5px; background-color: white;
+ 	padding: 3px 5px; font-size: 15px; font-weight: bold; margin-left: 10px;}
 </style>
 
 <!-- ajax 사용을 위한 연결 -->
@@ -94,15 +101,29 @@ function IsStudyRoom() {
 		<c:when test="${title == 'p' }">
 		<h3>당일 좌석 결제</h3>
 		<form action="paymentCheck" method="post">
-			<input type="hidden" name="title" value="${title }">
-			선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }"><br>
-			사용 시간: <select id="TimeNum" name="TimeNum"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select> <br>	
-			
-			결제 금액: <input type="text" id="TotalMoney" name="TotalMoney" readonly="readonly"><br>
-			휴대폰 번호: 010 - <input type="text" id="Num" name="PhoneNum" readonly="readonly"  style="width: 80px;"><br>
-			<c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/>
-			<input type="submit" value="결제">
-			<button type="button" onclick="location.href='javascript:history.go(1-)'">뒤로가기</button>
+		
+		<table>
+		<tr><td colspan="2"><input type="hidden" name="title" value="${title }"></td></tr>
+		
+		<tr>
+		<td style="text-align: left;">선택 번호: ${seatNum }번<input type="hidden" name="seatNum" value="${seatNum }"></td>
+		<td rowspan="4"><c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/></td>
+		</tr>
+		
+		<tr><td style="text-align: left;">사용 시간: <select id="TimeNum" name="TimeNum"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select></td></tr>
+		<tr><td style="text-align: left;">결제 금액: <input type="text" id="TotalMoney" name="TotalMoney" class="inputBorder" readonly="readonly"></td></tr>
+		
+		<tr>
+		<td style="text-align: left; padding-bottom: 80px;">휴대폰 번호: 010 - <input type="text" id="Num" name="PhoneNum" readonly="readonly"  style="width: 80px;"></td>		
+		</tr>
+		
+		<tr>
+			<td colspan="2" style="padding-top: 20px;"><input type="submit" value="결  제" class="checkBtn">
+			<button type="button" onclick="location.href='javascript:history.go(-1)'" class="cancelBtn">뒤로가기</button>
+			</td>
+		</tr>
+		</table>
+		
 		</form>
 		</c:when>
 		
