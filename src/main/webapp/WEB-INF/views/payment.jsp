@@ -45,21 +45,25 @@ $( document ).ready( function() {
 		var TimeNum = $(this).val();					
 				
 		if("${title}"=="p"){
-			$("#TotalMoney").val(TimeNum*1000);	
-		}else if("${title}"=="r"){
 			$("#TotalMoney").val(TimeNum*2000);	
+		}else if("${title}"=="r"){
+			$("#TotalMoney").val(TimeNum*1600);	
 		}else if("${title}"=="s"){		
-			var PeopleNum = $("#PeopleNum").val();
-			$("#TotalMoney").val(TimeNum*3000*PeopleNum);	
+			var studyRoomPrice = 6000;
+			if("${seatNum}"==43){studyRoomPrice = 8000;}
+			
+			$("#TotalMoney").val(TimeNum*studyRoomPrice);	
 		}							
 	});	
 	
+	/*인원 선택
 	$("#PeopleNum").click(function(){
 		var TimeNum = $("#TimeNum").val();
 		var PeopleNum = $(this).val();
 		
 		$("#TotalMoney").val(TimeNum*3000*PeopleNum);	
 	});	
+	*/
 });
 
 function IsStudyRoom() {

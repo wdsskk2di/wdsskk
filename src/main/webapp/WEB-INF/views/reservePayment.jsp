@@ -54,24 +54,27 @@ $(document).ready( function() {
 		
 		//가격
 		if("${title}"=="p"){
-			$("#TotalMoney").val(TimeNum*1000);	
-			
-		}else if("${title}"=="r"){
 			$("#TotalMoney").val(TimeNum*2000);	
 			
+		}else if("${title}"=="r"){
+			$("#TotalMoney").val(TimeNum*1600);	
+			
 		}else if("${title}"=="s"){		
-			var PeopleNum = $("#PeopleNum").val();
-			$("#TotalMoney").val(TimeNum*3000*PeopleNum);	
+			var studyRoomPrice = 6000;
+			if("${seatNum}"==43){studyRoomPrice = 8000;}
+			
+			$("#TotalMoney").val(TimeNum*studyRoomPrice);	
 		}							
 	});	
 	
-	//인원 선택
+	/*인원 선택
 	$("#PeopleNum").click(function(){
 		var TimeNum = $("#TimeNum").val();
 		var PeopleNum = $(this).val();
 		
 		$("#TotalMoney").val(TimeNum*3000*PeopleNum);	
 	});	
+	*/
 });
 </script>
 
@@ -106,10 +109,10 @@ $(document).ready( function() {
 	<c:if test="${title == 's' }">
 		<c:choose>
 		<c:when test="${seatNum == 43 }">
-		사용 인원: <select id="PeopleNum" name="PeopleNum"> <c:forEach var="people" items="${Plist43 }"> <option id="selectPeople">${people }</option> </c:forEach> </select>
+		사용 인원: <select> <c:forEach var="people" items="${Plist43 }"> <option id="selectPeople">${people }</option> </c:forEach> </select>
 		</c:when>
 		<c:otherwise>
-		사용 인원: <select id="PeopleNum" name="PeopleNum"> <c:forEach var="people" items="${Plist }"> <option id="selectPeople">${people }</option> </c:forEach> </select>
+		사용 인원: <select> <c:forEach var="people" items="${Plist }"> <option id="selectPeople">${people }</option> </c:forEach> </select>
 		</c:otherwise>
 		</c:choose>
 	</c:if>
