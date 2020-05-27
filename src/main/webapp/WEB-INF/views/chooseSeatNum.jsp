@@ -9,9 +9,9 @@
 
 <style type="text/css">
  .default{background-color: white; height:500px; width:600px; text-align: center; margin-top: 20%;}
- .left_Div{position: absolute; left: 150px; top: 170px; width: 400px; margin-top: 10%;}
+ .left_Div{position: absolute; left: 180px; top: 170px; width: 400px; margin-top: 10%;}
  .left_Div img{width: 100px; height: 100px;}
- .right_Div{position: absolute; right: 170px; top: 150px; width: 30%; margin-top: 10%;}
+ .right_Div{position: absolute; right: 130px; top: 150px; width: 300px; margin-top: 10%;}
  
  .checkBtn{color:white; border:1 solid #005766; outline:1; border-radius: 5px; background-color: #005766;
 		 padding: 3px 5px; font-size: 15px; font-weight: bold; margin-right: 10px;}
@@ -39,11 +39,11 @@
 
 <c:choose>
 <c:when test="${title == 'p' }">
-	<h4>당일 좌석은 1~20번 입니다</h4>
+	<h4>당일 좌석: 1~20번</h4>
 </c:when>
 
 <c:when test="${title == 's' }">
-	<h4>스터디룸은 41~43번 입니다</h4>
+	<h4>스터디룸: 41~43번</h4>
 </c:when>
 </c:choose>
 

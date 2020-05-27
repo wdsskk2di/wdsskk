@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions"  prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,25 +9,81 @@
 <title>Insert title here</title>
 	<style type="text/css">
 		.left_Div_in{position:absolute; top:20px; width: 400px;}
-		.left_Div_in table{margin: 0 auto;}
+		.left_Div_in table{margin: 0 auto; font-size: 15px;}
+		.left_Div_in table td{text-align:center; width: 68px; height: 83px; border: 1px solid #005766;}
 	</style>
 </head>
 <body>
 
 <div class="left_Div_in">
+
+<c:choose>
+<c:when test="${title == 'p' }">
 <table>
-<tr><th style="border-right: 1px solid;">좌석 번호</th><th style="border-right: 1px solid;">현재 사용자</th><th>종료 시간</th></tr>
-<tr><td>체크:<c:out value="${seatState[0].seatNum}"/> </td></tr>
-<c:forEach var="seatState" items="${seatState }">
-<tr><th colspan="3"  style="border-bottom: 1px solid;"></th></tr>
-<tr><th style="border-right: 1px solid;"><a>${seatState.seatNum }</a></th>
+<tr>
+<c:forEach var="i" begin="0" end="4">
+	<td>${seatState[i].seatNum}<br>
 	<c:choose>
-		<c:when test="${seatState.phoneNum == null}"><th style="border-right: 1px solid;">없음</th><th>--</th></c:when>
-		<c:otherwise><th style="border-right: 1px solid; background-color: red">있음</th><th>${seatState.endTime }</th></c:otherwise>
+		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
+		<c:otherwise><span style="background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
-</tr>
+	</td>
 </c:forEach>
+</tr>
+<tr>
+<c:forEach var="i" begin="5" end="9">
+	<td>${seatState[i].seatNum}<br>
+	<c:choose>
+		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
+		<c:otherwise><span style="background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+	</c:choose>
+	</td>
+</c:forEach>
+</tr>
 </table>
+</c:when>
+
+<c:when test="${title == 'r' }">
+<table>
+<tr>
+<c:forEach var="i" begin="0" end="4">
+	<td>${seatState[i].seatNum}<br>
+	<c:choose>
+		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
+		<c:otherwise><span style="background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+	</c:choose>
+	</td>
+</c:forEach>
+</tr>
+<tr>
+<c:forEach var="i" begin="5" end="9">
+	<td>${seatState[i].seatNum}<br>
+	<c:choose>
+		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
+		<c:otherwise><span style="background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+	</c:choose>
+	</td>
+</c:forEach>
+</tr>
+</table>
+</c:when>
+
+<c:otherwise>
+<table>
+<tr>
+<c:forEach var="i" begin="0" end="2">
+	<td>${seatState[i].seatNum}<br>
+	<c:choose>
+		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
+		<c:otherwise><span style="background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+	</c:choose>
+	</td>
+</c:forEach>
+</tr>
+</table>
+</c:otherwise>
+</c:choose>
+
 </div>
 
 </body>
