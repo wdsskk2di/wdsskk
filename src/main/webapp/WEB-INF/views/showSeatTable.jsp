@@ -22,20 +22,20 @@
 <table>
 <tr>
 <c:forEach var="i" begin="0" end="4">
-	<td>${seatState[i].seatNum}<br>
+	<td><b>${seatState[i].seatNum}</b><br>
 	<c:choose>
 		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
-		<c:otherwise><span style="background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+		<c:otherwise><span style="color:white; background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
 	</td>
 </c:forEach>
 </tr>
 <tr>
 <c:forEach var="i" begin="5" end="9">
-	<td>${seatState[i].seatNum}<br>
+	<td><b>${seatState[i].seatNum}</b><br>
 	<c:choose>
 		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
-		<c:otherwise><span style="background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+		<c:otherwise><span style="color:white; background-color: red;">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
 	</td>
 </c:forEach>
@@ -47,20 +47,20 @@
 <table>
 <tr>
 <c:forEach var="i" begin="0" end="4">
-	<td>${seatState[i].seatNum}<br>
+	<td><b>${seatState[i].seatNum}</b><br>
 	<c:choose>
 		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
-		<c:otherwise><span style="background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+		<c:otherwise><span style="color:white; background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
 	</td>
 </c:forEach>
 </tr>
 <tr>
 <c:forEach var="i" begin="5" end="9">
-	<td>${seatState[i].seatNum}<br>
+	<td><b>${seatState[i].seatNum}</b><br>
 	<c:choose>
 		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
-		<c:otherwise><span style="background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+		<c:otherwise><span style="color:white; background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
 	</td>
 </c:forEach>
@@ -72,10 +72,10 @@
 <table>
 <tr>
 <c:forEach var="i" begin="0" end="2">
-	<td>${seatState[i].seatNum}<br>
+	<td><b>${seatState[i].seatNum}</b><br>
 	<c:choose>
 		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
-		<c:otherwise><span style="background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+		<c:otherwise><span style="color:white; background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
 	</td>
 </c:forEach>
