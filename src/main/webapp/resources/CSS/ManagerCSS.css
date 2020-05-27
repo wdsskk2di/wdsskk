@@ -28,8 +28,8 @@
 
 /**/
 .sidenav button{overflow: hidden; position: relative; display: inline-block; vertical-align: top; color: #fff;
-	background: 0 none; border: 1 #111; width: 180px; height: 50px; line-height: 50px; border: 1px solid #111; transition: all 0.5s;}
-.sidenav button:hover{color: #225ea7;}
+	background: 0 none; width: 180px; height: 50px; line-height: 50px; border: 1px solid #111; transition: all 0.5s;}
+.sidenav button:hover{color: #225ea7; border: 1px solid #fff;}
 .sidenav button:before{content: ""; z-index: -1; position: absolute; background: #fff; border: 1 #fff; transition: all 1s;}
 .sidenav .buttonSN:before{left: 0; top: 0; width: 0; height: 100%; border-bottom-right-radius: 50%; border-top-right-radius: 50%;}
 .sidenav .buttonSN:hover:before{width: 200%;}
