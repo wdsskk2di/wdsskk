@@ -1,13 +1,10 @@
 package kiosk.study.dao;
 
-import java.util.ArrayList;
-
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.care.template.Constant;
 
-import kiosk.study.dto.seatDTO;
 import kiosk.study.dto.studyDTO;
 
 public class studyDAO {
@@ -19,7 +16,7 @@ public class studyDAO {
 		try {
 			String sql = "update kiosk set timeNum='"+dto.getTimeNum()+"', peopleNum='"+dto.getPeopleNum()+
 					"', totalmoney ='"+dto.getTotalMoney()+"', PhoneNum='"+dto.getPhoneNum()+
-					"', startTime=to_char(sysdate, 'yy/MM/dd hh:mi'), endTime=to_char(sysdate+"+dto.getTimeNum()+"/24, 'yy/mm/dd hh:mi') "
+					"', startTime=to_char(sysdate, 'yy/MM/dd hh24:mi'), endTime=to_char(sysdate+"+dto.getTimeNum()+"/24, 'yy/mm/dd hh24:mi') "
 					+ "where seatNum='"+dto.getSeatNum()+"'";
 			template.update(sql);
 			
@@ -66,39 +63,4 @@ public class studyDAO {
 			return 0;
 		}		
 	}
-
-	//당일좌석 현재 배치도 확인
-	public ArrayList<seatDTO> seatPState() {	
-		ArrayList<seatDTO> list = null;
-		try {
-			String sql = "select seatNum, phoneNum, endTime from kiosk where seatNum<21 order by seatNum asc";
-			list = (ArrayList<seatDTO>)template.query(sql, new BeanPropertyRowMapper<seatDTO>(seatDTO.class));
-		} catch (Exception e) {}	
-		
-		return list;
-	}
-
-//분리 필요?
-	//스터디룸 현재 배치도 확인
-	public ArrayList<seatDTO> roomPState() {	
-		ArrayList<seatDTO> list = null;
-		try {
-			String sql = "select seatNum, phoneNum, endTime from kiosk where seatNum>40 order by seatNum asc";
-			list = (ArrayList<seatDTO>)template.query(sql, new BeanPropertyRowMapper<seatDTO>(seatDTO.class));
-		} catch (Exception e) {}	
-		
-		return list;
-	}
-	
-	//예약좌석 현재 배치도 확인
-	public ArrayList<seatDTO> seatRState() {	
-		ArrayList<seatDTO> list = null;
-		try {
-			String sql = "select seatNum, phoneNum, endTime from kiosk where seatNum>20 and seatNum<41 order by seatNum asc";
-			list = (ArrayList<seatDTO>)template.query(sql, new BeanPropertyRowMapper<seatDTO>(seatDTO.class));
-		} catch (Exception e) {}	
-		
-		return list;
-	}
-
 }

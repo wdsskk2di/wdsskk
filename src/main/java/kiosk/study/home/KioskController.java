@@ -36,11 +36,13 @@ public class KioskController {
 		Constant.template = template;
 	}
 	
+	//메인 페이지
 	@RequestMapping("main")
 	public String main() {
 		return "default/main";
 	}
 	
+	//스터디룸 당일, 예약 선택 페이지
 	@RequestMapping("studyRoom")
 	public String studyRoom(HttpServletRequest request, Model model) {
 		String title = request.getParameter("title");
@@ -48,6 +50,7 @@ public class KioskController {
 		return "default/studyRoom";
 	}
 	
+	//당일 좌석, 당일 스터디룸 좌석 번호 선택 페이지
 	@RequestMapping("chooseSeatNum")
 	public String chooseSeatNum(HttpServletRequest request, Model model) {
 		model.addAttribute("title", request.getParameter("title"));
@@ -65,6 +68,7 @@ public class KioskController {
 		return "chooseSeatNum";
 	}
 	
+	//예약 좌석, 예약 스터디룸 좌석 번호 선택 페이지
 	@RequestMapping("reserve")
 	public String reserve(HttpServletRequest request, Model model) {
 		model.addAttribute("title", request.getParameter("title"));
@@ -81,126 +85,5 @@ public class KioskController {
 		
 		return "reserve";
 	}
-	
-	@RequestMapping("payment")
-	public String payment(HttpServletRequest request, Model model){
-		model.addAttribute("request", request);
-		String title = request.getParameter("title");
-		model.addAttribute("title", title);
 
-		//입력값 없을때
-		if(request.getParameter("seatNum")=="") {
-			return "redirect:chooseSeatNum";
-			
-		}else {	//입력값이 있고
-			int num = Integer.parseInt(request.getParameter("seatNum"));		
-			
-			if(title.equals("p") && num > 0 && num < 21) {  //당일 좌석 + 입력값이 1~20 사이				
-				//이미 누군가 있다면 입력되지 않게 돌려야..
-				ks = new SeatEmptyCheck();
-				ks.execute(model);		
-				
-				model.addAttribute("seatNum", num);
-				return "payment";	//결제 페이지로
-				
-			}else if(title.equals("r") && num > 20 && num < 41){  //예약 좌석 + 입력값이21~40 사이				
-				//이미 누군가 있다면 입력되지 않게 돌려야..
-				ks = new SeatEmptyCheck();
-				ks.execute(model);	
-				
-				model.addAttribute("seatNum", num);
-				return "payment";	//결제 페이지로
-				
-			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이				
-				//이미 누군가 있다면 입력되지 않게 돌려야..
-				ks = new SeatEmptyCheck();
-				ks.execute(model);	
-				
-				//스터디룸의 타임테이블
-				ks = new ReserveState();
-				ks.execute(model);	
-				
-				model.addAttribute("seatNum", num);
-				return "payment";	//결제 페이지로
-				
-			}else {//입력된 좌석에 문제가 있는 경우
-				try {
-					//좌석 선택창으로
-					return "redirect:chooseSeatNum";
-				} catch (Exception e) {return "redirect:chooseSeatNum";}
-
-			}
-		}
-
-	}
-	
-	@PostMapping("paymentCheck")
-	public String paymenyCheck(Model model, studyDTO dto) {
-		model.addAttribute("dto", dto);
-		ks = new PaymentService();
-		ks.execute(model);
-		
-		return "default/paymentSuccess";
-	}
-	
-	@RequestMapping("reservePayment")
-	public String reservePayment(HttpServletRequest request, Model model) {
-		model.addAttribute("request", request);
-		String title = request.getParameter("title");
-		model.addAttribute("title", title);
-
-		//입력값 없을때
-		if(request.getParameter("seatNum")=="") {
-			return "redirect:reserve";
-			
-		}else {	//입력값이 있고
-			int num = Integer.parseInt(request.getParameter("seatNum"));	
-			model.addAttribute("seatNum", request.getParameter("seatNum"));
-			
-			if(title.equals("r") && num > 20 && num < 41){  //예약 좌석 + 입력값이21~40 사이		
-				//스터디룸의 타임테이블
-				ks = new ReserveState();
-				ks.execute(model);	
-				
-				//좌석 번호
-				model.addAttribute("seatNum", num);
-				return "reservePayment";	//결제 페이지로
-				
-			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이						
-				//스터디룸의 타임테이블
-				ks = new ReserveState();
-				ks.execute(model);			
-
-				model.addAttribute("seatNum", num);
-				return "reservePayment";	//결제 페이지로
-				
-			}else {//입력된 좌석에 문제가 있는 경우
-				try {
-					//좌석 선택창으로
-					return "redirect:reserve";
-				} catch (Exception e) {return "redirect:reserve";}
-			}
-		}
-	}
-	
-	@GetMapping(value="reserveTomorrow", produces = "application/json;charset=utf8")
-	public String reserveTomorrow(@RequestParam("seatNum") String seatNum, Model model) {		
-		model.addAttribute("seatNum", seatNum);
-		//스터디룸의 타임테이블
-		ks = new ReserveState2();
-		ks.execute(model);	
-	
-		return "showTimeTable";
-	}
-	
-	@GetMapping(value="reserveToday", produces = "application/json;charset=utf8")
-	public String reserveToday(@RequestParam("seatNum") String seatNum, Model model) {
-		model.addAttribute("seatNum", seatNum);
-
-		//스터디룸의 타임테이블
-		ks = new ReserveState();
-		ks.execute(model);	
-	
-		return "showTimeTable";
-	}
 }

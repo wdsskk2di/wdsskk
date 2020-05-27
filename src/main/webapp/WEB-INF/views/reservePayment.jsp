@@ -24,6 +24,10 @@
 <script type="text/javascript" src="resources/jsFile/reservePaymentJS.js"></script>
 
 <script type="text/javascript">
+//samesite 경고 해결을 위한 설정
+document.cookie = 'same-site-cookie=foo; SameSite=Lax';
+document.cookie = 'cross-site-cookie=bar; SameSite=None; Secure';
+
 <%
 //스터디룸 정원
 int[] Plist43 = {1,2,3,4,5,6};
@@ -33,7 +37,7 @@ request.setAttribute("Plist",Plist);
 %>
 
 $(document).ready( function() {
-	console.log("ready");
+
 	//사용 시간 선택
 	$("#TimeNum").click(function(){		
 		
@@ -122,7 +126,7 @@ $(document).ready( function() {
 	<tr><td>
 	결제 금액: <input type="text" id="TotalMoney" name="TotalMoney" readonly="readonly"  class="inputBorder">
 	<td rowspan="2"><c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/></td>
-	</td></tr>
+	</tr>
 
 	<tr>
 	<td style="text-align: left; padding-bottom: 100px;">휴대폰 번호: 010 - <input type="text" id="Num" name="PhoneNum" readonly="readonly"  style="width: 80px;"></td>

@@ -15,6 +15,7 @@
 <script type="text/javascript" src="resources/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+
 <script type="text/javascript">
 //날짜 계산
 function getFormatDate(date){
@@ -25,6 +26,7 @@ function getFormatDate(date){
     day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
     return  year + '/' + month + '/' + day;
 }
+
 function compareDate() {
 	var date = new Date();
 	date = getFormatDate(date);
@@ -52,7 +54,7 @@ function get_tomoDate() {
 			$.ajax({
 				url:"reserveTomorrow",
 				type: "GET",	//방식
-				data: {seatNum: '${seatNum }'}
+				data: {seatNum: '${seatNum }'}				
 			})
 			.done(function(data){	//성공시				
 				$("#timeTable1").html(data);
@@ -61,8 +63,7 @@ function get_tomoDate() {
 				console.log("실패")
 			});
 		}
-	} catch (e) {}
-	
+	} catch (e) {}	
 }
 
 //오늘날짜 타임테이블 보여주기

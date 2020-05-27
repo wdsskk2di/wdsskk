@@ -1,6 +1,6 @@
 package kiosk.study.dto;
 
-public class seatDTO {
+public class ShowSeatTableDTO {
 	//당일 좌석 사용 유무
 	private int seatNum;	//좌석 번호
 	private String phoneNum; //핸드폰 번호
