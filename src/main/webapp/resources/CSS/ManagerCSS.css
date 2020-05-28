@@ -26,14 +26,31 @@
  background-color: 1px solid white;
 }
 
-/**/
-.sidenav button{overflow: hidden; position: relative; display: inline-block; vertical-align: top; color: #fff;
+/*사이드바 버튼 디자인 및 효과*/
+.sidenav button{overflow: hidden; position: relative; display: inline-block; vertical-align: top;
+	font-size: 25px; font-weight:bold; color: #fff;
 	background: 0 none; width: 180px; height: 50px; line-height: 50px; border: 1px solid #111; transition: all 0.5s;}
-.sidenav button:hover{color: #225ea7; border: 1px solid #fff;}
-.sidenav button:before{content: ""; z-index: -1; position: absolute; background: #fff; border: 1 #fff; transition: all 1s;}
+.sidenav button:hover{color: #225ea7;}
+.sidenav button:before{content: ""; z-index: -1; position: absolute; background: #fff; transition: all 1s;}
 .sidenav .buttonSN:before{left: 0; top: 0; width: 0; height: 100%; border-bottom-right-radius: 50%; border-top-right-radius: 50%;}
 .sidenav .buttonSN:hover:before{width: 200%;}
-/**/
+
+/*사이드바 span*/
+.sidenav span{color:white; margin-left: 25px;}
+
+/*관리자 로그인 Form*/
+.manageForm{color: white; font-size: 15px; height:75px; margin-bottom: 20px;}
+.manageForm input{width: 105px;}
+.manageForm #PW_TF{margin-left: 3px;}
+
+.manageForm #LoginBtn{width: 60px; margin-left: 37px; margin-top: 5px; color: #fff;  transition: all 0.5s;
+						border:none; outline:1px solid #fff; background: 0 none;}
+.manageForm #LoginBtn:hover{color: #111; outline: 1px solid #111; background-color: #fff; transition: all 0.5s;}
+				
+.manageForm #LogoutBtn{width: 80px; margin-left: 37px; margin-top: 5px; color: #fff;  transition: all 0.5s;
+						border:none; outline:1px solid #fff; background: 0 none;}
+.manageForm #LogoutBtn:hover{color: #111; outline: 1px solid #111; background-color: #fff; transition: all 0.5s;}					
+
 
 /* Style page content */
 .main {
