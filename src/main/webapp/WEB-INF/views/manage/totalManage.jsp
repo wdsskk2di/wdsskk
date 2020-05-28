@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>매출 관리</title>
 <link rel="stylesheet" href="<c:url value="resources/CSS/ManagerCSS.css" />">
 </head>
 <body>

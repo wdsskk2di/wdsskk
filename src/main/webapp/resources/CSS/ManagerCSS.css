@@ -63,3 +63,9 @@
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+/*좌석 관리 페이지*/
+.seatDiv{max-width: 800px; min-width: 780px; border: 1px solid #111;	margin-bottom: 20px;}
+.seatDiv table{min-width: 770px;}
+.seatDiv table td{text-align:center; border: 1px solid #111;}
+.seatDiv a{text-decoration: none;}
