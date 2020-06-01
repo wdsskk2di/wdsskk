@@ -3,28 +3,33 @@ DB Table
 -- 총 전체 좌석 관리용 --
 create table kiosk_function(
 title char(1) not null,
-seatNum number(2) not null
+seatNum number(2) not null,
 constraint kiosk_function primary key (seatNum)
 );
 
 
--- 당일 시간제 좌석(통계용) chooseSeatNum -> payment --
+-- #1  당일 시간제 좌석(통계용) chooseSeatNum -> payment --
 -- 입력값  seatNum Table저장용(사용자 선호도 통계) --
 create table kiosk_day(
-toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')) not null,
-toTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')) not null,
-seatNum number(2) not null
+toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')),
+toTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')),
+seatNum number(2) null
 );
+
+
+
+
+
 
 -- 당일 시간제 좌석(사용자선택) payment -> paymentCheck --
 -- 세션값(seatNum) 입력값 timeNum, timeUseMoney, phoneNum --
 -- dto 값 저장 이후  다음 페이지 계산 시에 저장하는 용도 --
 create table kiosk_dayuser(
-toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')) not null,
-toTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')) not null,
-seatNum number(2) not null,
+toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')),
+toTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')),
+seatNum number(2) null,
 timeNum number(2) not null,
-timeUseMoney number(10) not null,
+TotalMoney number(10) not null,
 phoneNum number(8) not null,
 );
 
@@ -32,14 +37,15 @@ phoneNum number(8) not null,
 --  결제 후 사용자 값 출력 paymentCheck -> main --
 -- uniqueUser : 사용자 결제후 고유키값 부여, 환불 내역 확인용 --
 create table study_timeSet(
-toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')) not null,
-startTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')) not null,
-endTime varchar2(8) not null,
-seatNum number(2) not null,
+toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')),
+startTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')),
+endTime varchar2(8),
+seatNum number(2) null,
 timeNum number(2) not null,
-timeUseMoney number(10) not null,
-usePerson number(1) not null,
-uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss')) not null,
+TotalMoney number(10) not null,
+PeopleNum number(1) default 1,
+phoneNum number(8) not null,
+uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss')),
 constraint dayUser_PK primary key(uniqueUser)
 );
 

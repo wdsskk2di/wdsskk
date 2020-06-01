@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.care.template.Constant;
 
+import kiosk.study.dao.studyDAO;
 import kiosk.study.dto.studyDTO;
 import kiost.study.service.KioskService;
 import kiost.study.service.PaymentService;
@@ -23,6 +24,7 @@ import kiost.study.service.UpdateSeatInfo;
 import kiost.study.service.roomPState;
 import kiost.study.service.seatPState;
 import kiost.study.service.seatRState;
+import kiost.study.service.stateSeat;
 
 @Controller
 public class PaymentController {
@@ -56,6 +58,12 @@ public class PaymentController {
 				ks.execute(model);		
 				
 				model.addAttribute("seatNum", num);
+				
+				// 좌석 선택시 값을  DB저장 
+				ks = new stateSeat();
+				ks.execute(model);
+				// -------------------------
+				
 				return "payment";	//결제 페이지로
 				
 			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이				
