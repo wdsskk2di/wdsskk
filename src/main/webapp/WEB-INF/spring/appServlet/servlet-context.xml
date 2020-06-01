@@ -22,7 +22,5 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="kiosk.study.home" />
-	
-	
-	
+
 </beans:beans>

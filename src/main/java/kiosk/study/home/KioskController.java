@@ -6,19 +6,11 @@ import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.care.template.Constant;
 
-import kiosk.study.dto.studyDTO;
 import kiost.study.service.KioskService;
-import kiost.study.service.PaymentService;
-import kiost.study.service.ReserveState;
-import kiost.study.service.ReserveState2;
-import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.UpdateSeatInfo;
 import kiost.study.service.roomPState;
 import kiost.study.service.seatPState;
@@ -37,8 +29,14 @@ public class KioskController {
 	}
 	
 	//메인 페이지
+	@RequestMapping("/")
+	public String home() {
+		return "default/main";
+	}
+	
 	@RequestMapping("main")
-	public String main() {
+	public String main(HttpServletRequest request) {
+		
 		return "default/main";
 	}
 	

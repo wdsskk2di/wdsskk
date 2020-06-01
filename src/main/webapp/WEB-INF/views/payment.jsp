@@ -114,11 +114,11 @@ function IsStudyRoom() {
 		<td rowspan="4"><c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/></td>
 		</tr>
 		
-		<tr><td style="text-align: left;">사용 시간: <select id="TimeNum" name="TimeNum"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select></td></tr>
-		<tr><td style="text-align: left;">결제 금액: <input type="text" id="TotalMoney" name="TotalMoney" class="inputBorder" readonly="readonly"></td></tr>
+		<tr><td style="text-align: left;">사용 시간: <select id="TimeNum" name="timeNum"> <c:forEach var="time" items="${Tlist }"> <option id="selectTime">${time }</option> </c:forEach> </select></td></tr>
+		<tr><td style="text-align: left;">결제 금액: <input type="text" id="TotalMoney" name="totalMoney" class="inputBorder" readonly="readonly"></td></tr>
 		
 		<tr>
-		<td style="text-align: left; padding-bottom: 80px;">휴대폰 번호: 010 - <input type="text" id="Num" name="PhoneNum" readonly="readonly"  style="width: 80px;"></td>		
+		<td style="text-align: left; padding-bottom: 80px;">휴대폰 번호: 010 - <input type="text" id="Num" name="phoneNum" readonly="readonly"  style="width: 80px;"></td>		
 		</tr>
 		
 		<tr>

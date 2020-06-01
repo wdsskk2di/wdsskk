@@ -104,7 +104,7 @@ $(document).ready( function() {
 	
 	<tr>
 	<td>시작 시간: <input type="text" id="showStartTime" readonly="readonly" class="inputBorder"></td>
-	<td>사용 시간: <select id="TimeNum" name="TimeNum" disabled="disabled"> <option id="selectTime">${time }</option> </select></td>		
+	<td>사용 시간: <select id="TimeNum" name="timeNum" disabled="disabled"> <option id="selectTime">${time }</option> </select></td>		
 	</tr>
 	
 	<tr>
@@ -124,12 +124,12 @@ $(document).ready( function() {
 	</tr>
 	
 	<tr><td>
-	결제 금액: <input type="text" id="TotalMoney" name="TotalMoney" readonly="readonly"  class="inputBorder">
+	결제 금액: <input type="text" id="TotalMoney" name="totalMoney" readonly="readonly"  class="inputBorder">
 	<td rowspan="2"><c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/></td>
 	</tr>
 
 	<tr>
-	<td style="text-align: left; padding-bottom: 100px;">휴대폰 번호: 010 - <input type="text" id="Num" name="PhoneNum" readonly="readonly"  style="width: 80px;"></td>
+	<td style="text-align: left; padding-bottom: 100px;">휴대폰 번호: 010 - <input type="text" id="Num" name="phoneNum" readonly="readonly"  style="width: 80px;"></td>
 	</tr>
 	
 	<tr>
