@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<style type="text/css">
-		.left_Div_in{position:absolute; top:20px; width: 400px;}
+		.left_Div_in{position:absolute; top:300px; width: 350px;}
 		.left_Div_in table{margin: 0 auto; font-size: 15px;}
 		.left_Div_in table td{text-align:center; width: 68px; height: 83px; border: 1px solid #005766;}
 	</style>

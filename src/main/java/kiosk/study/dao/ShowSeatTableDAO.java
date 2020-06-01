@@ -34,7 +34,7 @@ public class ShowSeatTableDAO {
 		
 		return list;
 	}
-	
+
 	//예약좌석 현재 배치도 확인
 	public ArrayList<ShowSeatTableDTO> seatRState() {	
 		ArrayList<ShowSeatTableDTO> list = null;

@@ -9,14 +9,15 @@
 
 <style type="text/css">
  .default{background-color: white; height:500px; width:600px; text-align: center; margin-top: 20%;}
- .left_Div{position: absolute; left: 180px; top: 170px; width: 400px; margin-top: 10%;}
- .left_Div img{width: 100px; height: 100px;}
- .right_Div{position: absolute; right: 130px; top: 150px; width: 300px; margin-top: 10%;}
+ .left_Div{position: absolute; left: 19%; top: 100px; width: 350px; margin-top: 10%;}
+ .left_Div img{width: 250px; height: 280px;}
+ .right_Div{position: absolute;  left: 60%; top: 150px; width: 250px; margin-top: 10%;}
  
  .checkBtn{color:white; border:1 solid #005766; outline:1; border-radius: 5px; background-color: #005766;
 		 padding: 3px 5px; font-size: 15px; font-weight: bold; margin-right: 10px;}
  .cancelBtn{color:#005766; border:1 solid #005766; outline:1; border-radius: 5px; background-color: white;
 		 padding: 3px 5px; font-size: 15px; font-weight: bold;}
+
 </style>
 
 <!-- ajax 사용을 위한 연결 -->
@@ -30,7 +31,7 @@
 <div class="default">
 
 <div class="left_Div">
-<img alt="배치도" src="">
+<img alt="배치도" src="resources/images/blockPlan.jpg"><br>
 <c:import url="/WEB-INF/views/showSeatTable.jsp"/>
 </div>
 

@@ -19,8 +19,8 @@ public class studyDAO {
 					"', startTime=to_char(sysdate, 'yy/MM/dd hh24:mi'), endTime=to_char(sysdate+"+dto.getTimeNum()+"/24, 'yy/mm/dd hh24:mi') "
 					+ "where seatNum='"+dto.getSeatNum()+"'";
 			template.update(sql);
-			
 			return 1;
+			
 		} catch (Exception e) {return 0;}
 		/*
 		sql에서 date 넣기. 예시

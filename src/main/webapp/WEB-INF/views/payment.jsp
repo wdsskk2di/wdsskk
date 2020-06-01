@@ -8,7 +8,7 @@
 <title>당일 일정 선택</title>
 
 <style type="text/css">
- .default{background-color: white; height:500px; width:600px; text-align: center; text-align: center; margin: 0 auto; margin-top: 20%;}
+ .default{background-color: white; height:500px; width:600px; max-width:600px; min-width:600px; text-align: center; text-align: center; margin: 0 auto; margin-top: 20%;}
  table{margin: 0 auto;}
  .inputBorder{border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;}
  
