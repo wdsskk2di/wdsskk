@@ -31,7 +31,7 @@
 <div class="default">
 
 <div class="left_Div">
-<img alt="배치도" src="resources/images/blockPlan.jpg"><br>
+<img alt="배치도" src="resources/images/blockPlan.jpg"  ondragstart="return false"><br>
 <c:import url="/WEB-INF/views/showSeatTable.jsp"/>
 </div>
 
