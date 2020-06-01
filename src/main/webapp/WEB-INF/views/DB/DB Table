@@ -1,2 +1,45 @@
 DB Table
 
+-- 총 전체 좌석 관리용 --
+create table kiosk_function(
+title char(1) not null,
+seatNum number(2) not null
+constraint kiosk_function primary key (seatNum)
+);
+
+
+-- 당일 시간제 좌석(통계용) chooseSeatNum -> payment --
+-- 입력값  seatNum Table저장용(사용자 선호도 통계) --
+create table kiosk_day(
+toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')) not null,
+toTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')) not null,
+seatNum number(2) not null
+);
+
+-- 당일 시간제 좌석(사용자선택) payment -> paymentCheck --
+-- 세션값(seatNum) 입력값 timeNum, timeUseMoney, phoneNum --
+create table kiosk_dayuser(
+toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')) not null,
+toTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')) not null,
+seatNum number(2) not null,
+timeNum number(2) not null,
+timeUseMoney number(10) not null,
+phoneNum number(8) not null,
+
+);
+
+
+--  결제 후 사용자 값 출력 --
+-- uniqueUser : 사용자 결제후 고유키값 부여, 환불 내역 확인용 --
+create table study_timeSet(
+toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')) not null,
+startTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')) not null,
+endTime varchar2(8) not null,
+seatNum number(2) not null,
+timeNum number(2) not null,
+timeUseMoney number(10) not null,
+usePerson number(1) not null,
+uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss')) not null,
+constraint dayUser_PK primary key(uniqueUser)
+);
+

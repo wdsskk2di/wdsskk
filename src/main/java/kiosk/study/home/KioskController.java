@@ -37,8 +37,13 @@ public class KioskController {
 	}
 	
 	//메인 페이지
+	@RequestMapping("/")
+	public String home() {
+		return "default/main";
+	}
 	@RequestMapping("main")
-	public String main() {
+	public String main(HttpServletRequest request, Model model) {
+//		request.removeAttribute();
 		return "default/main";
 	}
 	
