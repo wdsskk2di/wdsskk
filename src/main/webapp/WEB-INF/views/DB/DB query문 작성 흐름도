@@ -4,7 +4,6 @@ create table study_resultSet(
 seatNum number(2) null,
 timeNum number(2) not null,
 TotalMoney number(10) not null,
-PeopleNum number(1) default 1,
 phoneNum number(8) not null,
 uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss'))
 );
