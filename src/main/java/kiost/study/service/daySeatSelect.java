@@ -21,8 +21,6 @@ public class daySeatSelect implements KioskService{
 		
 		// dto(좌석번호, 시간, 가격, 핸드폰)을 DB에 저장
 		dao.daySeatSelect(dto);
-		
-		
 	}
 
 }

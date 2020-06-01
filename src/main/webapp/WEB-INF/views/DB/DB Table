@@ -45,7 +45,7 @@ timeNum number(2) not null,
 TotalMoney number(10) not null,
 PeopleNum number(1) default 1,
 phoneNum number(8) not null,
-uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss')),
-constraint dayUser_PK primary key(uniqueUser)
+uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss'))
 );
+// ,constraint dayUser_PK primary key(uniqueUser) 고유키값 집어넣으면 데이터 오류 발생
 
