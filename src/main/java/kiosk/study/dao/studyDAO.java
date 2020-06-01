@@ -20,7 +20,7 @@ public class studyDAO {
 	
 	
 	//사용자가 좌석 선택 ( seatNum) db 저장 #1
-	public void statSeat(int seatNum) {
+	public void statSeat(int seatNum) { 
 		try {
 			String sql = "insert into kiosk_day(seatNum) values ("+seatNum+")";
 			template.update(sql);

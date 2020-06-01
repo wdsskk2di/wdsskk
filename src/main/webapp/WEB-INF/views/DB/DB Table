@@ -79,7 +79,7 @@ uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss'))
 
 
 
-
+ 
 -- #5  결제 후 사용자 값 출력 paymentCheck -> main --
 -- uniqueUser : 사용자 결제후 고유키값 부여, 환불 내역 확인용 --
 create table study_timeSet(

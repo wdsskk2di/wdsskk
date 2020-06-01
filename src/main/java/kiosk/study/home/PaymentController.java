@@ -31,7 +31,7 @@ public class PaymentController {
 		Constant.template = template;
 	}
 	
-	//당일 좌석, 당일 스터디룸 사용자 정보 입력 페이지
+	//당일 좌석, 당일 스터디룸 사용자 정보 입력 페이지 
 	@RequestMapping("payment")
 	public String payment(HttpServletRequest request, Model model){
 		model.addAttribute("request", request);
