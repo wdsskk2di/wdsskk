@@ -21,6 +21,7 @@ import kiost.study.service.ReserveState;
 import kiost.study.service.ReserveState2;
 import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.UpdateSeatInfo;
+import kiost.study.service.daySeatSelect;
 import kiost.study.service.roomPState;
 import kiost.study.service.seatPState;
 import kiost.study.service.seatRState;
@@ -105,7 +106,7 @@ public class PaymentController {
 	@PostMapping("paymentCheck")
 	public String paymenyCheck(Model model, studyDTO dto) {
 		model.addAttribute("dto", dto);
-		ks = new PaymentService();
+		ks = new daySeatSelect();
 		ks.execute(model);
 		
 		return "default/paymentSuccess";

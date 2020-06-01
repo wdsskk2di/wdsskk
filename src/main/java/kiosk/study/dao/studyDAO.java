@@ -1,7 +1,11 @@
 package kiosk.study.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import com.care.template.Constant;
 
@@ -25,7 +29,27 @@ public class studyDAO {
 		}
 	}
 	//사용자가 시간선택, 시간가격값, 핸드폰번호  db저장
-//	public int
+	public void daySeatSelect(final studyDTO dto) {
+		try {
+			String sql = "insert into kiosk_dayuser(seatNum, timeNum, TotalMoney, phoneNum) values (?,?,?,?)";
+			template.update(sql, new PreparedStatementSetter() {
+				
+				@Override
+				public void setValues(PreparedStatement ps) throws SQLException {
+					ps.setInt(1, dto.getSeatNum());
+					ps.setInt(2, dto.getTimeNum());
+					ps.setInt(3, dto.getTotalMoney());
+					ps.setInt(4, dto.getPhoneNum());
+					
+					
+				}
+			});
+			System.out.println("정상 저장");
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("저장 실패");
+		}
+	}
 	//사용자 결제 확인 페이지 출력 및 저장
 	//관리자 결제확인 내역 저장
 	//사용자 선택한 자리 정보 확인
