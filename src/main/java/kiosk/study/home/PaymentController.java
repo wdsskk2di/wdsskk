@@ -16,11 +16,11 @@ import com.care.template.Constant;
 import kiosk.study.dao.studyDAO;
 import kiosk.study.dto.studyDTO;
 import kiost.study.service.KioskService;
-import kiost.study.service.PaymentService;
 import kiost.study.service.ReserveState;
 import kiost.study.service.ReserveState2;
 import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.UpdateSeatInfo;
+import kiost.study.service.dayPayUser;
 import kiost.study.service.daySeatSelect;
 import kiost.study.service.roomPState;
 import kiost.study.service.seatPState;
@@ -63,7 +63,7 @@ public class PaymentController {
 				// 좌석 선택시 값을  DB저장 
 				ks = new stateSeat();
 				ks.execute(model);
-				// -------------------------
+				// 
 				
 				return "payment";	//결제 페이지로
 				
@@ -106,8 +106,12 @@ public class PaymentController {
 	@PostMapping("paymentCheck")
 	public String paymenyCheck(Model model, studyDTO dto) {
 		model.addAttribute("dto", dto);
-		ks = new daySeatSelect();
+		// dayPayUser : 사용자 결제 값 저장
+		ks = new dayPayUser();
 		ks.execute(model);
+		// : 사용자 결제 내역 출력
+		
+		
 		
 		return "default/paymentSuccess";
 	}

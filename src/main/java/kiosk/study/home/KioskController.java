@@ -15,7 +15,6 @@ import com.care.template.Constant;
 
 import kiosk.study.dto.studyDTO;
 import kiost.study.service.KioskService;
-import kiost.study.service.PaymentService;
 import kiost.study.service.ReserveState;
 import kiost.study.service.ReserveState2;
 import kiost.study.service.SeatEmptyCheck;

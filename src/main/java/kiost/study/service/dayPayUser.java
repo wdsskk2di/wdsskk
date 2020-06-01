@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import kiosk.study.dao.studyDAO;
 import kiosk.study.dto.studyDTO;
 
-public class daySeatSelect implements KioskService{
+public class dayPayUser implements KioskService{
 // #2 당일 시간제 결제 정보 저장
 	@Override
 	public void execute(Model model) {
@@ -20,7 +20,7 @@ public class daySeatSelect implements KioskService{
 		// DAO 생성자 사용		
 		
 		// dto(좌석번호, 시간, 가격, 핸드폰)을 DB에 저장
-		dao.daySeatSelect(dto);
+		dao.dayPayUser(dto);
 		
 		
 	}

@@ -22,10 +22,10 @@ public class studyDAO {
 		try {
 			String sql = "insert into kiosk_day(seatNum) values ("+seatNum+")";
 			template.update(sql);
-			System.out.println("정상 저장");
+			System.out.println("사용자 좌석 선택 정상 저장 :"+seatNum);
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("저장 실패");
+			System.out.println("사용자 좌석 선택 저장 실패 #1");
 		}
 	}
 	//사용자가 시간선택, 시간가격값, 핸드폰번호  db저장
@@ -40,17 +40,43 @@ public class studyDAO {
 					ps.setInt(2, dto.getTimeNum());
 					ps.setInt(3, dto.getTotalMoney());
 					ps.setInt(4, dto.getPhoneNum());
-					
-					
 				}
 			});
-			System.out.println("정상 저장");
+			System.out.println("사용자 결제 내역 저장\n 좌석 번호 :"+dto.getSeatNum()+", 사용시간 :"+dto.getTimeNum()+", 사용가격 :"+dto.getTotalMoney()+
+					", 핸드폰번호 :"+dto.getPhoneNum());
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("저장 실패");
+			System.out.println("사용자 결제 내역 저장 실패 #2");
 		}
 	}
 	//사용자 결제 확인 페이지 출력 및 저장
+	public void dayPayUser(final studyDTO dto) {
+		try {
+			String sql = "insert into study_timeSet(seatNum, timeNum, TotalMoney, phoneNum, endTime) values (?,?,?,?,to_char(sysdate+"+dto.getTimeNum()+"/24,'hh24:mi:ss'))";
+			template.update(sql, new PreparedStatementSetter() {
+				
+				@Override
+				public void setValues(PreparedStatement ps) throws SQLException {
+					ps.setInt(1, dto.getSeatNum());
+					ps.setInt(2, dto.getTimeNum());
+					ps.setInt(3, dto.getTotalMoney());
+					ps.setInt(4, dto.getPhoneNum());
+				}
+			});
+			System.out.println("사용자 결제 내역 저장\n 좌석 번호 :"+dto.getSeatNum()+", 사용시간 :"+dto.getTimeNum()+", 사용가격 :"+dto.getTotalMoney()+
+					", 핸드폰번호 :"+dto.getPhoneNum());
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("사용자 결제 내역 저장 실패 #3");
+		}
+	}
+	public void daySelectUser(studyDTO dto) {
+		try {
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	//관리자 결제확인 내역 저장
 	//사용자 선택한 자리 정보 확인
 	//사용하는 좌석에 대한 사용불가처리

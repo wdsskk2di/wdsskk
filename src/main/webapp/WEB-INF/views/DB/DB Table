@@ -21,7 +21,7 @@ seatNum number(2) null
 
 
 
--- 당일 시간제 좌석(사용자선택) payment -> paymentCheck --
+-- #2  당일 시간제 좌석(사용자선택) payment -> paymentCheck --
 -- 세션값(seatNum) 입력값 timeNum, timeUseMoney, phoneNum --
 -- dto 값 저장 이후  다음 페이지 계산 시에 저장하는 용도 --
 create table kiosk_dayuser(
