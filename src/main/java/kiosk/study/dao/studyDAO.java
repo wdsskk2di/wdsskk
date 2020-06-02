@@ -17,8 +17,6 @@ public class studyDAO {
 	private JdbcTemplate template;
 	public studyDAO() {this.template = Constant.template;}
 	
-	
-	
 	//사용자가 좌석 선택 ( seatNum) db 저장 #1
 	public void statSeat(int seatNum) { 
 		try {
@@ -29,9 +27,7 @@ public class studyDAO {
 			e.printStackTrace();
 			System.out.println("사용자 좌석 선택 저장 실패 #1");
 		}
-	}
-	
-	
+	}	
 	
 	//사용자가 시간선택, 시간가격값, 핸드폰번호  db저장 #2
 	public void daySeatSelect(final studyDTO dto) {
@@ -54,23 +50,7 @@ public class studyDAO {
 			System.out.println("사용자 결제 내역 저장 실패 #2");
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	//사용자 결제 확인 페이지 출력 및 저장 #3
 	public void dayPayUser(final studyDTO dto) {
 		try {
@@ -121,19 +101,7 @@ public class studyDAO {
 	//사용자 선택한 자리 정보 확인
 	//사용하는 좌석에 대한 사용불가처리
 	//당일사용좌석 사용중/사용완료 처리
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	//당일 결제시 정보 저장
 	public int updateSeat(studyDTO dto) {
 		try {
