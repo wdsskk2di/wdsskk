@@ -1,15 +1,138 @@
 package kiosk.study.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import com.care.template.Constant;
 
+import kiosk.study.dto.TestDTO;
 import kiosk.study.dto.studyDTO;
 
 public class studyDAO {
 	private JdbcTemplate template;
 	public studyDAO() {this.template = Constant.template;}
+	
+	
+	
+	//사용자가 좌석 선택 ( seatNum) db 저장 #1
+	public void statSeat(int seatNum) { 
+		try {
+			String sql = "insert into kiosk_day(seatNum) values ("+seatNum+")";
+			template.update(sql);
+			System.out.println("사용자 좌석 선택 정상 저장 #1 :"+seatNum);
+		}catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("사용자 좌석 선택 저장 실패 #1");
+		}
+	}
+	
+	
+	
+	//사용자가 시간선택, 시간가격값, 핸드폰번호  db저장 #2
+	public void daySeatSelect(final studyDTO dto) {
+		try {
+			String sql = "insert into kiosk_dayuser(seatNum, timeNum, TotalMoney, phoneNum) values (?,?,?,?)";
+			template.update(sql, new PreparedStatementSetter() {
+				
+				@Override
+				public void setValues(PreparedStatement ps) throws SQLException {
+					ps.setInt(1, dto.getSeatNum());
+					ps.setInt(2, dto.getTimeNum());
+					ps.setInt(3, dto.getTotalMoney());
+					ps.setInt(4, dto.getPhoneNum());
+				}
+			});
+			System.out.println("사용자 결제 내역 저장 #2 \n 좌석 번호 :"+dto.getSeatNum()+", 사용시간 :"+dto.getTimeNum()+", 사용가격 :"+dto.getTotalMoney()+
+					", 핸드폰번호 :"+dto.getPhoneNum());
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("사용자 결제 내역 저장 실패 #2");
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//사용자 결제 확인 페이지 출력 및 저장 #3
+	public void dayPayUser(final studyDTO dto) {
+		try {
+			String sql = "insert into study_resultSet(seatNum, timeNum, TotalMoney, phoneNum, PeopleNum, uniqueUser)" + 
+						 "values(?,?,?,?,1,to_char(sysdate,'yymmddhh24miss'))";
+			template.update(sql, new PreparedStatementSetter() {
+				
+				@Override
+				public void setValues(PreparedStatement ps) throws SQLException {
+					ps.setInt(1, dto.getSeatNum());
+					ps.setInt(2, dto.getTimeNum());
+					ps.setInt(3, dto.getTotalMoney());
+					ps.setInt(4, dto.getPhoneNum());
+				}
+			});
+			System.out.println("사용자 결제 내역 저장 #3\n 좌석 번호 :"+dto.getSeatNum()+", 사용시간 :"+dto.getTimeNum()+", 사용가격 :"+dto.getTotalMoney()+
+					", 핸드폰번호 :"+dto.getPhoneNum());
+			System.out.println("study_resultSet[Table 저장]");
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("사용자 결제 내역 저장 실패 #3");
+		}
+	}
+	public void moveTable () {
+		try {
+			String sql = "";
+			template.batchUpdate(sql);
+			System.out.println("테이블 값 복사 정상 (study_resultSet >>>> study_timeSet)");
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("테이블 값 복사 실패 (study_resultSet >>>> study_timeSet)");
+		}
+	}
+	public TestDTO daySelectUser(int seatNum) {
+		try {
+			String sql = "select * from study_timeSet where seatNum="+seatNum;
+			// seatNum, startTime, endTime, timeNum, TotalMoney
+			return template.queryForObject(sql, new BeanPropertyRowMapper<TestDTO>(TestDTO.class));
+			
+		}catch(final DataAccessException e) {
+			e.printStackTrace();
+			return null;
+		}
+			
+		
+	}
+	//관리자 결제확인 내역 저장
+	//사용자 선택한 자리 정보 확인
+	//사용하는 좌석에 대한 사용불가처리
+	//당일사용좌석 사용중/사용완료 처리
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//당일 결제시 정보 저장
 	public int updateSeat(studyDTO dto) {
