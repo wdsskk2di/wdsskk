@@ -1,4 +1,4 @@
-package kiost.study.service;
+/*package kiost.study.service;
 
 import org.springframework.ui.Model;
 
@@ -13,3 +13,4 @@ public class seatRState implements KioskService {
 	}
 
 }
+*/

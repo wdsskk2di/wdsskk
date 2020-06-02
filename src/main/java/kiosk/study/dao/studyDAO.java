@@ -30,6 +30,9 @@ public class studyDAO {
 			System.out.println("사용자 좌석 선택 저장 실패 #1");
 		}
 	}
+	
+	
+	
 	//사용자가 시간선택, 시간가격값, 핸드폰번호  db저장 #2
 	public void daySeatSelect(final studyDTO dto) {
 		try {
@@ -44,17 +47,35 @@ public class studyDAO {
 					ps.setInt(4, dto.getPhoneNum());
 				}
 			});
-			System.out.println("사용자 결제 내역 저장#2 \n 좌석 번호 :"+dto.getSeatNum()+", 사용시간 :"+dto.getTimeNum()+", 사용가격 :"+dto.getTotalMoney()+
+			System.out.println("사용자 결제 내역 저장 #2 \n 좌석 번호 :"+dto.getSeatNum()+", 사용시간 :"+dto.getTimeNum()+", 사용가격 :"+dto.getTotalMoney()+
 					", 핸드폰번호 :"+dto.getPhoneNum());
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("사용자 결제 내역 저장 실패 #2");
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//사용자 결제 확인 페이지 출력 및 저장 #3
 	public void dayPayUser(final studyDTO dto) {
 		try {
-			String sql = "insert into study_timeSet(seatNum, timeNum, TotalMoney, phoneNum, startTime, endTime) values (?,?,?,?,(to_char(sysdate,'hh24:mi:ss')),to_char(sysdate+"+dto.getTimeNum()+"/24,'hh24:mi:ss'))";
+			String sql = "insert into study_resultSet(seatNum, timeNum, TotalMoney, phoneNum, PeopleNum, uniqueUser)" + 
+						 "values(?,?,?,?,1,to_char(sysdate,'yymmddhh24miss'))";
 			template.update(sql, new PreparedStatementSetter() {
 				
 				@Override
@@ -65,11 +86,22 @@ public class studyDAO {
 					ps.setInt(4, dto.getPhoneNum());
 				}
 			});
-			System.out.println("사용자 결제 내역 저장\n 좌석 번호 :"+dto.getSeatNum()+", 사용시간 :"+dto.getTimeNum()+", 사용가격 :"+dto.getTotalMoney()+
-					", 핸드폰번호 :"+dto.getPhoneNum()+",시작 시간 :"+dto.getStartTime()+", 종료 시간 : "+dto.getEndTime());
+			System.out.println("사용자 결제 내역 저장 #3\n 좌석 번호 :"+dto.getSeatNum()+", 사용시간 :"+dto.getTimeNum()+", 사용가격 :"+dto.getTotalMoney()+
+					", 핸드폰번호 :"+dto.getPhoneNum());
+			System.out.println("study_resultSet[Table 저장]");
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("사용자 결제 내역 저장 실패 #3");
+		}
+	}
+	public void moveTable () {
+		try {
+			String sql = "";
+			template.batchUpdate(sql);
+			System.out.println("테이블 값 복사 정상 (study_resultSet >>>> study_timeSet)");
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("테이블 값 복사 실패 (study_resultSet >>>> study_timeSet)");
 		}
 	}
 	public TestDTO daySelectUser(int seatNum) {

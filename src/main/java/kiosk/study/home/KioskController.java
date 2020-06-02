@@ -19,14 +19,16 @@ import kiost.study.service.ReserveState;
 import kiost.study.service.ReserveState2;
 import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.UpdateSeatInfo;
-import kiost.study.service.roomPState;
-import kiost.study.service.seatPState;
-import kiost.study.service.seatRState;
+import kiost.study.service.UserSeatSelectService;
+//import kiost.study.service.roomPState;
+//import kiost.study.service.seatPState;
+//import kiost.study.service.seatRState;
 
 @Controller
 public class KioskController {
 	
 	private KioskService ks;
+	private UserSeatSelectService us;
 	
 	public KioskController() {
 		String config = "classpath:applicationJDBC.xml";
@@ -62,8 +64,8 @@ public class KioskController {
 		ks.execute(model);
 		
 		if(request.getParameter("title").equals("p")) { //당일좌석 사용자 유무
-			ks = new seatPState();
-			ks.execute(model);
+//			ks = new UserSeatSelectService();
+			us.seatPState(model);
 		}else {//스터디룸 사용자 유무
 			//ks = new roomPState();
 			//ks.execute(model);
@@ -80,11 +82,13 @@ public class KioskController {
 		ks.execute(model);
 		
 		if(request.getParameter("title").equals("r")) { //예약좌석 사용자 유무
-			ks = new seatRState();
-			ks.execute(model);
+			us.seatRState(model);
+//			ks = new seatRState();
+//			ks.execute(model);
 		}else {//스터디룸 사용자 유무
-			ks = new roomPState();
-			ks.execute(model);
+			us.roomPState(model);
+//			ks = new roomPState();
+//			ks.execute(model);
 		}
 		
 		return "reserve";
