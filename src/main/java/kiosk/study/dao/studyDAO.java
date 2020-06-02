@@ -22,15 +22,7 @@ public class studyDAO {
 			return 1;
 			
 		} catch (Exception e) {return 0;}
-		/*
-		sql에서 date 넣기. 예시
-		create table test_time(stime varchar2(14), etime varchar2(14));
 
-		insert into test_time VALUES(to_char(sysdate, 'yy/MM/dd hh:mi'),
-									to_char(sysdate+1/24, 'yy/mm/dd hh:mi'));	+1/24는 1시간을 더한다는 의미
-		
-		결과 ==> stime=20/05/19 06:31 etime=20/05/19 07:31
-		*/
 	}
 	
 	//사용자가 선택한 자리 정보 확인

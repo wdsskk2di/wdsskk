@@ -27,18 +27,9 @@ public class KioskController {
 		JdbcTemplate template = ctx.getBean("template", JdbcTemplate.class);
 		Constant.template = template;
 	}
+
 	
-	//메인 페이지
-	@RequestMapping("/")
-	public String home() {
-		return "default/main";
-	}
 	
-	@RequestMapping("main")
-	public String main(HttpServletRequest request) {
-		
-		return "default/main";
-	}
 	
 	//스터디룸 당일, 예약 선택 페이지
 	@RequestMapping("studyRoom")
