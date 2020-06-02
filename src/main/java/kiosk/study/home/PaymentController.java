@@ -16,7 +16,6 @@ import kiost.study.service.KioskService;
 import kiost.study.service.ReserveState;
 import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.dayPayUser;
-import kiost.study.service.daySeatManage;
 import kiost.study.service.stateSeat;
 
 @Controller
@@ -75,42 +74,6 @@ public class PaymentController {
 				} catch (Exception e) {return "redirect:chooseSeatNum";}
 
 			}
-			
-			
-			/* 원본
-			if(title.equals("p") && num > 0 && num < 21) {  //당일 좌석 + 입력값이 1~20 사이				
-				//이미 누군가 있다면 입력되지 않게 돌려야..
-				ks = new SeatEmptyCheck();
-				ks.execute(model);		
-				
-				model.addAttribute("seatNum", num);
-				
-				// 좌석 선택시 값을  DB저장 
-				ks = new stateSeat();
-				ks.execute(model);
-				// 
-				
-				return "payment";	//결제 페이지로
-				
-			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이				
-				//이미 누군가 있다면 입력되지 않게 돌려야..
-				ks = new SeatEmptyCheck();
-				ks.execute(model);	
-				
-				//스터디룸의 타임테이블
-				ks = new ReserveState();
-				ks.execute(model);	
-				
-				model.addAttribute("seatNum", num);
-				return "payment";	//결제 페이지로
-				
-			}else {//입력된 좌석에 문제가 있는 경우
-				try {
-					//좌석 선택창으로
-					return "redirect:chooseSeatNum";
-				} catch (Exception e) {return "redirect:chooseSeatNum";}
-
-			}*/
 		}
 
 	}
@@ -137,9 +100,6 @@ public class PaymentController {
 		ks.execute(model);
 		
 		// : 사용자 결제 내역 출력
-		ks = new daySeatManage();
-		ks.execute(model);
-		
 		
 		
 		return "default/paymentSuccess";
