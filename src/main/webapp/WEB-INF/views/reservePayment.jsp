@@ -80,6 +80,19 @@ $(document).ready( function() {
 	});	
 	*/
 });
+
+//form submit시 미입력값 있으면 전송 막기
+function formCheck() {
+	if($("#TotalMoney").val().length < 4){
+		alert("사용 시간 미선택");
+		return false;
+	}else if ($("#Num").val().length < 8) {
+		alert("전화번호 미입력");
+		return false;
+	}else{
+		return true;
+	}	
+}
 </script>
 
 </head>
@@ -87,7 +100,7 @@ $(document).ready( function() {
 <c:import url="/WEB-INF/views/default/header.jsp"/>
 <div class="default">
 <h3 id="studyRoomTitle">스터디룸 예약</h3>
-<form action="paymentCheck" method="post">
+<form action="paymentCheck" method="post"  onsubmit="return formCheck()">
 
 	<h3>${seatNum }번 타임 테이블</h3>
 	<c:import url="/WEB-INF/views/showTimeTable.jsp"/>

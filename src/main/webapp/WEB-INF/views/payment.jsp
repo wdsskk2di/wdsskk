@@ -67,6 +67,9 @@ $( document ).ready( function() {
 });
 
 function IsStudyRoom() {
+	console.log("1=="+$("#TotalMoney").val().length);
+	console.log("2=="+$("#Num").val().length);
+	
 	if(${title =='s'}){
 		//타이틀 변경
 		$("#studyRoomTitle").html("스터디룸 결제");
@@ -92,6 +95,19 @@ function IsStudyRoom() {
 	}
 }
 
+//form submit시 미입력값 있으면 전송 막기
+function formCheck() {
+	if($("#TotalMoney").val().length < 4){
+		alert("사용 시간 미선택");
+		return false;
+	}else if ($("#Num").val().length < 8) {
+		alert("전화번호 미입력");
+		return false;
+	}else{
+		return true;
+	}	
+}
+
 </script>
 
 </head>
@@ -104,7 +120,7 @@ function IsStudyRoom() {
 	<c:choose>
 		<c:when test="${title == 'p' }">
 		<h3>당일 좌석 결제</h3>
-		<form action="paymentCheck" method="post">
+		<form id="target" action="paymentCheck" method="post" onsubmit="return formCheck()">
 		
 		<table>
 		<tr><td colspan="2"><input type="hidden" name="title" value="${title }"></td></tr>

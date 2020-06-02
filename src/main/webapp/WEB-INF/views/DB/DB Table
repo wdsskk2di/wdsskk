@@ -94,3 +94,4 @@ phoneNum number(8) not null,
 uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss'))
 );
 // ,constraint dayUser_PK primary key(uniqueUser) 고유키값 집어넣으면 데이터 오류 발생
+
