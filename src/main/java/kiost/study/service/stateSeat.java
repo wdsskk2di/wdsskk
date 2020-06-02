@@ -20,7 +20,6 @@ public class stateSeat implements KioskService{
 		
 		// 좌석 선택 값을 DB에 저장
 		dao.statSeat(seatNum);
-		System.out.println("stateSeat.execute() 실행 완료");
 		
 	}
 
