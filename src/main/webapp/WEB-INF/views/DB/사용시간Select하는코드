@@ -1,0 +1,17 @@
+/*
+		dao.daySelectUser(dto.getSeatNum());
+*/
+		// 저장된  DB를 dto에 저장하고 그 값을 출력
+		model.addAttribute("dto",dao.daySelectUser(dto.getSeatNum()));
+		
+		System.out.println("dto.title :" +dto.getTitle());
+		System.out.println("dto.seatNum :" +dto.getSeatNum());
+		System.out.println("dto.TimeNum :" +dto.getTimeNum());
+		System.out.println("dto.PeopleNum :" +dto.getPeopleNum());
+		System.out.println("dto.TotalMoney :" +dto.getTotalMoney());
+		System.out.println("dto.PhoneNum :" +dto.getPhoneNum());
+		System.out.println("dto.StartTime :" +dto.getStartTime());
+		System.out.println("dto.EndTime :" +dto.getEndTime());
+		
+		이게 원래 select 해서 시간 값을 불러오는 코드의 원초였음
+		ㅇㅇ 그래서 이거를 Service에 만들고  DAO 에 추가 해야되는데 이거를 이제 집에 가서 해야지
