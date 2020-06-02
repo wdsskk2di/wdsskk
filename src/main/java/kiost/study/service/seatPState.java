@@ -1,3 +1,4 @@
+/*
 package kiost.study.service;
 
 import org.springframework.ui.Model;
@@ -13,3 +14,4 @@ public class seatPState implements KioskService {
 	}
 
 }
+*/
