@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package kiost.study.service;
 
 import java.util.Map;
@@ -25,31 +24,3 @@ public class stateSeat implements KioskService{
 	}
 
 }
-=======
-package kiost.study.service;
-
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import org.springframework.ui.Model;
-import kiosk.study.dao.studyDAO;
-
-public class stateSeat implements KioskService{
-
-	@Override
-	public void execute(Model model) {
-		Map<String, Object> map = model.asMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		// model 값 받아오기 위해서 두줄 사용
-		
-		studyDAO dao = new studyDAO();
-		// DAO 생성자 사용
-		
-		int seatNum = Integer.parseInt(request.getParameter("seatNum"));
-		
-		// 좌석 선택 값을 DB에 저장
-		dao.statSeat(seatNum);
-		
-	}
-
-}
->>>>>>> branch 'master' of https://github.com/wdsskk2di/study_kiosk.git
