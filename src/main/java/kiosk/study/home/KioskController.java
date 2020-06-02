@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.care.template.Constant;
 
 import kiost.study.service.KioskService;
-import kiost.study.service.ReserveState;
-import kiost.study.service.ReserveState2;
-import kiost.study.service.SeatEmptyCheck;
+//import kiost.study.service.ReserveState;
+//import kiost.study.service.ReserveState2;
+//import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.UpdateSeatInfo;
 import kiost.study.service.UserSeatSelectService;
 //import kiost.study.service.roomPState;
