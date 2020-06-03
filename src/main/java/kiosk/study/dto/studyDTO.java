@@ -9,7 +9,7 @@ public class studyDTO {
 	private int totalMoney;	//총 금액
 	private int phoneNum; //핸드폰 번호
 	private String startTime; //시작 시간
-	private String EndTime; //종료 시간
+	private String endTime; //종료 시간
 	private String uniqueUser; //유저 결제코드값
 
 	public String getTitle() {return title;}
@@ -34,8 +34,8 @@ public class studyDTO {
 	public String getStartTime() {	return startTime;}
 	public void setStartTime(String startTime) {this.startTime = startTime;}
 
-	public String getEndTime() {return EndTime;	}
-	public void setEndTime(String EndTime) {this.EndTime = EndTime;}
+	public String getEndTime() {return endTime;	}
+	public void setEndTime(String endTime) {this.endTime = endTime;}
 
 	//유저 결제 코드값
 	public String getUniqueUser() { return uniqueUser;	}
