@@ -54,14 +54,14 @@ phoneNum number(8) not null,
 
 
 
--- #3 결제 후 사용자 값 출력 전에  uniqueUser 값 추가 , study_timeSet에  고유키값 제거 -- 
+-- #3 결제 후 사용자 값 출력 전에  uniqueUser 값 추가 , study_timeSet에  고유키값 제거 --
 create table study_resultSet(
 seatNum number(2) null,
 timeNum number(2) not null,
 TotalMoney number(10) not null,
 PeopleNum number(1) default 1,
 phoneNum number(8) not null,
-uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss'))
+uniqueUser varchar2(14) default (to_char(sysdate,'yymmddhh24miss'))
 );
 
 -- ** 이 table은 중간 저장소 개념으로 다음 테이블에 넣기 위해서 test 용으로 생성된 처리 결과 table입니다.
@@ -71,15 +71,15 @@ uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss'))
 
 -- #6  [sql query문 : resultSet에 저장된 값 + 연산할 값들을 이제 timeSet에다가 저장해 줘야 함]
 -- insert into study_timeSet(seatNum, timeNum, TotalMoney, phoneNum, uniqueUser, toDate, startTime, endTime, PeopleNum)
--- select seatNum, timeNum, TotalMoney, phoneNum, uniqueUser, to_char(sysdate,'yyyy/mm/dd'),to_char(sysdate,'hh24:mi:ss'),to_char(sysdate+timeNum/24,'hh24:mi:ss'), 1 
+-- select seatNum, timeNum, TotalMoney, phoneNum, uniqueUser, to_char(sysdate,'yyyy/mm/dd'),to_char(sysdate,'hh24:mi:ss'),to_char(sysdate+timeNum/24,'hh24:mi:ss'), 1
 -- from study_resultSet;
 
--- ** table에 있는 값들은 다른 테이블에서 불러와 주고, 나머지  not null이라고 된 부분의 데이터 값들은 그냥 집어넣어준다. 
+-- ** table에 있는 값들은 다른 테이블에서 불러와 주고, 나머지  not null이라고 된 부분의 데이터 값들은 그냥 집어넣어준다.
 -- ** 그래서 길이가 ㅈㄴ 길다.. 답이 없을 정도로 길어진다. (test 아직 안함) sql developer에서는 입력 가능
 
 
 
- 
+
 -- #5  결제 후 사용자 값 출력 paymentCheck -> main --
 -- uniqueUser : 사용자 결제후 고유키값 부여, 환불 내역 확인용 --
 create table study_timeSet(
@@ -91,7 +91,7 @@ timeNum number(2) not null,
 TotalMoney number(10) not null,
 PeopleNum number(1) default 1,
 phoneNum number(8) not null,
-uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss'))
+uniqueUser varchar2(14) default (to_char(sysdate,'yymmddhh24miss'))
 );
-// ,constraint dayUser_PK primary key(uniqueUser) 고유키값 집어넣으면 데이터 오류 발생
 
+디비 테이블 변경
