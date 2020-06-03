@@ -9,8 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import com.care.template.Constant;
-
-import kiosk.study.dto.TestDTO;
 import kiosk.study.dto.studyDTO;
 
 public class studyDAO {
@@ -110,11 +108,11 @@ public class studyDAO {
 		}
 	}
 
-	public TestDTO daySelectUser(int seatNum) {
+	public studyDTO daySelectUser(int seatNum) {
 		try {
 			String sql = "select * from study_timeSet where seatNum="+seatNum;
 			// seatNum, startTime, endTime, timeNum, TotalMoney
-			return template.queryForObject(sql, new BeanPropertyRowMapper<TestDTO>(TestDTO.class));
+			return template.queryForObject(sql, new BeanPropertyRowMapper<studyDTO>(studyDTO.class));
 			
 		}catch(final DataAccessException e) {
 			e.printStackTrace();
