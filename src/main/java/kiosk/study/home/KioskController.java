@@ -14,12 +14,12 @@ import kiost.study.service.UpdateSeatInfo;
 import kiost.study.service.UserSeatSelectService;
 
 @Controller
-public class KioskController_ver {
+public class KioskController {
 
 	private KioskService ks;
 	public UserSeatSelectService us;
 
-	public KioskController_ver() {
+	public KioskController() {
 		String config = "classpath:applicationJDBC.xml";
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(config);
 		JdbcTemplate template = ctx.getBean("template", JdbcTemplate.class);
