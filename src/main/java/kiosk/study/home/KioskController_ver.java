@@ -78,5 +78,12 @@ public class KioskController_ver {
 		
 		return "reserve";
 	}
+	
+	//예약 확인 페이지
+	@RequestMapping("reserveChk")
+	public String reserveChk(HttpServletRequest request, Model model) {
+		model.addAttribute("title", request.getParameter("title"));
+		return "reserveJSP/reserveChk";
+	}
 
 }
