@@ -22,7 +22,7 @@ import kiost.study.service.StudyStateService;
 public class PaymentController {
 	
 	private KioskService ks;
-	public ReserveStateService rs;
+	public ReserveStateService rs = new ReserveStateService();
 	
 	public PaymentController() {
 		String config = "classpath:applicationJDBC.xml";
@@ -44,6 +44,7 @@ public class PaymentController {
 			
 		}else {	//입력값이 있고
 			int num = Integer.parseInt(request.getParameter("seatNum"));
+			model.addAttribute("seatNum", request.getParameter("seatNum"));
 			
 			//이미 누군가 있다면 입력되지 않게 돌려야..
 			ks = new SeatEmptyCheck();
@@ -60,9 +61,8 @@ public class PaymentController {
 				return "payment";	//결제 페이지로
 				
 			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이				
-				
-				//스터디룸의 타임테이블
-				rs.reserveToday(model);
+				//스터디룸의 타임테이블				
+				rs.reserveToday(model);			
 				
 				model.addAttribute("seatNum", num);
 				return "payment";	//결제 페이지로

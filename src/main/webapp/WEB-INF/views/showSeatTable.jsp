@@ -25,7 +25,7 @@
 	<td><b>${seatState[i].seatNum}</b><br>
 	<c:choose>
 		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
-		<c:otherwise><span style="color:white; background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+		<c:otherwise><span style="color:white; background-color: red">사용중</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
 	</td>
 </c:forEach>
@@ -35,7 +35,7 @@
 	<td><b>${seatState[i].seatNum}</b><br>
 	<c:choose>
 		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
-		<c:otherwise><span style="color:white; background-color: red;">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+		<c:otherwise><span style="color:white; background-color: red;">사용중</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
 	</td>
 </c:forEach>
@@ -50,7 +50,7 @@
 	<td><b>${seatState[i].seatNum}</b><br>
 	<c:choose>
 		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
-		<c:otherwise><span style="color:white; background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+		<c:otherwise><span style="color:white; background-color: red">사용중</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
 	</td>
 </c:forEach>
@@ -60,7 +60,7 @@
 	<td><b>${seatState[i].seatNum}</b><br>
 	<c:choose>
 		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
-		<c:otherwise><span style="color:white; background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+		<c:otherwise><span style="color:white; background-color: red">사용중</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
 	</td>
 </c:forEach>
@@ -75,7 +75,7 @@
 	<td><b>${seatState[i].seatNum}</b><br>
 	<c:choose>
 		<c:when test="${seatState[i].phoneNum == null}">사용가능<br>--</c:when>
-		<c:otherwise><span style="color:white; background-color: red">사용불가</span><br>${seatState[i].endTime }</c:otherwise>
+		<c:otherwise><span style="color:white; background-color: red">사용중</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
 	</td>
 </c:forEach>

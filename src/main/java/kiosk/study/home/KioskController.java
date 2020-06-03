@@ -86,5 +86,12 @@ public class KioskController {
 		model.addAttribute("title", request.getParameter("title"));
 		return "reserveJSP/reserveChk";
 	}
+	
+	//예약 내역 DB연동 결과
+	@RequestMapping("reserveChkResult")
+	public String reserveChkResult(HttpServletRequest request, Model model) {
+		model.addAttribute("title", request.getParameter("title"));
+		return "reserveJSP/reserveChkResult";
+	}
 
 }

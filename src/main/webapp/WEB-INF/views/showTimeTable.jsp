@@ -48,7 +48,8 @@ function compareDate() {
 function get_tomoDate() {
 	var dateT = new Date();	dateT = getFormatDate(dateT);
 	var reDate = '${reState.reDate }';
-
+	console.log(dateT);
+	console.log(reDate);
 	try {		
 		if(reDate == dateT){
 			$.ajax({
@@ -70,7 +71,8 @@ function get_tomoDate() {
 function get_toDate() {
 	var dateT = new Date();	dateT = getFormatDate(dateT);
 	var reDate = '${reState.reDate }';
-
+	console.log(dateT);
+	console.log(reDate);
 	try {
 		if(reDate != dateT){
 			$.ajax({

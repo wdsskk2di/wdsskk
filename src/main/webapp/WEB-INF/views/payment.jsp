@@ -28,15 +28,12 @@
 //시간 1~6
 int[] Tlist = {1,2,3,4,5,6};
 request.setAttribute("Tlist",Tlist);
-
 //스터디룸 정원
 int[] Plist43 = {1,2,3,4,5,6};
 request.setAttribute("Plist43",Plist43);
-
 int[] Plist = {1,2,3,4};
 request.setAttribute("Plist",Plist);
 %>
-
 //시간 선택시
 $( document ).ready( function() {     
 	
@@ -66,8 +63,7 @@ $( document ).ready( function() {
 	*/
 });
 
-function IsStudyRoom() {
-	
+function IsStudyRoom() {	
 	if(${title =='s'}){
 		//타이틀 변경
 		$("#studyRoomTitle").html("스터디룸 결제");
@@ -92,7 +88,6 @@ function IsStudyRoom() {
 		}
 	}
 }
-
 //form submit시 미입력값 있으면 전송 막기
 function formCheck() {
 	if($("#TotalMoney").val().length < 4){
@@ -105,18 +100,17 @@ function formCheck() {
 		return true;
 	}	
 }
-
 </script>
 
 </head>
 <body onload="IsStudyRoom()">
-<c:import url="/WEB-INF/views/default/header.jsp"/>
 
-<div class="default">
 <c:choose>
 <c:when test="${result == 0 }">
 	<c:choose>
-		<c:when test="${title == 'p' }">
+	<c:when test="${title == 'p' }">
+	<c:import url="/WEB-INF/views/default/header.jsp"/>
+	<div class="default">
 		<h3>당일 좌석 결제</h3>
 		<form id="target" action="paymentCheck" method="post" onsubmit="return formCheck()">
 		
@@ -143,9 +137,11 @@ function formCheck() {
 		</table>
 		
 		</form>
-		</c:when>
+	</div>
+	<c:import url="/WEB-INF/views/default/footer.jsp"/>
+	</c:when>
 		
-		<c:otherwise>
+	<c:otherwise>
 		<c:import url="/WEB-INF/views/reservePayment.jsp"/>
 		</c:otherwise>
 	</c:choose>
@@ -156,8 +152,6 @@ function formCheck() {
 </c:otherwise>
 
 </c:choose>
-</div>
 
-<c:import url="/WEB-INF/views/default/footer.jsp"/>
 </body>
 </html>
