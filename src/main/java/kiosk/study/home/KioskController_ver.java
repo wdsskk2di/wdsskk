@@ -11,6 +11,7 @@ import kiost.study.service.KioskService;
 import kiost.study.service.UpdateSeatInfo;
 //import kiost.study.service.UserSeatSelectService;
 // ***   Service 의 간편성을 높이기 위해서  implement받지 않음   *** //
+import kiost.study.service.UserSeatSelectService;
 
 @Controller
 public class KioskController_ver {
