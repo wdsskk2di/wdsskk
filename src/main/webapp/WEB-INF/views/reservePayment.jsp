@@ -21,7 +21,10 @@
 <!-- ajax 사용을 위한 연결 -->
 <script type="text/javascript" src="resources/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>
+<!-- reservePayment 전용 JS파일 -->
 <script type="text/javascript" src="resources/jsFile/reservePaymentJS.js"></script>
+<!-- 타이머(이벤트 미발생시 main화면 이동) -->
+<script type="text/javascript" src="resources/jsFile/timer.js"></script>
 
 <script type="text/javascript">
 //samesite 경고 해결을 위한 설정
@@ -100,8 +103,8 @@ function formCheck() {
 <c:import url="/WEB-INF/views/default/header.jsp"/>
 <div class="default">
 <h3 id="studyRoomTitle">스터디룸 예약</h3>
-<form action="paymentCheck" method="post"  onsubmit="return formCheck()">
 
+<form action="paymentCheck" method="post" onsubmit="return formCheck()">
 	<h3>${seatNum }번 타임 테이블</h3>
 	<c:import url="/WEB-INF/views/showTimeTable.jsp"/>
 	

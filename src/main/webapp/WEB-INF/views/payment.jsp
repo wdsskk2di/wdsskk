@@ -21,9 +21,9 @@
 <!-- ajax 사용을 위한 연결 -->
 <script type="text/javascript" src="resources/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>
-
+<!-- 타이머(이벤트 미발생시 main화면 이동) -->
+<script type="text/javascript" src="resources/jsFile/timer.js"></script>
 <script type="text/javascript">
-
 <%
 //시간 1~6
 int[] Tlist = {1,2,3,4,5,6};
@@ -38,7 +38,7 @@ request.setAttribute("Plist",Plist);
 %>
 
 //시간 선택시
-$( document ).ready( function() { 
+$( document ).ready( function() {     
 	
 	$("#TimeNum").click(function(){			
 		//버튼 이벤트 발생한 숫자
@@ -67,8 +67,6 @@ $( document ).ready( function() {
 });
 
 function IsStudyRoom() {
-	console.log("1=="+$("#TotalMoney").val().length);
-	console.log("2=="+$("#Num").val().length);
 	
 	if(${title =='s'}){
 		//타이틀 변경

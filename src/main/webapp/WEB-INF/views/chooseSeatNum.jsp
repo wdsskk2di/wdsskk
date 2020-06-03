@@ -23,7 +23,11 @@
 <!-- ajax 사용을 위한 연결 -->
 <script type="text/javascript" src="resources/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>
+<!-- 타이머(이벤트 미발생시 main화면 이동) -->
+<script type="text/javascript" src="resources/jsFile/timer.js"></script>
+<script type="text/javascript">
 
+</script>
 </head>
 <body>
 <c:import url="/WEB-INF/views/default/header.jsp"/>
