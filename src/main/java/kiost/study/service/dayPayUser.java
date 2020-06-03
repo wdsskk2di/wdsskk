@@ -32,14 +32,16 @@ public class dayPayUser implements KioskService{
 		dao.manageCopy(dto);
 //		System.out.println("시간설정값 추가 및 관리용으로 값을 넘겨줌");
 		
-		// 삭제 하기 전에  result페이지에서  unique코드값을 불러와서  dto에 저장하고 이것을 비교해서 값 추출후에 삭제해야됨
 		final String getUniqueUser = dao.getUniqueUser();
 		System.out.println("#6 결제된 코드 값 : "+getUniqueUser);
 		
 		dao.deleteBeforeInfo2();
 //		System.out.println("결제 내역에 대한 모든 입력값들 삭제 완료");
 		
-		
+		// dto에 TimeSet 테이블 값들 집어넣어줌
+		dao.daySelectUser(getUniqueUser);
+		model.addAttribute("dto",dao.daySelectUser(getUniqueUser));
+
 		
 	}
 	

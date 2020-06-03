@@ -123,9 +123,9 @@ public class studyDAO {
 		}
 	}
 
-	public studyDTO daySelectUser(int seatNum) {
+	public studyDTO daySelectUser(String getUniqueUser) {
 		try {
-			String sql = "select * from study_timeSet where seatNum="+seatNum;
+			String sql = "select * from study_timeSet where uniqueUser="+getUniqueUser;
 			// seatNum, startTime, endTime, timeNum, TotalMoney
 			return template.queryForObject(sql, new BeanPropertyRowMapper<studyDTO>(studyDTO.class));
 			
