@@ -61,7 +61,7 @@ timeNum number(2) not null,
 TotalMoney number(10) not null,
 PeopleNum number(1) default 1,
 phoneNum number(8) not null,
-uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss'))
+uniqueUser varchar2(14) default (to_char(sysdate,'yymmddhh24miss'))
 );
 
 -- ** 이 table은 중간 저장소 개념으로 다음 테이블에 넣기 위해서 test 용으로 생성된 처리 결과 table입니다.
@@ -91,8 +91,9 @@ timeNum number(2) not null,
 TotalMoney number(10) not null,
 PeopleNum number(1) default 1,
 phoneNum number(8) not null,
-uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss'))
+uniqueUser varchar2(14) default (to_char(sysdate,'yymmddhh24miss'))
 );
-// ,constraint dayUser_PK primary key(uniqueUser) 고유키값 집어넣으면 데이터 오류 발생
+
+디비 테이블 변경
 
 
