@@ -13,7 +13,7 @@ import com.care.template.Constant;
 
 import kiosk.study.dto.studyDTO;
 import kiost.study.service.KioskService;
-import kiost.study.service.ReserveState;
+import kiost.study.service.ReserveStateService;
 import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.dayPayUser;
 import kiost.study.service.StudyStateService;
@@ -22,6 +22,7 @@ import kiost.study.service.StudyStateService;
 public class PaymentController {
 	
 	private KioskService ks;
+	public ReserveStateService rs;
 	
 	public PaymentController() {
 		String config = "classpath:applicationJDBC.xml";
@@ -61,8 +62,7 @@ public class PaymentController {
 			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이				
 				
 				//스터디룸의 타임테이블
-				ks = new ReserveState();
-				ks.execute(model);	
+				rs.reserveToday(model);
 				
 				model.addAttribute("seatNum", num);
 				return "payment";	//결제 페이지로
@@ -122,8 +122,7 @@ public class PaymentController {
 			
 			if(title.equals("r") && num > 20 && num < 41){  //예약 좌석 + 입력값이21~40 사이		
 				//스터디룸의 타임테이블
-				ks = new ReserveState();
-				ks.execute(model);	
+				rs.reserveToday(model);
 				
 				//좌석 번호
 				model.addAttribute("seatNum", num);
@@ -131,8 +130,7 @@ public class PaymentController {
 				
 			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이						
 				//스터디룸의 타임테이블
-				ks = new ReserveState();
-				ks.execute(model);			
+				rs.reserveToday(model);		
 
 				model.addAttribute("seatNum", num);
 				return "reservePayment";	//결제 페이지로

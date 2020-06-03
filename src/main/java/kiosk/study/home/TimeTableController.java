@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.care.template.Constant;
 
 import kiost.study.service.KioskService;
-import kiost.study.service.ReserveState;
-import kiost.study.service.ReserveState2;
+import kiost.study.service.ReserveStateService;
 
 @Controller
 public class TimeTableController {
 	
 	private KioskService ks;
+	public ReserveStateService rs;
 	
 	public TimeTableController() {
 		String config = "classpath:applicationJDBC.xml";
@@ -29,8 +29,7 @@ public class TimeTableController {
 	public String reserveTomorrow(@RequestParam("seatNum") String seatNum, Model model) {		
 		model.addAttribute("seatNum", seatNum);
 		//스터디룸의 타임테이블
-		ks = new ReserveState2();
-		ks.execute(model);	
+		rs.reserveNextday(model);
 	
 		return "showTimeTable";
 	}
@@ -40,8 +39,7 @@ public class TimeTableController {
 		model.addAttribute("seatNum", seatNum);
 
 		//스터디룸의 타임테이블
-		ks = new ReserveState();
-		ks.execute(model);	
+		rs.reserveNextday(model);
 	
 		return "showTimeTable";
 	}
