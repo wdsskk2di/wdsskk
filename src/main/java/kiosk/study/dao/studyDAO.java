@@ -23,7 +23,7 @@ public class studyDAO {
 			System.out.println("사용자 좌석 선택 정상 저장 #1 :"+seatNum);
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("사용자 좌석 선택 저장 실패 #1");
+			System.out.println("사용자 좌석 선택 저장 실패 $1");
 		}
 	}
 
@@ -46,7 +46,7 @@ public class studyDAO {
 					", 핸드폰번호 :"+dto.getPhoneNum());
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("사용자 결제 내역 저장 실패 #2");
+			System.out.println("사용자 결제 내역 저장 실패 $2");
 		}
 	}
 
@@ -62,7 +62,7 @@ public class studyDAO {
 			System.out.println("사용자 결제 내역 복사 성공 #3");
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("사용자 결제 내역 저장 실패 #3");
+			System.out.println("사용자 결제 내역 저장 실패 $3");
 		}
 	}
 
@@ -74,7 +74,7 @@ public class studyDAO {
 			System.out.println("이전값 테이블 삭제 성공 #4");
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("테이블 삭제 실패 #4");
+			System.out.println("테이블 삭제 실패 $4");
 		}
 	}
 	// study_resultSet >> study_timeSet 으로 내용값 복사하고 시간 값 추가 #5
@@ -89,7 +89,7 @@ public class studyDAO {
 
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("TimeSet테이블에 시간값 추가 실패 #5");
+			System.out.println("TimeSet테이블에 시간값 추가 실패 $5");
 		}
 	}
 	// study_resultSet에서 결제코드값 가져옴 #6
@@ -102,7 +102,7 @@ public class studyDAO {
 
 		}catch(final DataAccessException e) {
 			e.printStackTrace();
-			System.out.println("resultSet에서 결제고유키값 받아오기 실패 #6");
+			System.out.println("resultSet에서 결제고유키값 받아오기 실패 $6");
 			return "-1";
 		}
 	}
@@ -115,21 +115,46 @@ public class studyDAO {
 			System.out.println("resultSet내용 삭제 성공 #7");
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("resultSet내용 삭제 실패 #7");
+			System.out.println("resultSet내용 삭제 실패 $7");
 		}
 	}
-
+	// 당일 시간제 결제 정보  DTO에 저장하고 화면에 출력하기 #8
 	public studyDTO daySelectUser(String getUniqueUser) {
 		try {
 			String sql = "select * from study_timeSet where uniqueUser="+getUniqueUser;
 			// seatNum, startTime, endTime, timeNum, TotalMoney
+			System.out.println("사용자의 결제 정보 DTO에 저장 성공 #8");
 			return template.queryForObject(sql, new BeanPropertyRowMapper<studyDTO>(studyDTO.class));
 
 		}catch(final DataAccessException e) {
 			e.printStackTrace();
+			System.out.println("사용자의 결제 정보 DTO에 저장 실패 $8");
 			return null;
 		}
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	//관리자 결제확인 내역 저장
 	//사용자 선택한 자리 정보 확인
