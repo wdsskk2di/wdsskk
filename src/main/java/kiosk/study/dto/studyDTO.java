@@ -10,6 +10,7 @@ public class studyDTO {
 	private int PhoneNum; //핸드폰 번호
 	private String StartTime; //시작 시간
 	private String EndTime; //종료 시간
+	private String uniqueUser; //유저 결제코드값
 	
 	public String getTitle() {return title;}
 	public void setTitle(String title) {this.title = title;}
@@ -35,7 +36,11 @@ public class studyDTO {
 	
 	public String getEndTime() {return EndTime;	}
 	public void setEndTime(String EndTime) {this.EndTime = EndTime;}
+	
 
+	//유저 결제 코드값
+	public String getUniqueUser() { return uniqueUser;	}
+	public void setUniqueUser(String uniqueUser) {	this.uniqueUser = uniqueUser; }
 }
 /*
 kiosk 테이블

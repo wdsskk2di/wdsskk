@@ -96,15 +96,30 @@ public class studyDAO {
 			System.out.println("TimeSet테이블에 시간값 추가 실패 #5");
 		}
 	}
-	// study_resultSet의 내용 삭제 #6
+	// study_resultSet에서 결제코드값 가져옴 #6
+	public String getUniqueUser() {
+		try {
+			String sql = "select uniqueUser from study_resultSet";
+			System.out.println("resultSet에서 결제고유키값 get() 성공 #6");
+			
+			return template.queryForObject(sql, String.class);
+			
+		}catch(final DataAccessException e) {
+			e.printStackTrace();
+			System.out.println("resultSet에서 결제고유키값 받아오기 실패 #6");
+			return "-1";
+		}
+	}
+	
+	// study_resultSet의 내용 삭제 #7
 	public void deleteBeforeInfo2() {
 		try {
 			String sql = "delete study_resultSet";
 			template.update(sql);
-			System.out.println("resultSet내용 삭제 성공 #6");
+			System.out.println("resultSet내용 삭제 성공 #7");
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("resultSet내용 삭제 실패 #6");
+			System.out.println("resultSet내용 삭제 실패 #7");
 		}
 	}
 
