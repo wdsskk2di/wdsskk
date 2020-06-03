@@ -52,6 +52,13 @@ public class KioskController {
 	@RequestMapping("chooseSeatNum")
 	public String chooseSeatNum(HttpServletRequest request, Model model) {
 		model.addAttribute("title", request.getParameter("title"));
+		
+		
+		// 당일 좌석 좌석 확인 구현하기
+		
+		
+		
+		
 		ks = new UpdateSeatInfo();
 		ks.execute(model);
 
