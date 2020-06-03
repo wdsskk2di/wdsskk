@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import kiosk.study.dao.studyDAO;
 
-public class stateSeat implements KioskService{
+public class studyStateService implements KioskService{
 
 	@Override
 	public void execute(Model model) {
