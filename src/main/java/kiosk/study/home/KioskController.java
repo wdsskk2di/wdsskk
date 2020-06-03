@@ -22,8 +22,12 @@ public class KioskController {
 	public KioskController() {
 		String config = "classpath:applicationJDBC.xml";
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(config);
-		JdbcTemplate template = ctx.getBean("template", JdbcTemplate.class);
-		Constant.template = template;
+		try {
+			JdbcTemplate template = ctx.getBean("template", JdbcTemplate.class);
+			Constant.template = template;
+		}finally {
+			ctx.close();
+		}
 	}
 
 	//메인 페이지

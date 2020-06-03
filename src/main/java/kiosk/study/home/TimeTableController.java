@@ -21,8 +21,12 @@ public class TimeTableController {
 	public TimeTableController() {
 		String config = "classpath:applicationJDBC.xml";
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(config);
-		JdbcTemplate template = ctx.getBean("template", JdbcTemplate.class);
-		Constant.template = template;
+		try {
+			JdbcTemplate template = ctx.getBean("template", JdbcTemplate.class);
+			Constant.template = template;
+		}finally {
+			ctx.close();
+		}
 	}
 
 	@GetMapping(value="reserveTomorrow", produces = "application/json;charset=utf8")
