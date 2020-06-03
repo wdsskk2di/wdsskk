@@ -16,7 +16,7 @@ import kiost.study.service.KioskService;
 import kiost.study.service.ReserveState;
 import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.dayPayUser;
-import kiost.study.service.studyStateService;
+import kiost.study.service.StudyStateService;
 
 @Controller
 public class PaymentController {
@@ -53,7 +53,7 @@ public class PaymentController {
 				model.addAttribute("seatNum", num);
 				
 				// 좌석 선택시 값을  DB저장 
-				ks = new studyStateService();
+				ks = new StudyStateService();
 				ks.execute(model);
 				
 				return "payment";	//결제 페이지로
