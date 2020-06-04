@@ -1,9 +1,10 @@
-package kiost.study.service;
+package kiosk.study.service.dayTime;
 
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import kiosk.study.dao.studyDAO;
+import kiost.study.service.KioskService;
 
 public class StudyStateService implements KioskService{
 
