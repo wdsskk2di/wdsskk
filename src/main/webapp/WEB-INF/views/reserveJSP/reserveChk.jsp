@@ -48,7 +48,7 @@ function formCheck() {
 <div class="default">
 
 	<h3>예약 확인</h3>
-	<form id="target" action="reserveChkResult" method="post" onsubmit="return formCheck()">
+	<form id="target" action="reserveChkList?title=c" method="post" onsubmit="return formCheck()">
 	<input type="hidden" name="title" value="${title }">
 	<table>
 		<tr>
