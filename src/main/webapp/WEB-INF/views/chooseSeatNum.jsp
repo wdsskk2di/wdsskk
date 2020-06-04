@@ -9,8 +9,11 @@
 
 <style type="text/css">
  .default{background-color: white; height:500px; width:600px; text-align: center; margin-top: 20%;}
- .left_Div{position: absolute; left: 19%; top: 100px; width: 350px; margin-top: 10%;}
- .left_Div img{width: 250px; height: 280px;}
+ .left_Div{position: absolute; left: 19%; top: 100px; width: 350px; margin-top: 8%;}
+ .left_Div img{margin-top: 90px;}
+ #daySeatImg{width: 320px; height: 170px;}
+ #studyRoomImg{width: 330px; height: 100px; margin-top: 110px;}
+ 
  .right_Div{position: absolute;  left: 60%; top: 150px; width: 250px; margin-top: 10%;}
  
  .checkBtn{color:white; border:1 solid #005766; outline:1; border-radius: 5px; background-color: #005766;
@@ -35,8 +38,17 @@
 <div class="default">
 
 <div class="left_Div">
-<img alt="배치도" src="resources/images/blockPlan.jpg"  ondragstart="return false"><br>
-<c:import url="/WEB-INF/views/showSeatTable.jsp"/>
+	<c:choose>
+	<c:when test="${title == 'p' }">
+		<img alt="배치도" src="resources/images/daySeat.png" id="daySeatImg" ondragstart="return false"><br>
+	</c:when>
+	
+	<c:when test="${title == 's' }">
+		<img alt="배치도" src="resources/images/studyRoom.png" id="studyRoomImg" ondragstart="return false"><br>
+	</c:when>
+	</c:choose>
+	
+	<c:import url="/WEB-INF/views/showSeatTable.jsp"/>
 </div>
 
 <div class="right_Div">
