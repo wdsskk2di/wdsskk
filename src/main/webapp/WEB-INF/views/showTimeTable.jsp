@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-	.nextBtnSty{color:#005766; border:1 solid #005766; border-radius:50px; background-color: white; margin: 3px; font-size: 20px; font-weight: bold;}
+	.nextBtnSty{color:#005766; border:1 solid #005766; border-radius:50px; background-color: white;
+			margin: 3px; font-size: 20px; font-weight: bold; visibility: visible;}
 </style>
 
 <!-- ajax 사용을 위한 연결 -->

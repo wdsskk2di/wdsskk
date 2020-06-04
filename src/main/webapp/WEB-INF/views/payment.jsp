@@ -36,7 +36,7 @@ request.setAttribute("Plist",Plist);
 %>
 //시간 선택시
 $( document ).ready( function() {     
-	
+
 	$("#TimeNum").click(function(){			
 		//버튼 이벤트 발생한 숫자
 		var TimeNum = $(this).val();					
@@ -53,41 +53,35 @@ $( document ).ready( function() {
 		}							
 	});	
 	
-	/*인원 선택
-	$("#PeopleNum").click(function(){
-		var TimeNum = $("#TimeNum").val();
-		var PeopleNum = $(this).val();
-		
-		$("#TotalMoney").val(TimeNum*3000*PeopleNum);	
-	});	
-	*/
-});
-
-function IsStudyRoom() {	
+	//스터디룸 당일 사용 시 reservePayment로 import -> reservePayment 페이지의 타이틀, 버튼 값 변경
 	if(${title =='s'}){
 		//타이틀 변경
-		$("#studyRoomTitle").html("스터디룸 결제");
-		//버튼 값 변경
+		$("#studyRoomTitle").html("스터디룸 당일 사용");
+		//타임 테이블 날짜 조정 버튼(내일, 오늘 일정 보여주는 버튼) 안보이게 하기
+		$('.nextBtnSty').attr('style','visibility:hidden');
+		//타임 테이블 버튼 값 변경
 		$('[name="startBtn"]').html("사용 가능");
 		
 		//span값 변경
 		for(var i = 8; i<25;i++){
 			$('#'+i).text("사용 불가");
 		}
-		
+			
 		//현재 시간보다 전 시간대면 클릭 못하게 막기
 		var todate = new Date();
 		var chkTime = todate.getHours();
-		
+			
 		//현재 시간보다 전 시간대면 클릭 못하게 막기
 		for(var i = 8; i<Number(chkTime); i++){
 			if(i<Number(chkTime)){
 				$('#'+i).html("사용 불가");
 				$('#'+i).attr("disabled",true);
 			}
-		}
+		}	
 	}
-}
+	
+});
+
 //form submit시 미입력값 있으면 전송 막기
 function formCheck() {
 	if($("#TotalMoney").val().length < 4){
