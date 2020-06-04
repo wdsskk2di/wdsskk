@@ -69,13 +69,16 @@ $( document ).ready( function() {
 			
 		//현재 시간보다 전 시간대면 클릭 못하게 막기
 		var todate = new Date();
-		var chkTime = todate.getHours();
-			
+		var chkTime = todate.getHours(); //현재 시간
+
 		//현재 시간보다 전 시간대면 클릭 못하게 막기
-		for(var i = 8; i<Number(chkTime); i++){
-			if(i<Number(chkTime)){
+		for(var i = 8; i<23; i++){ //오전 8시부터 오후 23시 사이에
+			if(i<Number(chkTime)){ //사용자가 접속한 시간이 해당 시간보다 뒤면.. ex.8시 아무때나 접속 시 7시 버튼은 비활성화(미사용 좌석 기준)
 				$('#'+i).html("사용 불가");
 				$('#'+i).attr("disabled",true);
+			}else{	//사용자가 접속한 시간이 해당 시간보다 앞이거나 같으면.. ex.8시 아무때나 접속 시 8시와 9시 버튼은 활성화(미사용 좌석 기준)
+				$('#'+i).html("사용 가능");
+				$('#'+i).attr("disabled",false);
 			}
 		}	
 	}
