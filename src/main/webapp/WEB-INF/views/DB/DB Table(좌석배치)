@@ -88,3 +88,17 @@ set showtodaystudyseat.endtime =
 -------------------------------------------------------------------------------
 
 
+이전 데이터 실험
+
+select EndTIME from study_TimeSet where EndTIME>to_char(sysdate, 'yy/mm/dd hh24:mi:ss');
+ 
+select endtime, seatNum from study_timeSet where study_timeSet.endtime>to_char(sysdate,'hh24:mi:ss')
+and study_timeSet.toDate=to_char(sysdate,'yyyy/mm/dd');
+
+select * from study_timeSet;
+-- 여기서  seatNum, endtime을 받아와서 값이 null이 아니면 사용 불가능, 값이 null이면 사용 가능
+
+insert into todaytotalSeat(toDate, startTime, endTime, seatNum)
+select toDate, startTime, endTime, seatNum from study_timeSet where study_timeset.todate=(to_char(sysdate,'yyyy/mm/dd'));
+
+select * from showtodaystudyseat;
