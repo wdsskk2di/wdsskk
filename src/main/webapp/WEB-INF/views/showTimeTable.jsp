@@ -37,7 +37,7 @@ $( document ).ready( function() {
 
 	//현재 시간보다 전 시간대면 클릭 못하게 막기
 	if('${reState.reDate }' == date){
-		for(var i = 8; i<24; i++){
+		for(var i = 8; i<23; i++){
 			if(i<Number(chkTime)){
 				$('#'+i).html("예약 불가");
 				$('#'+i).attr("disabled",true);
@@ -108,19 +108,19 @@ function get_toDate() {
 				<c:otherwise><span id="18">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
-				<c:when test="${reState.p19 == null }"><button name="startBtn" type="button" value="19">예약 가능</button></c:when>
+				<c:when test="${reState.p19 == null }"><button id="19" name="startBtn" type="button" value="19">예약 가능</button></c:when>
 				<c:otherwise><span id="19">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
-				<c:when test="${reState.p20 == null }"><button name="startBtn" type="button" value="20">예약 가능</button></c:when>
+				<c:when test="${reState.p20 == null }"><button id="20" name="startBtn" type="button" value="20">예약 가능</button></c:when>
 				<c:otherwise><span id="20">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
-				<c:when test="${reState.p21 == null }"><button name="startBtn" type="button" value="21">예약 가능</button></c:when>
+				<c:when test="${reState.p21 == null }"><button id="21" name="startBtn" type="button" value="21">예약 가능</button></c:when>
 				<c:otherwise><span id="21">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
-				<c:when test="${reState.p22 == null }"><button name="startBtn" type="button" value="22">예약 가능</button></c:when>
+				<c:when test="${reState.p22 == null }"><button id="22" name="startBtn" type="button" value="22">예약 가능</button></c:when>
 				<c:otherwise><span id="22">예약 불가</span></c:otherwise>
 			</c:choose></th>
 		</tr>
