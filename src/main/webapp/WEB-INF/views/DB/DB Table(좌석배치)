@@ -1,2 +1,90 @@
 당일 시간제 좌석 보여주는  DB 테이블
 
+[Table] study_Timeset
+이름               널?       유형           
+---------- -------- ------------ 
+TODATE              VARCHAR2(14) 
+STARTTIME           VARCHAR2(8)  
+ENDTIME             VARCHAR2(8)  
+SEATNUM             NUMBER(2)    
+TIMENUM    NOT NULL NUMBER(2)    
+TOTALMONEY NOT NULL NUMBER(10)   
+PEOPLENUM           NUMBER(1)    
+PHONENUM   NOT NULL NUMBER(8)    
+UNIQUEUSER          VARCHAR2(14) 
+---------- -------- ------------ 
+의   timeset테이블에서  endtime, seatNum toDate값을 이용해서 Table을 생성하고 그 생성된 Table에
+값들을 집어넣어준다.
+
+create table todaytotalSeat(
+toDate varchar2(14),
+startTime varchar2(8),
+endTime varchar2(8),
+seatNum number(2)
+);
+
+create table showtodaystudyseat(
+seatNum number(2),
+endTime varchar2(8) null,
+primary key(seatNum)
+);
+
+insert into showtodaystudyseat(seatNum) values(1);
+insert into showtodaystudyseat(seatNum) values(2);
+insert into showtodaystudyseat(seatNum) values(3);
+insert into showtodaystudyseat(seatNum) values(4);
+insert into showtodaystudyseat(seatNum) values(5);
+insert into showtodaystudyseat(seatNum) values(6);
+insert into showtodaystudyseat(seatNum) values(7);
+insert into showtodaystudyseat(seatNum) values(8);
+insert into showtodaystudyseat(seatNum) values(9);
+insert into showtodaystudyseat(seatNum) values(10);
+insert into showtodaystudyseat(seatNum) values(11);
+insert into showtodaystudyseat(seatNum) values(12);
+insert into showtodaystudyseat(seatNum) values(13);
+insert into showtodaystudyseat(seatNum) values(14);
+insert into showtodaystudyseat(seatNum) values(15);
+insert into showtodaystudyseat(seatNum) values(16);
+insert into showtodaystudyseat(seatNum) values(17);
+insert into showtodaystudyseat(seatNum) values(18);
+insert into showtodaystudyseat(seatNum) values(19);
+insert into showtodaystudyseat(seatNum) values(20);
+
+-------------------------------------------------------------------------------
+
+todaytotalSeat 에 오늘 날짜에 해당하는 데이터 값들을 집어넣어준다.
+
+insert into todaytotalSeat(toDate, startTime, endTime, seatNum)
+select toDate, startTime, endTime, seatNum 
+from study_timeSet 
+where study_timeset.todate=(to_char(sysdate,'yyyy/mm/dd'));
+
+-- 오늘 날짜에 결제된 좌석들(당일 결제 모든 내역)
+select * from todaytotalSeat;
+
+-------------------------------------------------------------------------------
+-- 오늘 결제된 좌석들 중 현재 시간 기준으로 아직 endtime 이 더 큰 경우
+select * from showtodaystudyseat;
+
+
+update문은  #1을 부르고 다시 #2를 불러서 삭제하고 새로 갱신하는 느낌으로 작성
+
+-- 현재시간 > endtime 인 경우(좌석 사용시간이 만료된 경우) #1
+update showtodaystudyseat 
+set showtodaystudyseat.endtime = 
+( select todaytotalSeat.endtime 
+  from todaytotalSeat 
+  where todaytotalSeat.endtime<to_char(sysdate,'hh24:mi:ss')
+  and todaytotalSeat.seatNum=showtodaystudyseat.seatnum );
+
+-- 현재시간 < endtime 인 경우(아직 좌석 사용 시간이 남은 경우) #2
+update showtodaystudyseat 
+set showtodaystudyseat.endtime = 
+( select todaytotalSeat.endtime 
+  from todaytotalSeat 
+  where todaytotalSeat.endtime>to_char(sysdate,'hh24:mi:ss')
+  and todaytotalSeat.seatN0um=showtodaystudyseat.seatnum );
+
+-------------------------------------------------------------------------------
+
+
