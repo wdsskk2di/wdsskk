@@ -15,7 +15,8 @@
   #studyRoomImg{width: 330px; height: 100px; margin-top: 110px;}
  
  .right_Div{position: absolute;  left: 60%; top: 150px; width: 250px; margin-top: 10%;}
- 
+  #Num{text-align: right; width: 70px; margin-bottom: 5px;}
+  
  .checkBtn{color:white; border:1 solid #005766; outline:1; border-radius: 5px; background-color: #005766;
 		padding: 3px 5px; font-size: 15px; font-weight: bold; margin-right: 10px;}
  .cancelBtn{color:#005766; border:1 solid #005766; outline:1; border-radius: 5px; background-color: white;
@@ -61,7 +62,7 @@
 
 <form action="reservePayment" method="get">
 	<input type="hidden" name="title" value="${title }">
-	<input type="text" id="Num" name="seatNum" readonly="readonly" style="text-align: right; width: 80px;">번<br>
+	<input type="text" id="Num" name="seatNum" readonly="readonly">번<br>
 	<c:import url="/WEB-INF/views/keypad/timeKeypad.jsp"/>
 	<br>
 	<input type="submit" value="확인" style="margin-right: 10px;" class="checkBtn">

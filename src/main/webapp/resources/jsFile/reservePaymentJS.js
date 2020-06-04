@@ -68,6 +68,6 @@ $(document).on('click','[name="startBtn"]',function(e){
                 $('#TimeNum').append(option);
             }
 		}
-	});	
+	});
 
 });

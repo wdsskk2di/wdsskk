@@ -40,7 +40,6 @@ request.setAttribute("Plist",Plist);
 %>
 
 $(document).ready( function() {
-
 	//사용 시간 선택
 	$("#TimeNum").click(function(){		
 		
