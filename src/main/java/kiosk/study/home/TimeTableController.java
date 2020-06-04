@@ -16,7 +16,7 @@ import kiost.study.service.ReserveStateService;
 public class TimeTableController {
 	
 	private KioskService ks;
-	public ReserveStateService rs;
+	public ReserveStateService rs = new ReserveStateService();
 	
 	public TimeTableController() {
 		String config = "classpath:applicationJDBC.xml";
