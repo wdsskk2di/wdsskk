@@ -48,25 +48,36 @@ public class KioskController {
 		return "default/studyRoom";
 	}
 
-	//당일 좌석, 당일 스터디룸 좌석 번호 선택 페이지
-	@RequestMapping("chooseSeatNum")
-	public String chooseSeatNum(HttpServletRequest request, Model model) {
+	//당일 좌석 번호 선택 페이지
+	@RequestMapping("toDaySeat")
+	public String toDaySeat(HttpServletRequest request, Model model) {
 		model.addAttribute("title", request.getParameter("title"));
-		
-		
+	
 		// 당일 좌석 좌석 확인 구현하기
-		
-		
-		
-		
 		ks = new UpdateSeatInfo();
 		ks.execute(model);
 
 		if(request.getParameter("title").equals("p")) {
 			//당일좌석 사용자 유무
 //			us.seatPState(model);
-		}else {
-			//스터디룸 사용자 유무
+		}
+
+		return "chooseSeatNum";
+	}
+	
+	
+	// 당일 스터디룸 좌석 번호 선택 페이지
+	@RequestMapping("toDayRoom")
+	public String chooseSeatNum(HttpServletRequest request, Model model) {
+		model.addAttribute("title", request.getParameter("title"));
+		
+		// 당일 좌석 좌석 확인 구현하기
+
+		ks = new UpdateSeatInfo();
+		ks.execute(model);
+
+		if(request.getParameter("title").equals("s")) {
+			//당일좌석 사용자 유무
 //			us.roomPState(model);
 		}
 
