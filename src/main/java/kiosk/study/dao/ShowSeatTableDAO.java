@@ -17,7 +17,8 @@ public class ShowSeatTableDAO {
 	public ArrayList<ShowSeatTableDTO> seatPState() {	
 		ArrayList<ShowSeatTableDTO> list = null;
 		try {
-			String sql = "select seatNum, phoneNum, endTime from study_TimeSet where seatNum<21 order by seatNum asc";
+			String sql = "select seatNum, toDate, endTime from todaytotalSeat where seatNum <21 order by seatNum asc";
+//			String sql = "select seatNum, phoneNum, endTime from study_TimeSet where seatNum<21 order by seatNum asc";
 			list = (ArrayList<ShowSeatTableDTO>)template.query(sql, new BeanPropertyRowMapper<ShowSeatTableDTO>(ShowSeatTableDTO.class));
 		} catch (Exception e) {}	
 		
