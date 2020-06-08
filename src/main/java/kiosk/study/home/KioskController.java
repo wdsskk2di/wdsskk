@@ -17,7 +17,7 @@ import kiost.study.service.UserSeatSelectService;
 public class KioskController {
 
 	private KioskService ks;
-	public UserSeatSelectService us;
+	public UserSeatSelectService us = new UserSeatSelectService();
 
 	public KioskController() {
 		String config = "classpath:applicationJDBC.xml";
@@ -50,13 +50,13 @@ public class KioskController {
 		model.addAttribute("title", request.getParameter("title"));
 		ks = new UpdateSeatInfo();
 		ks.execute(model);
-
+		
 		if(request.getParameter("title").equals("p")) {
 			//당일좌석 사용자 유무
-//			us.seatPState(model);
+			us.seatPState(model);
 		}else {
 			//스터디룸 사용자 유무
-//			us.roomPState(model);
+			us.roomPState(model);
 		}
 
 		return "chooseSeatNum";
@@ -71,10 +71,10 @@ public class KioskController {
 
 		if(request.getParameter("title").equals("r")) {
 			//예약좌석 사용자 유무
-//			us.seatRState(model);
+			us.seatRState(model);
 		}else {
 			//스터디룸 사용자 유무
-//			us.roomPState(model);
+			us.roomPState(model);
 		}
 
 		return "reserve";

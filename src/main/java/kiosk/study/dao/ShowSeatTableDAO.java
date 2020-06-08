@@ -17,10 +17,10 @@ public class ShowSeatTableDAO {
 	public ArrayList<ShowSeatTableDTO> seatPState() {	
 		ArrayList<ShowSeatTableDTO> list = null;
 		try {
-			String sql = "select seatNum, phoneNum, endTime from kiosk where seatNum<21 order by seatNum asc";
+			String sql = "select seatNum, endTime from todaytotalSeat where seatNum<21 order by seatNum asc";
+			//String sql = "select seatNum, phoneNum, endTime from kiosk where seatNum<21 order by seatNum asc";
 			list = (ArrayList<ShowSeatTableDTO>)template.query(sql, new BeanPropertyRowMapper<ShowSeatTableDTO>(ShowSeatTableDTO.class));
 		} catch (Exception e) {}	
-		
 		return list;
 	}
 
@@ -34,7 +34,7 @@ public class ShowSeatTableDAO {
 		
 		return list;
 	}
-
+	
 	//예약좌석 현재 배치도 확인
 	public ArrayList<ShowSeatTableDTO> seatRState() {	
 		ArrayList<ShowSeatTableDTO> list = null;

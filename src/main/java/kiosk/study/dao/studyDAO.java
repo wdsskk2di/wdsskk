@@ -159,10 +159,26 @@ public class studyDAO {
 
 	//당일 좌석 카테고리 선택 시(배치도 보여줄때마다 작동) 좌석 사용중인지 확인해서 시간 지난건 지우고, 시간 지나지 않은건 그대로..
 	//select EndTIME from kiosk where EndTIME<to_char(sysdate, 'yy/MM/dd hh:mi');
+//	public void updateSeatInfo() {
+//		String sql ="update kiosk set timeNum = null, peopleNum = null, totalMoney = null, phoneNum = null, STARTTIME = null, EndTime = null "
+//				+ "where EndTIME < to_char(sysdate, 'yy/MM/dd hh:mi')";
+//		template.update(sql);
+//	}
+	
 	public void updateSeatInfo() {
-		String sql ="update kiosk set timeNum = null, peopleNum = null, totalMoney = null, phoneNum = null, STARTTIME = null, EndTime = null "
-				+ "where EndTIME < to_char(sysdate, 'yy/MM/dd hh:mi')";
-		template.update(sql);
+		// 현재시간 > endtime 인 경우(좌석 사용시간이 만료된 경우) #1
+		String resetSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
+				+ "( select todaytotalSeat.endtime " + "  from todaytotalSeat"
+				+ "  where todaytotalSeat.endtime < to_char(sysdate,'hh24:mi:ss')"
+				+ "  and todaytotalSeat.seatNum = showtodaystudyseat.seatnum)";
+		// 현재시간 < endtime 인 경우(아직 좌석 사용 시간이 남은 경우) #2
+		String updateSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
+				+ "( select todaytotalSeat.endtime " + "  from todaytotalSeat"
+				+ "  where todaytotalSeat.endtime < to_char(sysdate,'hh24:mi:ss')"
+				+ "  and todaytotalSeat.seatNum = showtodaystudyseat.seatnum)";
+
+		template.update(resetSeatInfo);
+		template.update(updateSeatInfo);
 	}
 
 	//(당일) 좌석에서 만일 사람이 있는 좌석을 선택했다면 결제창으로 넘어가지 못하게 하기 위한 sql문... -> 스터디룸과 예약좌석은 DB를 따로 둘거면 다른 메소드 생성 필요
