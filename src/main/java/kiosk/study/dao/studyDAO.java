@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import com.care.template.Constant;
+
+import kiosk.study.dto.ShowSeatTableDTO;
 import kiosk.study.dto.studyDTO;
 
 public class studyDAO {
@@ -161,49 +163,23 @@ public class studyDAO {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	//관리자 결제확인 내역 저장
-	//사용자 선택한 자리 정보 확인
-	//사용하는 좌석에 대한 사용불가처리
-	//당일사용좌석 사용중/사용완료 처리
-
-	//당일 결제시 정보 저장
-	public int updateSeat(studyDTO dto) {
+	//관리자 결제확인 내역 저장(오류)
+	public int dbManager(studyDTO dto) {
 		try {
-			String sql = "update kiosk set timeNum='"+dto.getTimeNum()+"', peopleNum='"+dto.getPeopleNum()+
-					"', totalmoney ='"+dto.getTotalMoney()+"', PhoneNum='"+dto.getPhoneNum()+
-					"', startTime=to_char(sysdate, 'yy/MM/dd hh24:mi'), endTime=to_char(sysdate+"+dto.getTimeNum()+"/24, 'yy/mm/dd hh24:mi') "
-					+ "where seatNum='"+dto.getSeatNum()+"'";
+			String sql = "insert into totalManager (select * from study_timeSet where study_timeSet.uniqueUser ="+dto.getUniqueUser();
 			template.update(sql);
 			return 1;
-
-		} catch (Exception e) {return 0;}
-
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
-
+	
 	//사용자가 선택한 자리 정보 확인
-	public studyDTO checkSeatInfo(int seatNum) {
-		String sql = "select * from kiosk where seatNum='"+seatNum+"'";
+	public ShowSeatTableDTO checkSeatInfo() {
+		String sql = "select seatNum, toDate, endTime from todaytotalSeat where toDate=(to_char(sysdate,'yyyy/mm/dd'))";
 
-		return template.queryForObject(sql, new BeanPropertyRowMapper<studyDTO>(studyDTO.class));
+		return template.queryForObject(sql, new BeanPropertyRowMapper<ShowSeatTableDTO>(ShowSeatTableDTO.class));
 	}
 
 	
@@ -211,7 +187,7 @@ public class studyDAO {
 	//(당일) 좌석에서 만일 사람이 있는 좌석을 선택했다면 결제창으로 넘어가지 못하게 하기 위한 sql문... -> 스터디룸과 예약좌석은 DB를 따로 둘거면 다른 메소드 생성 필요
 	public int seatEmptyCheck(String seatNum) {
 		try {
-			String sql = "select EndTIME from kiosk where seatNum='"+seatNum+"'";
+			String sql = "select EndTIME from todaytotalSeat where seatNum='"+seatNum+"'";
 			String result = template.queryForObject(sql, String.class);		//null이면 비어있는 자리. 값이 있으면 사용자가 있는 자리
 
 			if(result.equals("null")) {
@@ -223,4 +199,11 @@ public class studyDAO {
 			return 0;
 		}
 	}
+	
+	//사용자 선택한 자리 정보 확인
+	//사용하는 좌석에 대한 사용불가처리
+	//당일사용좌석 사용중/사용완료 처리
+	
+	
+	
 }
