@@ -18,7 +18,7 @@ public class StudyStateService implements KioskService{
 		// DAO 생성자 사용
 
 		int seatNum = Integer.parseInt(request.getParameter("seatNum"));
-
+ 
 		// 좌석 선택 값을 DB에 저장
 		dao.statSeat(seatNum);
 

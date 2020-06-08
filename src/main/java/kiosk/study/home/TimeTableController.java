@@ -28,7 +28,7 @@ public class TimeTableController {
 			ctx.close();
 		}
 	}
-
+ 
 	@GetMapping(value="reserveTomorrow", produces = "application/json;charset=utf8")
 	public String reserveTomorrow(@RequestParam("seatNum") String seatNum, Model model) {		
 		model.addAttribute("seatNum", seatNum);

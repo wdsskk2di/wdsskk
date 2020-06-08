@@ -34,7 +34,7 @@ public class PaymentController {
 			ctx.close();
 		}
 	}
-	
+	 
 	//당일 (좌석,스터디룸) 사용자 정보 입력 페이지 
 	@RequestMapping("payment")
 	public String payment(HttpServletRequest request, Model model){

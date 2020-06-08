@@ -24,7 +24,7 @@ public class ReserveDAO {
 		String sql = "select * from test_reserve where seatNum='"+seatNum+"' and reDate='"+sdf.format(date)+"'";
 		return template.queryForObject(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
 	}
-	
+	 
 	//사용자가 선택한 자리 내일 예약 정보 확인
 	public ShowReserveDTO checkTmrReserveInfo(String seatNum) {
 		 DateFormat dtf = new SimpleDateFormat("yyyy/MM/dd");

@@ -28,7 +28,7 @@ public class studyDAO {
 			System.out.println("사용자 좌석 선택 저장 실패 $1");
 		}
 	}
-
+ 
 	//사용자가 시간선택, 시간가격값, 핸드폰번호  db저장 #2
 	public void daySeatSelect(final studyDTO dto) {
 		try {

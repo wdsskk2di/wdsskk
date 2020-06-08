@@ -26,7 +26,7 @@ public class dayPayUser implements KioskService{
 
 		dao.dayPayUser(dto);
 //		System.out.println("uniqueUser값 추가 완료");
-
+ 
 		dao.deleteBeforeInfo();
 //		System.out.println("사용자 1차 입력란 삭제 완료");
 

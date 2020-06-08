@@ -28,8 +28,8 @@ public class KioskController {
 		}finally {
 			ctx.close();
 		}
-	}
-
+	} 
+  
 	//메인 페이지
 	@RequestMapping("/")
 	public String home() {

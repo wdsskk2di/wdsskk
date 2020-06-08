@@ -24,7 +24,7 @@ public class ShowSeatTableDAO {
 		
 		return list;
 	}
-
+ 
 	//스터디룸 현재 배치도 확인
 	public ArrayList<ShowSeatTableDTO> roomPState() {	
 		ArrayList<ShowSeatTableDTO> list = null;
