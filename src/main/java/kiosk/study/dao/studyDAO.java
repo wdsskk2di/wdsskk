@@ -79,6 +79,7 @@ public class studyDAO {
 			System.out.println("테이블 삭제 실패 $4");
 		}
 	}
+	
 	// study_resultSet >> study_timeSet 으로 내용값 복사하고 시간 값 추가 #5
 	public void manageCopy(final studyDTO dto) {
 		try {
@@ -94,6 +95,7 @@ public class studyDAO {
 			System.out.println("TimeSet테이블에 시간값 추가 실패 $5");
 		}
 	}
+	
 	// study_resultSet에서 결제코드값 가져옴 #6
 	public String getUniqueUser() {
 		try {
@@ -120,6 +122,7 @@ public class studyDAO {
 			System.out.println("resultSet내용 삭제 실패 $7");
 		}
 	}
+	
 	// 당일 시간제 결제 정보  DTO에 저장하고 화면에 출력하기 #8
 	public studyDTO daySelectUser(String getUniqueUser) {
 		try {
@@ -140,28 +143,28 @@ public class studyDAO {
 	// 당일 좌석 카테고리 선택 시(배치도 보여줄때마다 작동)
 	public void updateSeatInfo() {
 		// 현재시간 > endtime 인 경우(좌석 사용시간이 만료된 경우) #1
-		String resetSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
-				+ "( select todaytotalSeat.endtime " + "  from todaytotalSeat"
-				+ "  where todaytotalSeat.endtime < to_char(sysdate,'hh24:mi:ss')"
-				+ "  and todaytotalSeat.seatNum = showtodaystudyseat.seatnum)";
+//		String resetSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
+//				+ "( select todaytotalSeat.endtime " + "  from todaytotalSeat"
+//				+ "  where todaytotalSeat.endtime < to_char(sysdate,'hh24:mi:ss')"
+//				+ "  and todaytotalSeat.seatNum = showtodaystudyseat.seatnum)";
 		// 현재시간 < endtime 인 경우(아직 좌석 사용 시간이 남은 경우) #2
-		String updateSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
-				+ "( select todaytotalSeat.endtime " + "  from todaytotalSeat"
-				+ "  where todaytotalSeat.endtime < to_char(sysdate,'hh24:mi:ss')"
-				+ "  and todaytotalSeat.seatNum = showtodaystudyseat.seatnum)";
-
+//		String updateSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
+//				+ "( select todaytotalSeat.endtime " + "  from todaytotalSeat"
+//				+ "  where todaytotalSeat.endtime < to_char(sysdate,'hh24:mi:ss')"
+//				+ "  and todaytotalSeat.seatNum = showtodaystudyseat.seatnum)";
+		
+		String updateSeatInfo = "update SHOWTODAYSTUDYSEAT set showtodaystudyseat.endtime = "
+				+ "(select endtime from(select ROW_NUMBER() OVER (PARTITION BY seatnum ORDER BY endtime desc) "
+				+ "as seatState, todaytotalSeat.* from todaytotalSeat) where seatState=1 and seatNum = showtodaystudyseat.seatnum)";
+		String resetSeatInfo = "update SHOWTODAYSTUDYSEAT set endtime = null where endtime<to_char(sysdate,'hh24:mi:ss')";
 
 		// 원래 코드
 //		String sql ="update kiosk set timeNum = null, peopleNum = null, totalMoney = null, phoneNum = null, STARTTIME = null, EndTime = null "
 //				+ "where EndTIME < to_char(sysdate, 'yy/MM/dd hh:mi')";
-
-
-		template.update(resetSeatInfo);
+	
 		template.update(updateSeatInfo);
+		template.update(resetSeatInfo);
 	}
-
-
-
 
 	//관리자 결제확인 내역 저장(오류)
 	public int dbManager(studyDTO dto) {
@@ -189,22 +192,6 @@ public class studyDAO {
 //				+ "where EndTIME < to_char(sysdate, 'yy/MM/dd hh:mi')";
 //		template.update(sql);
 //	}
-
-	public void updateSeatInfo() {
-		// 현재시간 > endtime 인 경우(좌석 사용시간이 만료된 경우) #1
-		String resetSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
-				+ "( select todaytotalSeat.endtime " + "  from todaytotalSeat"
-				+ "  where todaytotalSeat.endtime < to_char(sysdate,'hh24:mi:ss')"
-				+ "  and todaytotalSeat.seatNum = showtodaystudyseat.seatnum)";
-		// 현재시간 < endtime 인 경우(아직 좌석 사용 시간이 남은 경우) #2
-		String updateSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
-				+ "( select todaytotalSeat.endtime " + "  from todaytotalSeat"
-				+ "  where todaytotalSeat.endtime < to_char(sysdate,'hh24:mi:ss')"
-				+ "  and todaytotalSeat.seatNum = showtodaystudyseat.seatnum)";
-
-		template.update(resetSeatInfo);
-		template.update(updateSeatInfo);
-	}
 
 	//(당일) 좌석에서 만일 사람이 있는 좌석을 선택했다면 결제창으로 넘어가지 못하게 하기 위한 sql문... -> 스터디룸과 예약좌석은 DB를 따로 둘거면 다른 메소드 생성 필요
 	public int seatEmptyCheck(String seatNum) {

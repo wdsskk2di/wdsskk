@@ -9,7 +9,7 @@
 
 <style type="text/css">
  .default{background-color: white; height:500px; width:600px; max-width:600px;  min-width:600px; text-align: center; text-align: center; margin: 0 auto; margin-top: 20%;}
- .left_Div{position: absolute; left: 19%; top: 100px; width: 350px; margin-top: 8%;}
+ .left_Div{position: absolute; left: 19%; top: 100px; width: 350px; margin-top: 5%;}
  .left_Div img{margin-top: 90px;}
   #reserveSeatImg{width: 320px; height: 170px;}
   #studyRoomImg{width: 330px; height: 100px; margin-top: 110px;}

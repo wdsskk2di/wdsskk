@@ -35,6 +35,26 @@
 	<td><b>${seatState[i].seatNum}</b><br>
 	<c:choose>
 		<c:when test="${seatState[i].endTime == null}">사용가능<br>--</c:when>
+		<c:otherwise><span style="color:white; background-color: red">사용중</span><br>${seatState[i].endTime }</c:otherwise>
+	</c:choose>
+	</td>
+</c:forEach>
+</tr>
+<tr>
+<c:forEach var="i" begin="10" end="14">
+	<td><b>${seatState[i].seatNum}</b><br>
+	<c:choose>
+		<c:when test="${seatState[i].endTime == null}">사용가능<br>--</c:when>
+		<c:otherwise><span style="color:white; background-color: red;">사용중</span><br>${seatState[i].endTime }</c:otherwise>
+	</c:choose>
+	</td>
+</c:forEach>
+</tr>
+<tr>
+<c:forEach var="i" begin="15" end="19">
+	<td><b>${seatState[i].seatNum}</b><br>
+	<c:choose>
+		<c:when test="${seatState[i].endTime == null}">사용가능<br>--</c:when>
 		<c:otherwise><span style="color:white; background-color: red;">사용중</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
 	</td>
@@ -61,6 +81,26 @@
 	<c:choose>
 		<c:when test="${seatState[i].endTime == null}">사용가능<br>--</c:when>
 		<c:otherwise><span style="color:white; background-color: red">사용중</span><br>${seatState[i].endTime }</c:otherwise>
+	</c:choose>
+	</td>
+</c:forEach>
+</tr>
+<tr>
+<c:forEach var="i" begin="10" end="14">
+	<td><b>${seatState[i].seatNum}</b><br>
+	<c:choose>
+		<c:when test="${seatState[i].endTime == null}">사용가능<br>--</c:when>
+		<c:otherwise><span style="color:white; background-color: red;">사용중</span><br>${seatState[i].endTime }</c:otherwise>
+	</c:choose>
+	</td>
+</c:forEach>
+</tr>
+<tr>
+<c:forEach var="i" begin="15" end="19">
+	<td><b>${seatState[i].seatNum}</b><br>
+	<c:choose>
+		<c:when test="${seatState[i].endTime == null}">사용가능<br>--</c:when>
+		<c:otherwise><span style="color:white; background-color: red;">사용중</span><br>${seatState[i].endTime }</c:otherwise>
 	</c:choose>
 	</td>
 </c:forEach>

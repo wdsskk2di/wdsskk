@@ -59,7 +59,7 @@ public class KioskController {
 
 		if(request.getParameter("title").equals("p")) {
 			//당일좌석 사용자 유무
-//			us.seatPState(model);
+			us.seatPState(model);
 		}
 
 		return "chooseSeatNum";
@@ -78,7 +78,7 @@ public class KioskController {
 
 		if(request.getParameter("title").equals("s")) {
 			//당일좌석 사용자 유무
-//			us.roomPState(model);
+			us.roomPState(model);
 		}
 
 		return "chooseSeatNum";
