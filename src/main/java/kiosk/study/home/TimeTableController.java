@@ -43,7 +43,7 @@ public class TimeTableController {
 		model.addAttribute("seatNum", seatNum);
 
 		//스터디룸의 타임테이블
-		rs.reserveNextday(model);
+		rs.reserveToday(model);
 	
 		return "showTimeTable";
 	}

@@ -8,7 +8,8 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-	.nextBtnSty{color:#005766; border:1 solid #005766; border-radius:50px; background-color: white; margin: 3px; font-size: 20px; font-weight: bold;}
+	.nextBtnSty{color:#005766; border:1 solid #005766; border-radius:50px; background-color: white;
+			margin: 3px; font-size: 20px; font-weight: bold; visibility: visible;}
 </style>
 
 <!-- ajax 사용을 위한 연결 -->
@@ -25,24 +26,25 @@ function getFormatDate(date){
     var day = date.getDate();                   //d
     day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
     return  year + '/' + month + '/' + day;
-}
+}		
 
-function compareDate() {
+$( document ).ready( function() {  
 	var date = new Date();
 	date = getFormatDate(date);
 	
 	var todate = new Date();
 	var chkTime = todate.getHours();
-	
+
 	//현재 시간보다 전 시간대면 클릭 못하게 막기
-	if(${reState.reDate } == date){
-	for(var i = 8; i<Number(chkTime); i++){
-		if(i<Number(chkTime)){
-			$('#'+i).html("예약 불가");
-			$('#'+i).attr("disabled",true);
+	if('${reState.reDate }' == date){
+		for(var i = 8; i<23; i++){
+			if(i<Number(chkTime)){
+				$('#'+i).html("예약 불가");
+				$('#'+i).attr("disabled",true);
+			}
 		}
-	}}
-}		
+	}
+});
 
 //내일날짜 타임테이블 보여주기
 function get_tomoDate() {
@@ -91,7 +93,7 @@ function get_toDate() {
 
 </head>
 
-<body onload="compareDate()">
+<body>
 <div>
 	<table border="1" id="timeTable1" style="margin:0 auto;">
 		<caption id="reserveDate"><button type="button" class="nextBtnSty" onclick="get_toDate()">&lt;</button>${reState.reDate }<button type="button" class="nextBtnSty" onclick="get_tomoDate()">&gt;</button></caption>
@@ -106,19 +108,19 @@ function get_toDate() {
 				<c:otherwise><span id="18">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
-				<c:when test="${reState.p19 == null }"><button name="startBtn" type="button" value="19">예약 가능</button></c:when>
+				<c:when test="${reState.p19 == null }"><button id="19" name="startBtn" type="button" value="19">예약 가능</button></c:when>
 				<c:otherwise><span id="19">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
-				<c:when test="${reState.p20 == null }"><button name="startBtn" type="button" value="20">예약 가능</button></c:when>
+				<c:when test="${reState.p20 == null }"><button id="20" name="startBtn" type="button" value="20">예약 가능</button></c:when>
 				<c:otherwise><span id="20">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
-				<c:when test="${reState.p21 == null }"><button name="startBtn" type="button" value="21">예약 가능</button></c:when>
+				<c:when test="${reState.p21 == null }"><button id="21" name="startBtn" type="button" value="21">예약 가능</button></c:when>
 				<c:otherwise><span id="21">예약 불가</span></c:otherwise>
 			</c:choose></th>
 						<th><c:choose>
-				<c:when test="${reState.p22 == null }"><button name="startBtn" type="button" value="22">예약 가능</button></c:when>
+				<c:when test="${reState.p22 == null }"><button id="22" name="startBtn" type="button" value="22">예약 가능</button></c:when>
 				<c:otherwise><span id="22">예약 불가</span></c:otherwise>
 			</c:choose></th>
 		</tr>

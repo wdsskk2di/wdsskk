@@ -9,10 +9,14 @@
 
 <style type="text/css">
  .default{background-color: white; height:500px; width:600px; max-width:600px;  min-width:600px; text-align: center; text-align: center; margin: 0 auto; margin-top: 20%;}
- .left_Div{position: absolute; left: 19%; top: 100px; width: 350px; margin-top: 10%;}
- .left_Div img{width: 250px; height: 280px;}
- .right_Div{position: absolute;  left: 60%; top: 150px; width: 250px; margin-top: 10%;}
+ .left_Div{position: absolute; left: 19%; top: 100px; width: 350px; margin-top: 8%;}
+ .left_Div img{margin-top: 90px;}
+  #reserveSeatImg{width: 320px; height: 170px;}
+  #studyRoomImg{width: 330px; height: 100px; margin-top: 110px;}
  
+ .right_Div{position: absolute;  left: 60%; top: 150px; width: 250px; margin-top: 10%;}
+  #Num{text-align: right; width: 70px; margin-bottom: 5px;}
+  
  .checkBtn{color:white; border:1 solid #005766; outline:1; border-radius: 5px; background-color: #005766;
 		padding: 3px 5px; font-size: 15px; font-weight: bold; margin-right: 10px;}
  .cancelBtn{color:#005766; border:1 solid #005766; outline:1; border-radius: 5px; background-color: white;
@@ -31,8 +35,16 @@
 <div class="default">
 
 <div class="left_Div">
-<img alt="배치도" src="resources/images/blockPlan.jpg"  ondragstart="return false"><br>
-<c:import url="/WEB-INF/views/showSeatTable.jsp"/>
+	<c:choose>
+	<c:when test="${title == 'r' }">
+		<img alt="배치도" src="resources/images/reserveSeat.png" id="reserveSeatImg" ondragstart="return false"><br>
+	</c:when>
+	
+	<c:when test="${title == 's' }">
+		<img alt="배치도" src="resources/images/studyRoom.png" id="studyRoomImg" ondragstart="return false"><br>
+	</c:when>
+	</c:choose>
+	<c:import url="/WEB-INF/views/showSeatTable.jsp"/>
 </div>
 
 <div class="right_Div">
@@ -50,7 +62,7 @@
 
 <form action="reservePayment" method="get">
 	<input type="hidden" name="title" value="${title }">
-	<input type="text" id="Num" name="seatNum" readonly="readonly" style="text-align: right; width: 80px;">번<br>
+	<input type="text" id="Num" name="seatNum" readonly="readonly">번<br>
 	<c:import url="/WEB-INF/views/keypad/timeKeypad.jsp"/>
 	<br>
 	<input type="submit" value="확인" style="margin-right: 10px;" class="checkBtn">

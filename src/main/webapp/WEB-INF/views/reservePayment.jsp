@@ -40,7 +40,6 @@ request.setAttribute("Plist",Plist);
 %>
 
 $(document).ready( function() {
-
 	//사용 시간 선택
 	$("#TimeNum").click(function(){		
 		
@@ -120,7 +119,7 @@ function formCheck() {
 	
 	<tr>
 	<td>시작 시간: <input type="text" id="showStartTime" readonly="readonly" class="inputBorder"></td>
-	<td>사용 시간: <select id="TimeNum" name="timeNum" disabled="disabled"> <option id="selectTime">${time }</option> </select></td>		
+	<td style="width:115px;">사용 시간: <select id="TimeNum" name="timeNum" disabled="disabled"> <option id="selectTime">${time }</option> </select></td>		
 	</tr>
 	
 	<tr>

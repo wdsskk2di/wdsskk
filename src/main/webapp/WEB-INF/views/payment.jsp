@@ -28,18 +28,15 @@
 //시간 1~6
 int[] Tlist = {1,2,3,4,5,6};
 request.setAttribute("Tlist",Tlist);
-
 //스터디룸 정원
 int[] Plist43 = {1,2,3,4,5,6};
 request.setAttribute("Plist43",Plist43);
-
 int[] Plist = {1,2,3,4};
 request.setAttribute("Plist",Plist);
 %>
-
 //시간 선택시
 $( document ).ready( function() {     
-	
+
 	$("#TimeNum").click(function(){			
 		//버튼 이벤트 발생한 숫자
 		var TimeNum = $(this).val();					
@@ -56,42 +53,37 @@ $( document ).ready( function() {
 		}							
 	});	
 	
-	/*인원 선택
-	$("#PeopleNum").click(function(){
-		var TimeNum = $("#TimeNum").val();
-		var PeopleNum = $(this).val();
-		
-		$("#TotalMoney").val(TimeNum*3000*PeopleNum);	
-	});	
-	*/
-});
-
-function IsStudyRoom() {
-	
+	//스터디룸 당일 사용 시 reservePayment로 import -> reservePayment 페이지의 타이틀, 버튼 값 변경
 	if(${title =='s'}){
 		//타이틀 변경
-		$("#studyRoomTitle").html("스터디룸 결제");
-		//버튼 값 변경
+		$("#studyRoomTitle").html("스터디룸 당일 사용");
+		//타임 테이블 날짜 조정 버튼(내일, 오늘 일정 보여주는 버튼) 안보이게 하기
+		$('.nextBtnSty').attr('style','visibility:hidden');
+		//타임 테이블 버튼 값 변경
 		$('[name="startBtn"]').html("사용 가능");
 		
 		//span값 변경
 		for(var i = 8; i<25;i++){
 			$('#'+i).text("사용 불가");
 		}
-		
+			
 		//현재 시간보다 전 시간대면 클릭 못하게 막기
 		var todate = new Date();
-		var chkTime = todate.getHours();
-		
+		var chkTime = todate.getHours(); //현재 시간
+
 		//현재 시간보다 전 시간대면 클릭 못하게 막기
-		for(var i = 8; i<Number(chkTime); i++){
-			if(i<Number(chkTime)){
+		for(var i = 8; i<23; i++){ //오전 8시부터 오후 23시 사이에
+			if(i<Number(chkTime)){ //사용자가 접속한 시간이 해당 시간보다 뒤면.. ex.8시 아무때나 접속 시 7시 버튼은 비활성화(미사용 좌석 기준)
 				$('#'+i).html("사용 불가");
 				$('#'+i).attr("disabled",true);
+			}else{	//사용자가 접속한 시간이 해당 시간보다 앞이거나 같으면.. ex.8시 아무때나 접속 시 8시와 9시 버튼은 활성화(미사용 좌석 기준)
+				$('#'+i).html("사용 가능");
+				$('#'+i).attr("disabled",false);
 			}
-		}
+		}	
 	}
-}
+	
+});
 
 //form submit시 미입력값 있으면 전송 막기
 function formCheck() {
@@ -105,18 +97,17 @@ function formCheck() {
 		return true;
 	}	
 }
-
 </script>
 
 </head>
 <body onload="IsStudyRoom()">
-<c:import url="/WEB-INF/views/default/header.jsp"/>
 
-<div class="default">
 <c:choose>
 <c:when test="${result == 0 }">
 	<c:choose>
-		<c:when test="${title == 'p' }">
+	<c:when test="${title == 'p' }">
+	<c:import url="/WEB-INF/views/default/header.jsp"/>
+	<div class="default">
 		<h3>당일 좌석 결제</h3>
 		<form id="target" action="paymentCheck" method="post" onsubmit="return formCheck()">
 		
@@ -143,9 +134,11 @@ function formCheck() {
 		</table>
 		
 		</form>
-		</c:when>
+	</div>
+	<c:import url="/WEB-INF/views/default/footer.jsp"/>
+	</c:when>
 		
-		<c:otherwise>
+	<c:otherwise>
 		<c:import url="/WEB-INF/views/reservePayment.jsp"/>
 		</c:otherwise>
 	</c:choose>
@@ -156,8 +149,6 @@ function formCheck() {
 </c:otherwise>
 
 </c:choose>
-</div>
 
-<c:import url="/WEB-INF/views/default/footer.jsp"/>
 </body>
 </html>

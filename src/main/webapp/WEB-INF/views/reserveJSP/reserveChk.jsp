@@ -48,17 +48,17 @@ function formCheck() {
 <div class="default">
 
 	<h3>예약 확인</h3>
-	<form id="target" action="reserveChk" method="post" onsubmit="return formCheck()">
-	
+	<form id="target" action="reserveChkList?title=c" method="post" onsubmit="return formCheck()">
+	<input type="hidden" name="title" value="${title }">
 	<table>
 		<tr>
-		<td style="text-align: left; padding-bottom: 80px;">휴대폰 번호: 010 - <input type="text" id="Num" name="phoneNum" readonly="readonly"  style="width: 80px;"></td>		
+		<td style="text-align: left; padding-bottom: 40px;">휴대폰 번호: 010 - <input type="text" id="Num" name="phoneNum" readonly="readonly"  style="width: 80px;"></td>		
 		</tr>
 		
 		<tr><td><c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/></td></tr>
 		
 		<tr>
-			<td colspan="2" style="padding-top: 20px;"><input type="submit" value="확  인" class="checkBtn">
+			<td style="padding-top: 20px;"><input type="submit" value="확  인" class="checkBtn">
 			<button type="button" onclick="location.href='main'" class="cancelBtn">취 소</button>
 			</td>
 		</tr>

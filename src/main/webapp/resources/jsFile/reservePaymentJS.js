@@ -11,9 +11,14 @@ $(document).on('click','[name="startBtn"]',function(e){
 	$('[name="startBtn"]').click(function(){			
 		//버튼 이벤트 발생
 		startTime = $(this).val();					
-
+		
+		//종료 시간 값 없애기(타임 테이블 시작 시간 버튼 두번 이상 눌렀을 시)
+		//결제 금액 값 없애기(타임 테이블 시작 시간 버튼 두번 이상 눌렀을 시)
+		$("#showEndTime").val("");
+		$("#TotalMoney").val("");
+		
 		$('[name="startTime"]').val(startTime);	//시작 시간 값 넘겨줄 name
-		$("#showStartTime").val(startTime+":00시");	//시작 시간 값 보여줄 id
+		$("#showStartTime").val(startTime+":00 시");	//시작 시간 값 보여줄 id
 	
 		//사용 시간 선택 제한
 		$("#TimeNum").removeAttr("disabled") ;
@@ -63,6 +68,6 @@ $(document).on('click','[name="startBtn"]',function(e){
                 $('#TimeNum').append(option);
             }
 		}
-	});	
+	});
 
 });
