@@ -1,9 +1,10 @@
-package kiost.study.service;
+package kiosk.study.service.dayTime;
 
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import kiosk.study.dao.studyDAO;
+import kiost.study.service.KioskService;
 
 public class StudyStateService implements KioskService{
 
@@ -17,7 +18,7 @@ public class StudyStateService implements KioskService{
 		// DAO 생성자 사용
 
 		int seatNum = Integer.parseInt(request.getParameter("seatNum"));
-
+ 
 		// 좌석 선택 값을 DB에 저장
 		dao.statSeat(seatNum);
 

@@ -11,7 +11,7 @@ public class studyDTO {
 	private String startTime; //시작 시간
 	private String endTime; //종료 시간
 	private String uniqueUser; //유저 결제코드값
-
+    
 	public String getTitle() {return title;}
 	public void setTitle(String title) {this.title = title;}
 

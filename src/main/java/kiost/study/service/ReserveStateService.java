@@ -21,7 +21,7 @@ public class ReserveStateService {
 	public void reserveNextday(Model model) {		
 		Map<String, Object> map = model.asMap();
 		String seatNum = (String) map.get("seatNum");
-
+ 
 		ReserveDAO dao = new ReserveDAO();
 		model.addAttribute("reState", dao.checkTmrReserveInfo(seatNum));
 	}

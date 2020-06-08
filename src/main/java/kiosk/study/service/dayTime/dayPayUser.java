@@ -1,4 +1,4 @@
-package kiost.study.service;
+package kiosk.study.service.dayTime;
 
 import java.util.Map;
 
@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 
 import kiosk.study.dao.studyDAO;
 import kiosk.study.dto.studyDTO;
+import kiost.study.service.KioskService;
 
 public class dayPayUser implements KioskService{
 // #2 당일 시간제 결제 정보 저장
@@ -25,7 +26,7 @@ public class dayPayUser implements KioskService{
 
 		dao.dayPayUser(dto);
 //		System.out.println("uniqueUser값 추가 완료");
-
+ 
 		dao.deleteBeforeInfo();
 //		System.out.println("사용자 1차 입력란 삭제 완료");
 

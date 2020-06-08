@@ -11,5 +11,5 @@ public class UpdateSeatInfo implements KioskService {
 		studyDAO dao = new studyDAO();
 		dao.updateSeatInfo();
 	}
-
+ 
 }

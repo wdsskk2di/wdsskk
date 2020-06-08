@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 
 import com.care.template.Constant;
+
+import kiosk.study.dto.ShowSeatTableDTO;
 import kiosk.study.dto.studyDTO;
 
 public class studyDAO {
@@ -23,7 +25,7 @@ public class studyDAO {
 			System.out.println("사용자 좌석 선택 정상 저장 #1 :"+seatNum);
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("사용자 좌석 선택 저장 실패 #1");
+			System.out.println("사용자 좌석 선택 저장 실패 $1");
 		}
 	}
 
@@ -46,7 +48,7 @@ public class studyDAO {
 					", 핸드폰번호 :"+dto.getPhoneNum());
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("사용자 결제 내역 저장 실패 #2");
+			System.out.println("사용자 결제 내역 저장 실패 $2");
 		}
 	}
 
@@ -62,7 +64,7 @@ public class studyDAO {
 			System.out.println("사용자 결제 내역 복사 성공 #3");
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("사용자 결제 내역 저장 실패 #3");
+			System.out.println("사용자 결제 내역 저장 실패 $3");
 		}
 	}
 
@@ -74,7 +76,7 @@ public class studyDAO {
 			System.out.println("이전값 테이블 삭제 성공 #4");
 		}catch(Exception e) {
 			e.printStackTrace();
-			System.out.println("테이블 삭제 실패 #4");
+			System.out.println("테이블 삭제 실패 $4");
 		}
 	}
 	// study_resultSet >> study_timeSet 으로 내용값 복사하고 시간 값 추가 #5
@@ -89,7 +91,7 @@ public class studyDAO {
 
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("TimeSet테이블에 시간값 추가 실패 #5");
+			System.out.println("TimeSet테이블에 시간값 추가 실패 $5");
 		}
 	}
 	// study_resultSet에서 결제코드값 가져옴 #6
@@ -102,7 +104,7 @@ public class studyDAO {
 
 		}catch(final DataAccessException e) {
 			e.printStackTrace();
-			System.out.println("resultSet에서 결제고유키값 받아오기 실패 #6");
+			System.out.println("resultSet에서 결제고유키값 받아오기 실패 $6");
 			return "-1";
 		}
 	}
@@ -115,46 +117,69 @@ public class studyDAO {
 			System.out.println("resultSet내용 삭제 성공 #7");
 		}catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("resultSet내용 삭제 실패 #7");
+			System.out.println("resultSet내용 삭제 실패 $7");
 		}
 	}
-
+	// 당일 시간제 결제 정보  DTO에 저장하고 화면에 출력하기 #8
 	public studyDTO daySelectUser(String getUniqueUser) {
 		try {
 			String sql = "select * from study_timeSet where uniqueUser="+getUniqueUser;
 			// seatNum, startTime, endTime, timeNum, TotalMoney
+			System.out.println("사용자의 결제 정보 DTO에 저장 성공 #8");
 			return template.queryForObject(sql, new BeanPropertyRowMapper<studyDTO>(studyDTO.class));
 
 		}catch(final DataAccessException e) {
 			e.printStackTrace();
+			System.out.println("사용자의 결제 정보 DTO에 저장 실패 $8");
 			return null;
 		}
 	}
 
-	//관리자 결제확인 내역 저장
-	//사용자 선택한 자리 정보 확인
-	//사용하는 좌석에 대한 사용불가처리
-	//당일사용좌석 사용중/사용완료 처리
 
-	//당일 결제시 정보 저장
-	public int updateSeat(studyDTO dto) {
+
+	// 당일 좌석 카테고리 선택 시(배치도 보여줄때마다 작동)
+	public void updateSeatInfo() {
+		// 현재시간 > endtime 인 경우(좌석 사용시간이 만료된 경우) #1
+		String resetSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
+				+ "( select todaytotalSeat.endtime " + "  from todaytotalSeat"
+				+ "  where todaytotalSeat.endtime < to_char(sysdate,'hh24:mi:ss')"
+				+ "  and todaytotalSeat.seatNum = showtodaystudyseat.seatnum)";
+		// 현재시간 < endtime 인 경우(아직 좌석 사용 시간이 남은 경우) #2
+		String updateSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
+				+ "( select todaytotalSeat.endtime " + "  from todaytotalSeat"
+				+ "  where todaytotalSeat.endtime < to_char(sysdate,'hh24:mi:ss')"
+				+ "  and todaytotalSeat.seatNum = showtodaystudyseat.seatnum)";
+
+
+		// 원래 코드
+//		String sql ="update kiosk set timeNum = null, peopleNum = null, totalMoney = null, phoneNum = null, STARTTIME = null, EndTime = null "
+//				+ "where EndTIME < to_char(sysdate, 'yy/MM/dd hh:mi')";
+
+
+		template.update(resetSeatInfo);
+		template.update(updateSeatInfo);
+	}
+
+
+
+
+	//관리자 결제확인 내역 저장(오류)
+	public int dbManager(studyDTO dto) {
 		try {
-			String sql = "update kiosk set timeNum='"+dto.getTimeNum()+"', peopleNum='"+dto.getPeopleNum()+
-					"', totalmoney ='"+dto.getTotalMoney()+"', PhoneNum='"+dto.getPhoneNum()+
-					"', startTime=to_char(sysdate, 'yy/MM/dd hh24:mi'), endTime=to_char(sysdate+"+dto.getTimeNum()+"/24, 'yy/mm/dd hh24:mi') "
-					+ "where seatNum='"+dto.getSeatNum()+"'";
+			String sql = "insert into totalManager (select * from study_timeSet where study_timeSet.uniqueUser ="+dto.getUniqueUser();
 			template.update(sql);
 			return 1;
-
-		} catch (Exception e) {return 0;}
-
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 	//사용자가 선택한 자리 정보 확인
-	public studyDTO checkSeatInfo(int seatNum) {
-		String sql = "select * from kiosk where seatNum='"+seatNum+"'";
+	public ShowSeatTableDTO checkSeatInfo() {
+		String sql = "select seatNum, toDate, endTime from todaytotalSeat where toDate=(to_char(sysdate,'yyyy/mm/dd'))";
 
-		return template.queryForObject(sql, new BeanPropertyRowMapper<studyDTO>(studyDTO.class));
+		return template.queryForObject(sql, new BeanPropertyRowMapper<ShowSeatTableDTO>(ShowSeatTableDTO.class));
 	}
 
 	//당일 좌석 카테고리 선택 시(배치도 보여줄때마다 작동) 좌석 사용중인지 확인해서 시간 지난건 지우고, 시간 지나지 않은건 그대로..
@@ -164,7 +189,7 @@ public class studyDAO {
 //				+ "where EndTIME < to_char(sysdate, 'yy/MM/dd hh:mi')";
 //		template.update(sql);
 //	}
-	
+
 	public void updateSeatInfo() {
 		// 현재시간 > endtime 인 경우(좌석 사용시간이 만료된 경우) #1
 		String resetSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
@@ -184,7 +209,7 @@ public class studyDAO {
 	//(당일) 좌석에서 만일 사람이 있는 좌석을 선택했다면 결제창으로 넘어가지 못하게 하기 위한 sql문... -> 스터디룸과 예약좌석은 DB를 따로 둘거면 다른 메소드 생성 필요
 	public int seatEmptyCheck(String seatNum) {
 		try {
-			String sql = "select EndTIME from kiosk where seatNum='"+seatNum+"'";
+			String sql = "select EndTIME from todaytotalSeat where seatNum='"+seatNum+"'";
 			String result = template.queryForObject(sql, String.class);		//null이면 비어있는 자리. 값이 있으면 사용자가 있는 자리
 
 			if(result.equals("null")) {
@@ -196,4 +221,11 @@ public class studyDAO {
 			return 0;
 		}
 	}
+
+	//사용자 선택한 자리 정보 확인
+	//사용하는 좌석에 대한 사용불가처리
+	//당일사용좌석 사용중/사용완료 처리
+
+
+
 }

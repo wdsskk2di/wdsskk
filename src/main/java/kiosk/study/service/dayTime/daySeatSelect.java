@@ -1,4 +1,4 @@
-package kiost.study.service;
+package kiosk.study.service.dayTime;
 
 import java.util.Map;
 
@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 
 import kiosk.study.dao.studyDAO;
 import kiosk.study.dto.studyDTO;
+import kiost.study.service.KioskService;
 
 public class daySeatSelect implements KioskService{
 // #2 당일 시간제 결제 정보 저장
@@ -21,5 +22,5 @@ public class daySeatSelect implements KioskService{
 
 		dao.daySeatSelect(dto);				// dto(좌석번호, 시간, 가격, 핸드폰)을 DB에 저장
 	}
-
+ 
 }

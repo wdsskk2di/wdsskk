@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.care.template.Constant;
 
 import kiosk.study.dto.studyDTO;
+import kiosk.study.service.dayTime.StudyStateService;
+import kiosk.study.service.dayTime.dayPayUser;
 import kiost.study.service.KioskService;
 import kiost.study.service.ReserveStateService;
 import kiost.study.service.SeatEmptyCheck;
-import kiost.study.service.dayPayUser;
-import kiost.study.service.StudyStateService;
 
 @Controller
 public class PaymentController {
@@ -27,10 +27,14 @@ public class PaymentController {
 	public PaymentController() {
 		String config = "classpath:applicationJDBC.xml";
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(config);
-		JdbcTemplate template = ctx.getBean("template", JdbcTemplate.class);
-		Constant.template = template;
+		try {
+			JdbcTemplate template = ctx.getBean("template", JdbcTemplate.class);
+			Constant.template = template;
+		}finally {
+			ctx.close();
+		}
 	}
-	
+	 
 	//당일 (좌석,스터디룸) 사용자 정보 입력 페이지 
 	@RequestMapping("payment")
 	public String payment(HttpServletRequest request, Model model){

@@ -22,8 +22,12 @@ public class KioskController {
 	public KioskController() {
 		String config = "classpath:applicationJDBC.xml";
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext(config);
-		JdbcTemplate template = ctx.getBean("template", JdbcTemplate.class);
-		Constant.template = template;
+		try {
+			JdbcTemplate template = ctx.getBean("template", JdbcTemplate.class);
+			Constant.template = template;
+		}finally {
+			ctx.close();
+		}
 	}
 
 	//메인 페이지
@@ -44,19 +48,37 @@ public class KioskController {
 		return "default/studyRoom";
 	}
 
-	//당일 좌석, 당일 스터디룸 좌석 번호 선택 페이지
-	@RequestMapping("chooseSeatNum")
-	public String chooseSeatNum(HttpServletRequest request, Model model) {
+	//당일 좌석 번호 선택 페이지
+	@RequestMapping("toDaySeat")
+	public String toDaySeat(HttpServletRequest request, Model model) {
 		model.addAttribute("title", request.getParameter("title"));
+
+		// 당일 좌석 좌석 확인 구현하기
 		ks = new UpdateSeatInfo();
 		ks.execute(model);
-		
+
 		if(request.getParameter("title").equals("p")) {
 			//당일좌석 사용자 유무
-			us.seatPState(model);
-		}else {
-			//스터디룸 사용자 유무
-			us.roomPState(model);
+//			us.seatPState(model);
+		}
+
+		return "chooseSeatNum";
+	}
+
+	
+	// 당일 스터디룸 좌석 번호 선택 페이지
+	@RequestMapping("toDayRoom")
+	public String chooseSeatNum(HttpServletRequest request, Model model) {
+		model.addAttribute("title", request.getParameter("title"));
+
+		// 당일 좌석 좌석 확인 구현하기
+
+		ks = new UpdateSeatInfo();
+		ks.execute(model);
+
+		if(request.getParameter("title").equals("s")) {
+			//당일좌석 사용자 유무
+//			us.roomPState(model);
 		}
 
 		return "chooseSeatNum";
@@ -86,14 +108,14 @@ public class KioskController {
 		model.addAttribute("title", request.getParameter("title"));
 		return "reserveJSP/reserveChk";
 	}
-	
+
 	//예약 내역 DB연동 결과 리스트
 	@RequestMapping("reserveChkList")
 	public String reserveChkList(HttpServletRequest request, Model model) {
 		model.addAttribute("title", request.getParameter("title"));
 		return "reserveJSP/reserveChkList";
 	}
-	
+
 	//예약 내역 자세히
 	@RequestMapping("reserveChkResult")
 	public String reserveChkResult(HttpServletRequest request, Model model) {

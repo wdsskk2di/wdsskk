@@ -25,5 +25,5 @@ public class UserSeatSelectService{
 	public void roomPState(Model model){
 		ShowSeatTableDAO dao = new ShowSeatTableDAO();
 		model.addAttribute("seatState", dao.roomPState());
-	}
+	} 
 }

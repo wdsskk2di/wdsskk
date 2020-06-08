@@ -23,7 +23,7 @@ public class SeatEmptyCheck implements KioskService{
 			model.addAttribute("result", 0);
 		}else {
 			model.addAttribute("result", 1);
-		}
+		} 
 		
 	}
 
