@@ -16,6 +16,21 @@ public class ReserveDAO {
 	private JdbcTemplate template;
 	public ReserveDAO() {this.template = Constant.template;}
 	
+	//test_reserve에 내일날짜 DB없을 시 insert하는 sql문
+	public void timeTable_Date_Chk() {
+		String sql = "select COUNT(*) from test_reserve where redate=(to_char(sysdate+1, 'yyyy/MM/dd'))";
+		int result = template.queryForObject(sql, Integer.class);
+
+		if(result == 0) {
+			sql = "BEGIN\n" + 
+					"  FOR i IN 21..43 LOOP\n" + 
+					"       insert into TEST_RESERVE VALUES(i, to_char(sysdate+1, 'yyyy/MM/dd'), null, null, null, null, null, null, null);\n" + 
+					"      END LOOP;\n" + 
+					"END;";
+			template.update(sql);
+		}
+	}
+	
 	//사용자가 선택한 자리 오늘 예약 정보 확인
 	public ShowReserveDTO checkReserveInfo(String seatNum) {
 		Date date = new Date();

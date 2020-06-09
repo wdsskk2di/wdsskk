@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.ui.Model;
 
+import kiosk.study.dao.ReserveDAO;
 import kiosk.study.dao.ShowSeatTableDAO;
 import kiosk.study.dto.ShowSeatTableDTO;
 
@@ -16,14 +17,24 @@ public class UserSeatSelectService{
 		model.addAttribute("seatState", listResult);
 		
 	}
+	
+	//예약, 스터디룸 내일 날짜 없을 시 insert
+	public void timeTable_Chk() {
+		ReserveDAO dao = new ReserveDAO();
+		dao.timeTable_Date_Chk();
+	}
+	
 	// 예약제 좌석 사용 확인
 	public void seatRState(Model model){
 		ShowSeatTableDAO dao = new ShowSeatTableDAO();
+		dao.reserve_seatTable_Update();
 		model.addAttribute("seatState", dao.seatRState());
 	}
+	
 	// 스터디 룸 좌석 사용 확인
 	public void roomPState(Model model){
 		ShowSeatTableDAO dao = new ShowSeatTableDAO();
+		dao.reserve_seatTable_Update();
 		model.addAttribute("seatState", dao.roomPState());
 	} 
 }

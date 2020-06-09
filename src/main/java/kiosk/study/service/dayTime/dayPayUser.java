@@ -42,8 +42,9 @@ public class dayPayUser implements KioskService{
 		// dto에 TimeSet 테이블 값들 집어넣어줌
 		dao.daySelectUser(getUniqueUser);
 		model.addAttribute("dto",dao.daySelectUser(getUniqueUser));
-
-
+		
+//위치 몰라서 테스트 위해 개인 추가 . KioskController -> dayPayUser -> studyDAO
+		dao.todaytotalSeat_Insert();
 	}
 
 

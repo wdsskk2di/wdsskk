@@ -138,32 +138,29 @@ public class studyDAO {
 		}
 	}
 
-
+	//위치 몰라서 테스트 위해 개인 추가 . KioskController -> dayPayUser -> studyDAO
+	public void todaytotalSeat_Insert() {
+		String sql ="insert into todaytotalSeat(toDate, startTime, endTime, seatNum) " + 
+				"select toDate, startTime, endTime, seatNum " + 
+				"from study_timeSet " + 
+				"where study_timeset.todate=(to_char(sysdate,'yyyy/mm/dd'))";
+				
+		template.update(sql);
+	}
 
 	// 당일 좌석 카테고리 선택 시(배치도 보여줄때마다 작동)
 	public void updateSeatInfo() {
-		// 현재시간 > endtime 인 경우(좌석 사용시간이 만료된 경우) #1
-//		String resetSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
-//				+ "( select todaytotalSeat.endtime " + "  from todaytotalSeat"
-//				+ "  where todaytotalSeat.endtime < to_char(sysdate,'hh24:mi:ss')"
-//				+ "  and todaytotalSeat.seatNum = showtodaystudyseat.seatnum)";
-		// 현재시간 < endtime 인 경우(아직 좌석 사용 시간이 남은 경우) #2
-//		String updateSeatInfo = "update showtodaystudyseat set showtodaystudyseat.endtime = "
-//				+ "( select todaytotalSeat.endtime " + "  from todaytotalSeat"
-//				+ "  where todaytotalSeat.endtime < to_char(sysdate,'hh24:mi:ss')"
-//				+ "  and todaytotalSeat.seatNum = showtodaystudyseat.seatnum)";
-		
+		//todaytotalSeat에 기록된 목록에서 오늘 날짜로 좌석의 가장 최근 시간값을 가져와서 showtodaystudyseat에 update.
 		String updateSeatInfo = "update SHOWTODAYSTUDYSEAT set showtodaystudyseat.endtime = "
 				+ "(select endtime from(select ROW_NUMBER() OVER (PARTITION BY seatnum ORDER BY endtime desc) "
-				+ "as seatState, todaytotalSeat.* from todaytotalSeat) where seatState=1 and seatNum = showtodaystudyseat.seatnum)";
+				+ "as seatState, todaytotalSeat.* from todaytotalSeat) "
+				+ "where seatState=1 and todate=(to_char(sysdate,'yyyy/mm/dd')) and seatNum = showtodaystudyseat.seatnum)";
+		
+		//만일 showtodaystudyseat의 endtime이 사용자가 페이지에 접속한 시간보다 전이라면 사용이 끝난 것이므로 null로 바꿔준다
 		String resetSeatInfo = "update SHOWTODAYSTUDYSEAT set endtime = null where endtime<to_char(sysdate,'hh24:mi:ss')";
 
-		// 원래 코드
-//		String sql ="update kiosk set timeNum = null, peopleNum = null, totalMoney = null, phoneNum = null, STARTTIME = null, EndTime = null "
-//				+ "where EndTIME < to_char(sysdate, 'yy/MM/dd hh:mi')";
-	
 		template.update(updateSeatInfo);
-		template.update(resetSeatInfo);
+		template.update(resetSeatInfo);	
 	}
 
 	//관리자 결제확인 내역 저장(오류)

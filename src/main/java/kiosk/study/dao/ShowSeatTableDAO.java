@@ -1,12 +1,15 @@
 package kiosk.study.dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.care.template.Constant;
 
+import kiosk.study.dto.ShowReserveDTO;
 import kiosk.study.dto.ShowSeatTableDTO;
 
 public class ShowSeatTableDAO {
@@ -24,23 +27,41 @@ public class ShowSeatTableDAO {
 		return list;
 	}
 
+	//예약, 스터디룸 사용자에게 현재 좌석 사용 상태 보여주기 위한 update
+	public void reserve_seatTable_Update() {
+		Date date = new Date();
+		SimpleDateFormat sdfTime = new SimpleDateFormat("HH");	
+		String conTime = sdfTime.format(date);
+		
+		String sql_notNull = "update TEST_RESERVE set NULLCHK=p"+conTime+" where p"+conTime+" is not null";
+		String sql_Null = "update TEST_RESERVE set NULLCHK=p"+conTime+" where p"+conTime+" is null";
+		template.update(sql_notNull);
+		template.update(sql_Null);
+	}
+	
 	//스터디룸 현재 배치도 확인
-	public ArrayList<ShowSeatTableDTO> roomPState() {
-		ArrayList<ShowSeatTableDTO> list = null;
+	public ArrayList<ShowReserveDTO> roomPState() {
+		ArrayList<ShowReserveDTO> list = null;
 		try {
-			String sql = "select seatNum, phoneNum, endTime from kiosk where seatNum>40 order by seatNum asc";
-			list = (ArrayList<ShowSeatTableDTO>)template.query(sql, new BeanPropertyRowMapper<ShowSeatTableDTO>(ShowSeatTableDTO.class));
+			Date date = new Date();
+			SimpleDateFormat sdfTime = new SimpleDateFormat("HH");			
+
+			String sql = "select seatNum, nullChk, p"+sdfTime.format(date)+" from test_reserve where seatNum>40 and redate=(to_char(sysdate, 'yyyy/mm/dd')) order by seatNum asc";
+			list = (ArrayList<ShowReserveDTO>)template.query(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
 		} catch (Exception e) {}
 
 		return list;
 	}
 
 	//예약좌석 현재 배치도 확인
-	public ArrayList<ShowSeatTableDTO> seatRState() {
-		ArrayList<ShowSeatTableDTO> list = null;
+	public ArrayList<ShowReserveDTO> seatRState() {
+		ArrayList<ShowReserveDTO> list = null;
 		try {
-			String sql = "select seatNum, phoneNum, endTime from kiosk where seatNum>20 and seatNum<41 order by seatNum asc";
-			list = (ArrayList<ShowSeatTableDTO>)template.query(sql, new BeanPropertyRowMapper<ShowSeatTableDTO>(ShowSeatTableDTO.class));
+			Date date = new Date();
+			SimpleDateFormat sdfTime = new SimpleDateFormat("HH");
+			
+			String sql = "select seatNum, nullChk, p"+sdfTime.format(date)+" from reserve where where seatNum<41 and redate=(to_char(sysdate, 'yyyy/mm/dd')) order by seatNum asc";
+			list = (ArrayList<ShowReserveDTO>)template.query(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
 		} catch (Exception e) {}
 
 		return list;

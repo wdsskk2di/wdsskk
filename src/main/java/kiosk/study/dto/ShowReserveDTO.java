@@ -1,16 +1,20 @@
 package kiosk.study.dto;
 
 public class ShowReserveDTO {
-	//예약 상탱
+	//예약 상태
 	private int seatNum;
 	private String reDate;//예약일(yyyy/MM/dd로)
+	private String nullChk;
+	
 	private String p17;	private String p18;	private String p19;
 	private String p20;	private String p21;	private String p22;
-
 
 	public int getSeatNum() {return seatNum;}
 	public void setSeatNum(int seatNum) {this.seatNum = seatNum;}
 
+	public String getNullChk() {return nullChk;}
+	public void setNullChk(String nullChk) {this.nullChk = nullChk;}
+	
 	public String getReDate() {return reDate;}
 	public void setReDate(String reDate) {this.reDate = reDate;}
 

@@ -1,5 +1,8 @@
 package kiosk.study.home;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -72,7 +75,6 @@ public class KioskController {
 		model.addAttribute("title", request.getParameter("title"));
 
 		// 당일 좌석 좌석 확인 구현하기
-
 		ks = new UpdateSeatInfo();
 		ks.execute(model);
 
@@ -88,13 +90,17 @@ public class KioskController {
 	@RequestMapping("reserve")
 	public String reserve(HttpServletRequest request, Model model) {
 		model.addAttribute("title", request.getParameter("title"));
+		//test_reserve 테이블에 DB에 내일 날짜 없으면 insert
+		us.timeTable_Chk();
+		
+		//좌석 정보
 		ks = new UpdateSeatInfo();
 		ks.execute(model);
 
 		if(request.getParameter("title").equals("r")) {
 			//예약좌석 사용자 유무
 			us.seatRState(model);
-		}else {
+		}else {		
 			//스터디룸 사용자 유무
 			us.roomPState(model);
 		}
