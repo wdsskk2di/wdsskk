@@ -103,7 +103,7 @@ function formCheck() {
 <div class="default">
 <h3 id="studyRoomTitle">스터디룸 예약</h3>
 
-<form action="paymentCheck" method="post" onsubmit="return formCheck()">
+<form action="reservePaymentChk" method="post" onsubmit="return formCheck()">
 	<h3>${seatNum }번 타임 테이블</h3>
 	<c:import url="/WEB-INF/views/showTimeTable.jsp"/>
 	
@@ -138,6 +138,7 @@ function formCheck() {
 	</td>
 	</tr>
 	
+	<tr><td><input type="hidden" name="roomReserveDate" value="${reState.reDate }"></td></tr>
 	<tr><td>
 	결제 금액: <input type="text" id="TotalMoney" name="totalMoney" readonly="readonly"  class="inputBorder">
 	<td rowspan="2"><c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/></td>

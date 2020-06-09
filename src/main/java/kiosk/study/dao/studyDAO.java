@@ -193,7 +193,7 @@ public class studyDAO {
 	//(당일) 좌석에서 만일 사람이 있는 좌석을 선택했다면 결제창으로 넘어가지 못하게 하기 위한 sql문... -> 스터디룸과 예약좌석은 DB를 따로 둘거면 다른 메소드 생성 필요
 	public int seatEmptyCheck(String seatNum) {
 		try {
-			String sql = "select EndTIME from todaytotalSeat where seatNum='"+seatNum+"'";
+			String sql = "select EndTIME from SHOWTODAYSTUDYSEAT where seatNum='"+seatNum+"'";
 			String result = template.queryForObject(sql, String.class);		//null이면 비어있는 자리. 값이 있으면 사용자가 있는 자리
 
 			if(result.equals("null")) {

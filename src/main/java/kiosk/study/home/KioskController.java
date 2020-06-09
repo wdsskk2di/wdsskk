@@ -90,6 +90,7 @@ public class KioskController {
 	@RequestMapping("reserve")
 	public String reserve(HttpServletRequest request, Model model) {
 		model.addAttribute("title", request.getParameter("title"));
+		
 		//test_reserve 테이블에 DB에 내일 날짜 없으면 insert
 		us.timeTable_Chk();
 		

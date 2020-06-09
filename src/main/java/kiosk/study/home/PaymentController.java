@@ -15,6 +15,7 @@ import kiosk.study.dto.studyDTO;
 import kiosk.study.service.dayTime.StudyStateService;
 import kiosk.study.service.dayTime.dayPayUser;
 import kiost.study.service.KioskService;
+import kiost.study.service.ReserveInfoUpdate;
 import kiost.study.service.ReserveStateService;
 import kiost.study.service.SeatEmptyCheck;
 
@@ -148,4 +149,13 @@ public class PaymentController {
 		}
 	}
 
+	//예약, 스터디룸 사용자가 결정한 값을 test_reserve DB 연결해서 사용 시간값 update
+	@PostMapping("reservePaymentChk")
+	public String reservePaymentChk(studyDTO dto, Model model) {
+		model.addAttribute("dto", dto);
+		ks = new ReserveInfoUpdate();
+		ks.execute(model);
+		
+		return "default/paymentSuccess";
+	}
 }
