@@ -146,7 +146,7 @@ function formCheck() {
 </c:when>
 
 <c:otherwise>
-<script type="text/javascript">location.href="chooseSeatNum?title=${title}"</script>
+<script type="text/javascript">location.href="toDaySeat?title=${title}"</script>
 </c:otherwise>
 
 </c:choose>
