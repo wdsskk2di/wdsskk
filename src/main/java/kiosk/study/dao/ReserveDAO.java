@@ -35,7 +35,7 @@ public class ReserveDAO {
 			e.printStackTrace();
 		}
 		
-}
+	}
 	
 	//사용자가 선택한 자리 오늘 예약 정보 확인
 	public ShowReserveDTO checkReserveInfo(String seatNum) {
@@ -63,23 +63,46 @@ public class ReserveDAO {
 		int startTime = Integer.parseInt(dto.getStartTime());	//시작 시간
 		int endTime = Integer.parseInt(dto.getEndTime());	//종료 시간
 		String sql = null;
+		
 		try {
 			if(timeNum==1) {
-				sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+endTime+"="+endTime+
-						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				if(endTime==23) {
+					sql ="update test_Reserve set p"+startTime+"="+startTime+
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}else{
+					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+endTime+"="+endTime+
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}
 			}else if(timeNum==2) {
-				sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
+				if(endTime==23) {
+					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}else{
+					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
 						", p"+endTime+"="+endTime+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}
 			}else if(timeNum==3) {
-				sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
+				if(endTime==23) {
+					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}else{
+					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
 						", p"+endTime+"="+endTime+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}
 			}else if(timeNum==4) {
-				sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
+				if(endTime==23) {
+					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
+							", p"+(startTime+3)+"="+(startTime+3)+
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}else{
+					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
 						", p"+(startTime+3)+"="+(startTime+3)+", p"+endTime+"="+endTime+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}
 			}
+			
 			template.update(sql);
 		} catch (Exception e) {
 			e.printStackTrace();

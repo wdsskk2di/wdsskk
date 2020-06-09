@@ -46,7 +46,7 @@ public class ShowSeatTableDAO {
 			Date date = new Date();
 			SimpleDateFormat sdfTime = new SimpleDateFormat("HH");			
 
-			String sql = "select seatNum, nullChk, p"+sdfTime.format(date)+" from test_reserve where seatNum>40 and redate=(to_char(sysdate, 'yyyy/mm/dd')) order by seatNum asc";
+			String sql = "select seatNum, nullChk, p"+sdfTime.format(date)+" from test_reserve where redate=(to_char(sysdate, 'yyyy/mm/dd')) and seatNum>40 order by seatNum asc";
 			list = (ArrayList<ShowReserveDTO>)template.query(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
 		} catch (Exception e) {}
 
@@ -59,8 +59,8 @@ public class ShowSeatTableDAO {
 		try {
 			Date date = new Date();
 			SimpleDateFormat sdfTime = new SimpleDateFormat("HH");
-			
-			String sql = "select seatNum, nullChk, p"+sdfTime.format(date)+" from reserve where where seatNum<41 and redate=(to_char(sysdate, 'yyyy/mm/dd')) order by seatNum asc";
+			System.out.println(sdfTime.format(date));
+			String sql = "select seatNum, nullChk, p"+sdfTime.format(date)+" from test_reserve where where redate=(to_char(sysdate, 'yyyy/mm/dd')) and seatNum<41 order by seatNum asc";
 			list = (ArrayList<ShowReserveDTO>)template.query(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
 		} catch (Exception e) {}
 
