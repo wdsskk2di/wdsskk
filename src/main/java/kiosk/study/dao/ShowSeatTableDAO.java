@@ -59,8 +59,8 @@ public class ShowSeatTableDAO {
 		try {
 			Date date = new Date();
 			SimpleDateFormat sdfTime = new SimpleDateFormat("HH");
-			System.out.println(sdfTime.format(date));
-			String sql = "select seatNum, nullChk, p"+sdfTime.format(date)+" from test_reserve where where redate=(to_char(sysdate, 'yyyy/mm/dd')) and seatNum<41 order by seatNum asc";
+
+			String sql = "select seatNum, nullChk, p"+sdfTime.format(date)+" from test_reserve where redate=(to_char(sysdate, 'yyyy/mm/dd')) and seatNum<41 order by seatNum asc";
 			list = (ArrayList<ShowReserveDTO>)template.query(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
 		} catch (Exception e) {}
 
