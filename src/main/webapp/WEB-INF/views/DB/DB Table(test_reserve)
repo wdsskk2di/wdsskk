@@ -66,6 +66,13 @@ ShowSeatTableDAO()의  reserveTable_Update()를 통해 TEST_RESERVE의 nullChk �
 		========roomPState() 변경. (연결되는 테이블이 test_reserve -> test_studyroom으로 변경)===============
 		String sql = "select seatNum, nullChk, p"+sdfTime.format(date)+" from test_studyRoom where redate=(to_char(sysdate, 'yyyy/mm/dd')) order by seatNum asc";
 		
+		
+---------------------Ajax에 연결된 메소드 수정---------------------------------------
+	DB가 예약, 스터디룸으로 나뉨에 따라 ajax로 보내는 값에 title을 추가. 
+	TimeTableController -> ReserveStateService -> reserveToday메소드와  reserveNextday 메소드에서 title값에 따라
+	ReserveDAO에서 실행하는 메소드가 달라진다.		
+		
+
 ---------------reserve_Payment의 form값을 DB로 연결---------------------------------
 studyDTO를 이용해 form값들을 들고와서 
 PaymentController의 reservePaymentChk 로 매핑.
@@ -75,6 +82,28 @@ PaymentController의 reservePaymentChk 로 매핑.
   *위의 두 메소드 안에서 dto로 받아온 endTime이 23 일 경우 DB에는 p23이라는 속서이 없어 오류가 난다.
  	조건문으로 endTime이 23일 경우 sql문이 다르게 들어가도록 조치함.
 
----------------결제 목록에 예약과 스터디룸이 insert되게 추가하기
 
----------------사용자 결제 정보를 관리자가 볼 수 있게 study_timeSet 과 연결하기
+---------------결제 목록에 예약과 스터디룸이 insert되게 추가하기------------------------------
+
+	사용자 결제 정보를 관리자가 볼 수 있게 study_timeSet 과 연결하기. reservePayUser 폴더에 reservePayUser.class 추가.
+	안의 메소드는 당일 결제에서 따온 메소드 5개와 새로만든 테이블(reserveTotalSeat)과 연결하는 메소드 1개로 구성.
+		기존 활용: dayPayUser / manageCopy / getUniqueUser / deleteBeforeInfo2 / daySelectUser
+		추가: reserveTotalSeat_Insert => todaytotalSeat_Info를 활용한 것
+	당일 결제에서 따온 메소드는 ReserveDAO 하단에 넣어둠.
+
+
+	----------예약자들용 reserveTotalSeat 테이블. 당일 좌석의 todaytotalSeat 테이블 역할.
+	create table reserveTotalSeat(
+	toDate varchar2(14), startTime varchar2(8),
+	endTime varchar2(8), seatNum number(2));
+	
+		----순서----
+		STUDY_RESULTSET 테이블에 seatNum, timeNum, totalMoney, peopleNum, phoneNum, uniqueUser 를 삽입
+		-> study_timeSet 테이블에 STUDY_RESULTSET 테이블 값과 + 당일 날짜 +시작시간 +종료 시간을 삽입 --> 당일 좌석과 다르게 시간:00:00 단위로 기록되게끔 sql문을 수정함
+		-> STUDY_RESULTSET 테이블에서 uniqueUser 값 가져옴
+		-> STUDY_RESULTSET 테이블에 들어가 있는 값 삭제
+		-> study_timeSet 테이블에 들어온, 결제한 사용자의 정보 화면에 출력
+		-> reserveTotalSeat 테이블에 (toDate, startTime, endTime, seatNum) 저장
+	
+
+	

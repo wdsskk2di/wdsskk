@@ -18,6 +18,7 @@ import kiost.study.service.KioskService;
 import kiost.study.service.ReserveInfoUpdate;
 import kiost.study.service.ReserveStateService;
 import kiost.study.service.SeatEmptyCheck;
+import kiost.study.service.reservePayUser.ReservePayUser;
 
 @Controller
 public class PaymentController {
@@ -153,9 +154,15 @@ public class PaymentController {
 	@PostMapping("reservePaymentChk")
 	public String reservePaymentChk(studyDTO dto, Model model) {
 		model.addAttribute("dto", dto);
+		
+		//타임 테이블 저장
 		ks = new ReserveInfoUpdate();
 		ks.execute(model);
 		
+		////ReservePayUser: 예약 사용자 결제 값 저장
+		ks = new ReservePayUser();
+		ks.execute(model);
+				
 		return "default/paymentSuccess";
 	}
 }

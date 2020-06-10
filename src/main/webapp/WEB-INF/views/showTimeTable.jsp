@@ -56,7 +56,10 @@ function get_tomoDate() {
 			$.ajax({
 				url:"reserveTomorrow",
 				type: "GET",	//방식
-				data: {seatNum: '${seatNum }'}				
+				data: {
+					seatNum: '${seatNum }',
+					title: '${title}'
+				}				
 			})
 			.done(function(data){	//성공시				
 				$("#timeTable1").html(data);
@@ -78,7 +81,10 @@ function get_toDate() {
 			$.ajax({
 				url:"reserveToday",
 				type: "GET",	//방식
-				data: {seatNum: '${seatNum }'}
+				data: {
+					seatNum: '${seatNum }',
+					title: '${title}'
+				}
 			})
 			.done(function(data){	//성공시
 				$("#timeTable1").html(data);
