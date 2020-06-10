@@ -211,9 +211,10 @@ public class ReserveDAO {
 	//사용자 입력값 + 고유코드값 추가
 	public void reservePayUser(final studyDTO dto) {
 		try {
+
 			String sql = "insert into STUDY_RESULTSET(seatNum, timeNum, totalMoney, peopleNum, phoneNum, uniqueUser)" +
 					"values ("+dto.getSeatNum()+", "+dto.getTimeNum()+", "+dto.getTotalMoney()+", "+dto.getPeopleNum()+
-					", "+dto.getPeopleNum()+", (to_char(sysdate,'yymmddhh24miss')))";
+					", "+dto.getPhoneNum()+", (to_char(sysdate,'yymmddhh24miss')))";
 			
 			template.update(sql);
 			System.out.println("reservePayUser(): 사용자 결제 내역 저장 성공");
