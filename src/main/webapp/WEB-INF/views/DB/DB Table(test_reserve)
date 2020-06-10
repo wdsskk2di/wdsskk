@@ -111,7 +111,7 @@ PaymentController의 reservePaymentChk 로 매핑.
 ShowSeatTableDTO에 startTime과 timeNum 변수를 추가.
 ReserveChkController를 새로 만들어 예약 확인 매핑은 모두 여기를 통한다.
 	reserveChk -> 예약 확인 페이지를 보여주는 용
-	reserveChkList -> 사용자가 입력한 번호로 study_timeset 테이블에 값이 있는지 검색해서 reserveChkList 페이지로 넘어가는 용.
+	reserveChkList -> 사용자가 입력한 번호로 study_timeset 테이블에 값이 있는지 검색해서 reserveChkList 페이지로 넘어가는 용.	<== 현재 여기까지 구현 ==
 	reserveChkResult-> 사용자가 예약 목록을 자세히 보고 싶어 좌석 번호 클릭시 해당 좌석 번호로  study_timeset 테이블에서 자세한 값을 가져와서 reserveChkResult 페이지로 넘어가는 용.
 
 	reserveChkResult를 할때 조건을 많이 달아서 서 다시 검색? -> 이건 움직이는 조건이 많아지며
