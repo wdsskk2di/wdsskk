@@ -84,7 +84,7 @@ $(document).ready( function() {
 });
 
 //form submit시 미입력값 있으면 전송 막기
-function formCheck() {
+function formCheck() {	
 	if($("#TotalMoney").val().length < 4){
 		alert("사용 시간 미선택");
 		return false;
@@ -128,10 +128,10 @@ function formCheck() {
 	<c:if test="${title == 's' }">
 		<c:choose>
 		<c:when test="${seatNum == 43 }">
-		사용 인원: <select> <c:forEach var="people" items="${Plist43 }"> <option id="selectPeople">${people }</option> </c:forEach> </select>
+		사용 인원: <select name="peopleNum"> <c:forEach var="people" items="${Plist43 }"> <option id="selectPeople">${people }</option> </c:forEach> </select>
 		</c:when>
 		<c:otherwise>
-		사용 인원: <select> <c:forEach var="people" items="${Plist }"> <option id="selectPeople">${people }</option> </c:forEach> </select>
+		사용 인원: <select name="peopleNum"> <c:forEach var="people" items="${Plist }"> <option id="selectPeople">${people }</option> </c:forEach> </select>
 		</c:otherwise>
 		</c:choose>
 	</c:if>

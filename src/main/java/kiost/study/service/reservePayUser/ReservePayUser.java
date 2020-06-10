@@ -23,21 +23,21 @@ public class ReservePayUser implements KioskService{
 		dao.reservePayUser(dto);
 
 //		System.out.println("시간설정값 추가 및 관리용으로 값을 넘겨줌");	 study_timeset
-		//dao.manageCopy(dto);
+		dao.manageCopy(dto);
 
 
-		//final String getUniqueUser = dao.getUniqueUser();
-		//System.out.println("#결제된 코드 값 : "+getUniqueUser);
+		final String getUniqueUser = dao.getUniqueUser();
+		System.out.println("#결제된 코드 값 : "+getUniqueUser);
 
 //		System.out.println("결제 내역에 대한 모든 입력값들 삭제 완료");  study_resultset 테이블 내역 삭제
-		//dao.deleteBeforeInfo2();
+		dao.deleteBeforeInfo2();
 
 
 //		dto에 study_timeSet 테이블 중 해당 코드값에 해당하는 릴레이션 값을 집어넣어줌 -> 화면 출력
-		//model.addAttribute("dto",dao.daySelectUser(getUniqueUser));
+		model.addAttribute("dto",dao.daySelectUser(getUniqueUser));
 		
 //		KioskController -> dayPayUser -> studyDAO
-		//dao.reserveTotalSeat_Insert();
+		dao.reserveTotalSeat_Insert();
 	}
 
 
