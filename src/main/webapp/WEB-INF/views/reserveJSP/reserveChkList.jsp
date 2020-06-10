@@ -14,7 +14,7 @@
  
  .trList:nth-child(2n+1) {background-color: #EAEAEA;}
  .reserve_List table td{margin: 0 auto; padding: 5px;}
- .reserve_List table td a{text-decoration: none; font-weight: bold; }
+ .reserve_List table td a{text-decoration: none; font-weight: bold; color: black;}
 
  .checkBtn{color:white; border:1 solid #005766; outline:1; border-radius: 5px; background-color: #005766;
 		 padding: 3px 5px; font-size: 15px; font-weight: bold; margin-top: 20px;}
