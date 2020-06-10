@@ -17,15 +17,35 @@ public class ReserveDAO {
 	private JdbcTemplate template;
 	public ReserveDAO() {this.template = Constant.template;}
 	
-	//test_reserve에 내일날짜 DB없을 시 insert하는 sql문
-	public void timeTable_Date_Chk() {
+	//test_reserve에 내일날짜 없을 시 insert하는 sql문
+	public void reserveTable_Date_Chk() {
 		try {
 			String sql = "select COUNT(*) from test_reserve where redate=(to_char(sysdate+1, 'yyyy/MM/dd'))";
 			int result = template.queryForObject(sql, Integer.class);
 
 			if(result == 0) {
 				sql = "BEGIN\n" + 
-						"  FOR i IN 21..43 LOOP\n" + 
+						"  FOR i IN 21..40 LOOP\n" + 
+						"       insert into TEST_RESERVE VALUES(i, to_char(sysdate+1, 'yyyy/MM/dd'), null, null, null, null, null, null, null);\n" + 
+						"      END LOOP;\n" + 
+						"END;";
+				template.update(sql);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	////test_studyroom에 내일날짜 없을 시 insert하는 sql문
+	public void studyRoomTable_Date_Chk() {
+		try {
+			String sql = "select COUNT(*) from test_studyroom where redate=(to_char(sysdate+1, 'yyyy/MM/dd'))";
+			int result = template.queryForObject(sql, Integer.class);
+
+			if(result == 0) {
+				sql = "BEGIN\n" + 
+						"  FOR i IN 41..43 LOOP\n" + 
 						"       insert into TEST_RESERVE VALUES(i, to_char(sysdate+1, 'yyyy/MM/dd'), null, null, null, null, null, null, null);\n" + 
 						"      END LOOP;\n" + 
 						"END;";
@@ -58,7 +78,8 @@ public class ReserveDAO {
 		return template.queryForObject(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
 	}
 	
-	public void ReserveInfoUpdate(studyDTO dto) {
+	//예약 타임 테이블에 update 
+	public void reserveInfoUpdate(studyDTO dto) {
 		int timeNum = dto.getTimeNum();	//사용시간
 		int startTime = Integer.parseInt(dto.getStartTime());	//시작 시간
 		int endTime = Integer.parseInt(dto.getEndTime());	//종료 시간
@@ -107,8 +128,58 @@ public class ReserveDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	////스터디룸 타임 테이블에 update 
+	public void studyInfoUpdate(studyDTO dto) {
+		int timeNum = dto.getTimeNum();	//사용시간
+		int startTime = Integer.parseInt(dto.getStartTime());	//시작 시간
+		int endTime = Integer.parseInt(dto.getEndTime());	//종료 시간
+		String sql = null;
 		
-		
+		try {
+			if(timeNum==1) {
+				if(endTime==23) {
+					sql ="update test_studyRoom set p"+startTime+"="+startTime+
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}else{
+					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+endTime+"="+endTime+
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}
+			}else if(timeNum==2) {
+				if(endTime==23) {
+					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}else{
+					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
+						", p"+endTime+"="+endTime+
+						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}
+			}else if(timeNum==3) {
+				if(endTime==23) {
+					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}else{
+					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
+						", p"+endTime+"="+endTime+
+						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}
+			}else if(timeNum==4) {
+				if(endTime==23) {
+					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
+							", p"+(startTime+3)+"="+(startTime+3)+
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}else{
+					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
+						", p"+(startTime+3)+"="+(startTime+3)+", p"+endTime+"="+endTime+
+						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+				}
+			}
+			
+			template.update(sql);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

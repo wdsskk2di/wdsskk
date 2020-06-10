@@ -16,7 +16,16 @@ public class ReserveInfoUpdate implements KioskService {
 		
 		//reserve_Payment 정보 기준 타임 테이블 업데이트
 		ReserveDAO dao = new ReserveDAO();
-		dao.ReserveInfoUpdate(dto);
+		
+		//사용자의 좌석 번호에 따라
+		if(dto.getSeatNum()>40) {
+			//예약 결제일 시
+			dao.reserveInfoUpdate(dto);
+		}else {
+			//스터디룸 결제일 시
+			dao.studyInfoUpdate(dto);
+		}
+		
 	}
 
 }

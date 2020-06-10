@@ -91,12 +91,15 @@ public class KioskController {
 	public String reserve(HttpServletRequest request, Model model) {
 		model.addAttribute("title", request.getParameter("title"));
 		
-		//test_reserve 테이블에 DB에 내일 날짜 없으면 insert
-		us.timeTable_Chk();
+		//test_reserve 테이블에 DB에 내일 날짜 없으면 insert(21~40번 좌석)
+		us.reserveTable_Chk();
+		
+		////test_studyRoom 테이블에 내일 날짜 없으면 insert(41~43번 좌석)
+		us.studyRoomTable_Chk();
 		
 		//좌석 정보
-		ks = new UpdateSeatInfo();
-		ks.execute(model);
+//		ks = new UpdateSeatInfo();
+//		ks.execute(model);
 
 		if(request.getParameter("title").equals("r")) {
 			//예약좌석 사용자 유무
