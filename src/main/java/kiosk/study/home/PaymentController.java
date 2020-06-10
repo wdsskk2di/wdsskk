@@ -159,7 +159,7 @@ public class PaymentController {
 		ks = new ReserveInfoUpdate();
 		ks.execute(model);
 		
-		////ReservePayUser: 예약 사용자 결제 값 저장
+		////ReservePayUser: 예약 사용자 결제 값 저장 ->ajax 로 내일 날짜 결제할 시 오류 발생 / resultSet에서 결제고유키값 받아오기 실패 -> 여기서부터 쭉 오류
 		ks = new ReservePayUser();
 		ks.execute(model);
 				
