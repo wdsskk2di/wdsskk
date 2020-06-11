@@ -35,13 +35,13 @@ UserSeatSelectService.java의 timeTable_Chk()메소드
 	      END LOOP;
 	  END;	
 
----------------showSeatTable 연결---------------------------------
+---------------showSeatTable 연결---------------------------------==========sql문 수정. 조건에 당일 날짜 추가
 reserve.jsp에 import될 showSeatTable.jsp
 kioskController에서  UserSeatSelectService.java의  seatRState()와 roomPState()가 이 기능을 한다
 ShowSeatTableDAO()의  reserveTable_Update()를 통해 TEST_RESERVE의 nullChk 속성값을 update한다.
 
-	String sql_notNull = "update TEST_RESERVE set NULLCHK=p"+conTime+" where p"+conTime+" is not null";
-	String sql_Null = "update TEST_RESERVE set NULLCHK=p"+conTime+" where p"+conTime+" is null";
+	String sql_notNull = "update TEST_RESERVE set NULLCHK=p"+conTime+" where p"+conTime+" is not null and redate=(to_char(sysdate, 'yyyy/mm/dd'))";
+	String sql_Null = "update TEST_RESERVE set NULLCHK=p"+conTime+" where p"+conTime+" is null and redate=(to_char(sysdate, 'yyyy/mm/dd'))";
 
 	conTime은 사용자가 예약 페이지에 접속한 시간. ex)17시 접속 -> p17의 값에 따라 nullChk의 값이 update.
 	=> 만일 p17에 사용자가 있다면 그 값이 nullChk에 들어가고, 사용자가 없다면 null 이므로 nullChk도 null값을 가진다.
@@ -49,8 +49,8 @@ ShowSeatTableDAO()의  reserveTable_Update()를 통해 TEST_RESERVE의 nullChk �
 		==> nullChk가 null이면 사용자가 없는 것이므로 '사용 가능' / 값이 들어가 있다면 '사용중' 이라고 표시하게 작성
 	
 		========스터디룸 추가(studyRoomTable_Update 메소드)===============
-		String sql_notNull = "update test_studyRoom set NULLCHK=p"+conTime+" where p"+conTime+" is not null";
-		String sql_Null = "update test_studyRoom set NULLCHK=p"+conTime+" where p"+conTime+" is null";
+		String sql_notNull = "update test_studyRoom set NULLCHK=p"+conTime+" where p"+conTime+" is not null and redate=(to_char(sysdate, 'yyyy/mm/dd'))";
+		String sql_Null = "update test_studyRoom set NULLCHK=p"+conTime+" where p"+conTime+" is null and redate=(to_char(sysdate, 'yyyy/mm/dd'))";
 	
 	
 그 후 ShowSeatTableDAO()의 seatRState()와 roomPState()가 각각 실행.

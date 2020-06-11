@@ -20,7 +20,7 @@ public class ShowSeatTableDAO {
 	public ArrayList<ShowSeatTableDTO> seatPState() {	
 		ArrayList<ShowSeatTableDTO> list = null;
 		try {
-			String sql = "select seatNum, endTime from showtodaystudyseat where seatNum<21 order by seatNum asc";
+			String sql = "select seatNum, endTime from showtodaystudyseat order by seatNum asc";
 			//String sql = "select seatNum, phoneNum, endTime from kiosk where seatNum<21 order by seatNum asc";
 			list = (ArrayList<ShowSeatTableDTO>)template.query(sql, new BeanPropertyRowMapper<ShowSeatTableDTO>(ShowSeatTableDTO.class));
 		} catch (Exception e) {}
@@ -33,8 +33,8 @@ public class ShowSeatTableDAO {
 		SimpleDateFormat sdfTime = new SimpleDateFormat("HH");	
 		String conTime = sdfTime.format(date);
 		
-		String sql_notNull = "update TEST_RESERVE set NULLCHK=p"+conTime+" where p"+conTime+" is not null";
-		String sql_Null = "update TEST_RESERVE set NULLCHK=p"+conTime+" where p"+conTime+" is null";
+		String sql_notNull = "update TEST_RESERVE set NULLCHK=p"+conTime+" where p"+conTime+" is not null and redate=(to_char(sysdate, 'yyyy/mm/dd'))";
+		String sql_Null = "update TEST_RESERVE set NULLCHK=p"+conTime+" where p"+conTime+" is null and redate=(to_char(sysdate, 'yyyy/mm/dd'))";
 		template.update(sql_notNull);
 		template.update(sql_Null);
 	}
@@ -45,8 +45,8 @@ public class ShowSeatTableDAO {
 		SimpleDateFormat sdfTime = new SimpleDateFormat("HH");	
 		String conTime = sdfTime.format(date);
 		
-		String sql_notNull = "update test_studyRoom set NULLCHK=p"+conTime+" where p"+conTime+" is not null";
-		String sql_Null = "update test_studyRoom set NULLCHK=p"+conTime+" where p"+conTime+" is null";
+		String sql_notNull = "update test_studyRoom set NULLCHK=p"+conTime+" where p"+conTime+" is not null and redate=(to_char(sysdate, 'yyyy/mm/dd'))";
+		String sql_Null = "update test_studyRoom set NULLCHK=p"+conTime+" where p"+conTime+" is null and redate=(to_char(sysdate, 'yyyy/mm/dd'))";
 		template.update(sql_notNull);
 		template.update(sql_Null);
 	}

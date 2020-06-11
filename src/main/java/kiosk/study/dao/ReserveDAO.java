@@ -143,38 +143,38 @@ public class ReserveDAO {
 		try {
 			if(timeNum==1) {
 				if(endTime==23) {
-					sql ="update test_Reserve set p"+startTime+"="+startTime+
+					sql ="update test_Reserve set p"+startTime+"="+endTime+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+endTime+"="+endTime+
+					sql ="update test_Reserve set p"+startTime+"="+endTime+", p"+endTime+"="+endTime+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==2) {
 				if(endTime==23) {
-					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
+					sql ="update test_Reserve set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
+					sql ="update test_Reserve set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+
 						", p"+endTime+"="+endTime+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==3) {
 				if(endTime==23) {
-					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
+					sql ="update test_Reserve set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
+					sql ="update test_Reserve set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
 						", p"+endTime+"="+endTime+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==4) {
 				if(endTime==23) {
-					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
-							", p"+(startTime+3)+"="+(startTime+3)+
+					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
+							", p"+(startTime+3)+"="+endTime+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
-						", p"+(startTime+3)+"="+(startTime+3)+", p"+endTime+"="+endTime+
+					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
+						", p"+(startTime+3)+"="+endTime+", p"+endTime+"="+endTime+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}
@@ -195,38 +195,38 @@ public class ReserveDAO {
 		try {
 			if(timeNum==1) {
 				if(endTime==23) {
-					sql ="update test_studyRoom set p"+startTime+"="+startTime+
+					sql ="update test_studyRoom set p"+startTime+"="+endTime+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+endTime+"="+endTime+
+					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+endTime+"="+endTime+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==2) {
 				if(endTime==23) {
-					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
+					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
+					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+
 						", p"+endTime+"="+endTime+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==3) {
 				if(endTime==23) {
-					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
+					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
+					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
 						", p"+endTime+"="+endTime+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==4) {
 				if(endTime==23) {
-					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
-							", p"+(startTime+3)+"="+(startTime+3)+
+					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
+							", p"+(startTime+3)+"="+endTime+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
-						", p"+(startTime+3)+"="+(startTime+3)+", p"+endTime+"="+endTime+
+					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
+						", p"+(startTime+3)+"="+endTime+", p"+endTime+"="+endTime+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}
@@ -317,7 +317,7 @@ public class ReserveDAO {
 		String sql ="insert into reserveTotalSeat(toDate, startTime, endTime, seatNum) " + 
 				"select toDate, startTime, endTime, seatNum " + 
 				"from study_timeSet " + 
-				"where study_timeset.todate=(to_char(sysdate,'yyyy/mm/dd'))";
+				"where RESERVE_TIMESET.todate=(to_char(sysdate,'yyyy/mm/dd'))";
 				
 		template.update(sql);
 	}
