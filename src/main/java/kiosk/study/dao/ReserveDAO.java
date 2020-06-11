@@ -312,7 +312,7 @@ public class ReserveDAO {
 		}
 	}
 
-	//위치 몰라서 테스트 위해 개인 추가 . KioskController -> dayPayUser -> studyDAO
+	//위치 몰라서 테스트 위해 개인 추가 . KioskController -> dayPayUser -> studyDAO ////중복값이 생기는 문제?
 	public void reserveTotalSeat_Insert() {
 		String sql ="insert into reserveTotalSeat(toDate, startTime, endTime, seatNum) " + 
 				"select toDate, startTime, endTime, seatNum " + 
