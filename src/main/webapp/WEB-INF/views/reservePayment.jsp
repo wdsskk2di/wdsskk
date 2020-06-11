@@ -40,6 +40,7 @@ request.setAttribute("Plist",Plist);
 %>
 
 $(document).ready( function() {
+
 	//사용 시간 선택
 	$("#TimeNum").click(function(){		
 		
@@ -106,11 +107,11 @@ function formCheck() {
 <form action="reservePaymentChk" method="post" onsubmit="return formCheck()">
 	<h3>${seatNum }번 타임 테이블</h3>
 	<c:import url="/WEB-INF/views/showTimeTable.jsp"/>
-	
+
 	<table>
 	<tr>
 	<td><input type="hidden" name="title" value="${title }"></td>
-	<td><input type="hidden" name="startTime"> <input type="hidden" name="endTime">	<input type="hidden" name="reDate"></td>
+	<td><input type="hidden" name="startTime"> <input type="hidden" name="endTime"></td>
 	</tr>
 	
 	<tr>
@@ -137,8 +138,7 @@ function formCheck() {
 	</c:if>
 	</td>
 	</tr>
-	
-	<tr><td><input type="hidden" name="roomReserveDate" value="${reState.reDate }"></td></tr>
+
 	<tr><td>
 	결제 금액: <input type="text" id="TotalMoney" name="totalMoney" readonly="readonly"  class="inputBorder">
 	<td rowspan="2"><c:import url="/WEB-INF/views/keypad/phoneKeypad.jsp"/></td>

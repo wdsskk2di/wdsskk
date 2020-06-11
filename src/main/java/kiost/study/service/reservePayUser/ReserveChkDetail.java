@@ -7,16 +7,16 @@ import org.springframework.ui.Model;
 import kiosk.study.dao.ReserveChkDAO;
 import kiost.study.service.KioskService;
 
-public class ReserveChk implements KioskService {
+public class ReserveChkDetail implements KioskService {
 
 	@Override
 	public void execute(Model model) {
 		Map<String, Object> map = model.asMap();
-		String phoneNum = (String)map.get("phoneNum");
+		String uniqueUser = (String)map.get("uniqueUser");
 
 		ReserveChkDAO dao = new ReserveChkDAO();
 
-		model.addAttribute("result", dao.reserveChk_list(phoneNum));
+		model.addAttribute("result", dao.reserveChkDetail(uniqueUser));
 	}
 
 }

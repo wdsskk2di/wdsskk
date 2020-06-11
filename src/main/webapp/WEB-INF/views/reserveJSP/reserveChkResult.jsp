@@ -27,14 +27,16 @@
 	<h3>예약 확인창</h3>
 	
 	<table>
-	<tr><td>선택 번호: </td><td>${dto.getSeatNum() }</td></tr>
-	<tr><td>시작 시간: </td><td>${dto.getStartTime() }</td></tr>
-	<tr><td>종료 시간: </td><td>${dto.getEndTime() }</td></tr>
-	<tr><td colspan="2">(총 ${dto.getTimeNum() } 시간)</td></tr>
+	<tr><td>선택 번호: </td><td>${result.getSeatNum() }</td></tr>
+	<tr><td>예약 날짜: </td><td>${result.getReDate() }</td></tr>
+	<tr><td>결제 날짜: </td><td>${result.getToDate() }</td></tr>
+	<tr><td>시작 시간: </td><td>${result.getStartTime() }</td></tr>
+	<tr><td>종료 시간: </td><td>${result.getEndTime() }</td></tr>
+	<tr><td colspan="2">(총 ${result.getTimeNum() } 시간)</td></tr>
 	
 	<c:choose>		
-	<c:when test="${dto.getTitle() == 's' }">
-		<tr><td>사용 인원: </td><td>${dto.getPeopleNum() }명</td></tr>
+	<c:when test="${result.getSeatNum() > 40 }">
+		<tr><td>사용 인원: </td><td>${result.getPeopleNum() }명</td></tr>
 	</c:when>		
 	</c:choose>
 

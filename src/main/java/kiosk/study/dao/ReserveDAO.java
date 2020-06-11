@@ -28,13 +28,14 @@ public class ReserveDAO {
 			if(result == 0) {
 				sql = "BEGIN\n" + 
 						"  FOR i IN 21..40 LOOP\n" + 
-						"       insert into TEST_RESERVE VALUES(i, to_char(sysdate+1, 'yyyy/MM/dd'), null, null, null, null, null, null, null);\n" + 
+						"       insert into TEST_RESERVE VALUES(i, to_char(sysdate+1, 'yyyy/MM/dd'), null, null, null, null, null, null, null, null);\n" + 
 						"      END LOOP;\n" + 
 						"END;";
 				template.update(sql);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("ReserveDAO: 예약테이블 내일 날짜 생성 실패");
 		}
 		
 	}
@@ -48,13 +49,14 @@ public class ReserveDAO {
 			if(result == 0) {
 				sql = "BEGIN\n" + 
 						"  FOR i IN 41..43 LOOP\n" + 
-						"       insert into test_studyroom VALUES(i, to_char(sysdate+1, 'yyyy/MM/dd'), null, null, null, null, null, null, null);\n" + 
+						"       insert into test_studyroom VALUES(i, to_char(sysdate+1, 'yyyy/MM/dd'), null, null, null, null, null, null, null, null);\n" + 
 						"      END LOOP;\n" + 
 						"END;";
 				template.update(sql);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("ReserveDAO: 스터디룸 테이블 내일 날짜 생성 실패");
 		}
 		
 	}
@@ -62,44 +64,72 @@ public class ReserveDAO {
 /////////////////////////////////////////Ajax로 연결되는 메소드. 타임 테이블의 오늘 & 내일을 보여줌
 	//사용자가 선택한 자리 오늘 예약 정보 확인
 	public ShowReserveDTO checkReserveInfo(String seatNum) {
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		try {
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
-		String sql = "select * from test_reserve where seatNum='"+seatNum+"' and reDate='"+sdf.format(date)+"'";
-		return template.queryForObject(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
+			String sql = "select * from test_reserve where seatNum='"+seatNum+"' and reDate='"+sdf.format(date)+"'";
+			return template.queryForObject(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ReserveDAO: 오늘 날짜 타임 테이블 연결 실패");
+			return null;
+		}
+
 	}
 	 
 	//사용자가 선택한 자리 내일 예약 정보 확인
 	public ShowReserveDTO checkTmrReserveInfo(String seatNum) {
-		 DateFormat dtf = new SimpleDateFormat("yyyy/MM/dd");
-	     final Calendar cal = Calendar.getInstance();
-	     cal.add(Calendar.DATE, 1);
-	     String tDate = dtf.format(cal.getTime());	
+		try {
+			 DateFormat dtf = new SimpleDateFormat("yyyy/MM/dd");
+		     final Calendar cal = Calendar.getInstance();
+		     cal.add(Calendar.DATE, 1);
+		     String tDate = dtf.format(cal.getTime());	
 
-		String sql = "select * from test_reserve where seatNum='"+seatNum+"' and reDate='"+tDate+"'";
-		
-		return template.queryForObject(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
+			String sql = "select * from test_reserve where seatNum='"+seatNum+"' and reDate='"+tDate+"'";
+			
+			return template.queryForObject(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ReserveDAO: 내일 날짜 타임 테이블 연결 실패");
+			return null;
+		}
+
 	}
 	
 	//사용자가 선택한 자리 오늘 스터디룸 정보 확인
 	public ShowReserveDTO checkStudyRoomInfo(String seatNum) {
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		try {
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
-		String sql = "select * from test_studyroom where seatNum='"+seatNum+"' and reDate='"+sdf.format(date)+"'";
-		return template.queryForObject(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
+			String sql = "select * from test_studyroom where seatNum='"+seatNum+"' and reDate='"+sdf.format(date)+"'";
+			return template.queryForObject(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ReserveDAO: 오늘 날짜 타임 테이블 연결 실패");
+			return null;
+		}
+		
 	}
 	 
 	//사용자가 선택한 자리 내일 스터디룸 정보 확인
 	public ShowReserveDTO checkTmrStudyRoomInfo(String seatNum) {
-		 DateFormat dtf = new SimpleDateFormat("yyyy/MM/dd");
-	     final Calendar cal = Calendar.getInstance();
-	     cal.add(Calendar.DATE, 1);
-	     String tDate = dtf.format(cal.getTime());	
+		try {
+			 DateFormat dtf = new SimpleDateFormat("yyyy/MM/dd");
+		     final Calendar cal = Calendar.getInstance();
+		     cal.add(Calendar.DATE, 1);
+		     String tDate = dtf.format(cal.getTime());	
 
-		String sql = "select * from test_studyroom where seatNum='"+seatNum+"' and reDate='"+tDate+"'";
-		
-		return template.queryForObject(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
+			String sql = "select * from test_studyroom where seatNum='"+seatNum+"' and reDate='"+tDate+"'";
+			
+			return template.queryForObject(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("ReserveDAO: 내일 날짜 타임 테이블 연결 실패");
+			return null;
+		}
+
 	}
 
 /////////////////////////////////////사용자가 사용하려는 시간대를 타임테이블에 update
@@ -114,38 +144,38 @@ public class ReserveDAO {
 			if(timeNum==1) {
 				if(endTime==23) {
 					sql ="update test_Reserve set p"+startTime+"="+startTime+
-							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
 					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+endTime+"="+endTime+
-							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==2) {
 				if(endTime==23) {
 					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
-							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
 					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
 						", p"+endTime+"="+endTime+
-						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==3) {
 				if(endTime==23) {
 					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
-							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
 					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
 						", p"+endTime+"="+endTime+
-						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==4) {
 				if(endTime==23) {
 					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
 							", p"+(startTime+3)+"="+(startTime+3)+
-							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
 					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
 						", p"+(startTime+3)+"="+(startTime+3)+", p"+endTime+"="+endTime+
-						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}
 			
@@ -166,38 +196,38 @@ public class ReserveDAO {
 			if(timeNum==1) {
 				if(endTime==23) {
 					sql ="update test_studyRoom set p"+startTime+"="+startTime+
-							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
 					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+endTime+"="+endTime+
-							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==2) {
 				if(endTime==23) {
 					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
-							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
 					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+
 						", p"+endTime+"="+endTime+
-						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==3) {
 				if(endTime==23) {
 					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
-							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
 					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
 						", p"+endTime+"="+endTime+
-						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==4) {
 				if(endTime==23) {
 					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
 							", p"+(startTime+3)+"="+(startTime+3)+
-							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
 					sql ="update test_studyRoom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+(startTime+1)+", p"+(startTime+2)+"="+(startTime+2)+
 						", p"+(startTime+3)+"="+(startTime+3)+", p"+endTime+"="+endTime+
-						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getRoomReserveDate()+"'";
+						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}
 			
@@ -207,7 +237,7 @@ public class ReserveDAO {
 		}
 	}
 	
-//////////////////////////////////	사용자 결제 정보 저장 -> 화면 출력
+//////////////////////////////////	사용자 결제 정보 저장 -> 화면 출력	///////////////////////////////////////////
 	//사용자 입력값 + 고유코드값 추가
 	public void reservePayUser(final studyDTO dto) {
 		try {
@@ -224,12 +254,12 @@ public class ReserveDAO {
 		}
 	}
 	
-	// study_resultSet >> study_timeSet 으로 내용값 복사하고 시간 값 추가
+	// study_resultSet >> RESERVE_TIMESET 으로 내용값 복사하고 시간 값 추가
 	public void manageCopy(final studyDTO dto) {
 		try {
-			String sql = "insert into study_timeSet(seatNum, timeNum, TotalMoney, phoneNum, uniqueUser, toDate, startTime, endTime, PeopleNum) " + 
+			String sql = "insert into RESERVE_TIMESET(seatNum, timeNum, TotalMoney, phoneNum, uniqueUser, toDate, reDate, startTime, endTime, PeopleNum) " + 
 					"select seatNum, timeNum, TotalMoney, phoneNum, uniqueUser, to_char(sysdate,'yyyy/mm/dd'), '"+
-					dto.getStartTime()+":00:00', '"+dto.getEndTime()+":00:00', peopleNum " + 
+					dto.getReDate()+"', '"+dto.getStartTime()+":00:00', '"+dto.getEndTime()+":00:00', peopleNum " + 
 					"from study_resultSet";
 			template.update(sql);
 			System.out.println("TimeSet테이블에 시간값 추가 성공");
@@ -270,7 +300,7 @@ public class ReserveDAO {
 	// 당일 시간제 결제 정보  DTO에 저장하고 화면에 출력하기
 	public studyDTO daySelectUser(String getUniqueUser) {
 		try {
-			String sql = "select * from study_timeSet where uniqueUser="+getUniqueUser;
+			String sql = "select * from RESERVE_TIMESET where uniqueUser="+getUniqueUser;
 			// seatNum, startTime, endTime, timeNum, TotalMoney
 			System.out.println("사용자의 결제 정보 DTO에 저장 성공");
 			return template.queryForObject(sql, new BeanPropertyRowMapper<studyDTO>(studyDTO.class));

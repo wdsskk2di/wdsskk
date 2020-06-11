@@ -85,7 +85,7 @@ PaymentController의 reservePaymentChk 로 매핑.
 
 ---------------결제 목록에 예약과 스터디룸이 insert되게 추가하기------------------------------
 
-	사용자 결제 정보를 관리자가 볼 수 있게 study_timeSet 과 연결하기. reservePayUser 폴더에 reservePayUser.class 추가.
+	사용자 결제 정보를 관리자가 볼 수 있게 reserve_timeSet 과 연결하기. reservePayUser 폴더에 reservePayUser.class 추가.
 	안의 메소드는 당일 결제에서 따온 메소드 5개와 새로만든 테이블(reserveTotalSeat)과 연결하는 메소드 1개로 구성.
 		기존 활용: dayPayUser / manageCopy / getUniqueUser / deleteBeforeInfo2 / daySelectUser
 		추가: reserveTotalSeat_Insert => todaytotalSeat_Info를 활용한 것
@@ -97,12 +97,27 @@ PaymentController의 reservePaymentChk 로 매핑.
 	toDate varchar2(14), startTime varchar2(8),
 	endTime varchar2(8), seatNum number(2));
 	
+			=====================reserve_timeSet 테이블 생성===================
+			create table study_timeSet(
+			toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')),
+			reDate varchar2(14),	<-- 예약일 추가
+			startTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')),
+			endTime varchar2(8),
+			seatNum number(2) null,
+			timeNum number(2) not null,
+			TotalMoney number(10) not null,
+			PeopleNum number(1) default 1,
+			phoneNum number(8) not null,
+			uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss'))
+			);
+	
 		----순서----
-		STUDY_RESULTSET 테이블에 seatNum, timeNum, totalMoney, peopleNum, phoneNum, uniqueUser 를 삽입
-		-> study_timeSet 테이블에 STUDY_RESULTSET 테이블 값과 + 당일 날짜 +시작시간 +종료 시간을 삽입 --> 당일 좌석과 다르게 시간:00:00 단위로 기록되게끔 sql문을 수정함
+		STUDY_RESULTSET 테이블에 seatNum, timeNum, totalMoney, peopleNum, phoneNum, uniqueUser 를 삽입		
+			=================study_timeSet(당일 기반) -> reserve_timeSet 테이블로 변경.=====================
+			->  테이블에 STUDY_RESULTSET 테이블 값과 + 당일 날짜 + *예약일* +시작시간 +종료 시간을 삽입 --> 당일 좌석과 다르게 시간:00:00 단위로 기록되게끔 sql문을 수정함
 		-> STUDY_RESULTSET 테이블에서 uniqueUser 값 가져옴
 		-> STUDY_RESULTSET 테이블에 들어가 있는 값 삭제
-		-> study_timeSet 테이블에 들어온, 결제한 사용자의 정보 화면에 출력
+			-> reserve_timeSet 테이블에 들어온, 결제한 사용자의 정보 화면에 출력
 		-> reserveTotalSeat 테이블에 (toDate, startTime, endTime, seatNum) 저장
 	
 
@@ -113,10 +128,11 @@ ReserveChkController를 새로 만들어 예약 확인 매핑은 모두 여기�
 	reserveChk -> 예약 확인 페이지를 보여주는 용
 	reserveChkList -> 사용자가 입력한 번호로 study_timeset 테이블에 값이 있는지 검색해서 reserveChkList 페이지로 넘어가는 용.	<== 현재 여기까지 구현 ==
 	reserveChkResult-> 사용자가 예약 목록을 자세히 보고 싶어 좌석 번호 클릭시 해당 좌석 번호로  study_timeset 테이블에서 자세한 값을 가져와서 reserveChkResult 페이지로 넘어가는 용.
+	
+			============예약 확인시 상세 내역 표시는 어떻게?========================
+			reserveChkResult를 할때 조건을 많이 달아서 서 다시 검색?
+				-> 유저 유니크 코드를 들고와서 좌석a태그에 달아주자. -->이걸로 reserve_timeSet를 검색해서 상세 내용 표시
 
-	reserveChkResult를 할때 조건을 많이 달아서 서 다시 검색? -> 이건 움직이는 조건이 많아지며
-		아니면 새로 테이블 만들어서 List 조회할때 거기다 넣고 그 테이블에서 검색> -> 언제 이 테이블을 비울지 정해야한다. (아마 메인화면이 되지 않을까? 다만 메인화면으로 돌아가기 전까지 계속 테이블 내용이 유지된다는 문제가 있다)
-																seatNum, todate, starttime, endTime, timeNum 테이블에 들어가게 될 속성명
 
 
 

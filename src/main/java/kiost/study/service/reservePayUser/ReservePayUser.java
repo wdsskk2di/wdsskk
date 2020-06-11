@@ -16,6 +16,7 @@ public class ReservePayUser implements KioskService{
 		Map<String, Object> map = model.asMap();
 		studyDTO dto = (studyDTO)map.get("dto");		
 
+		System.out.println(dto.getReDate());
 		// DAO 생성자 사용
 		ReserveDAO dao = new ReserveDAO();
 
@@ -24,7 +25,6 @@ public class ReservePayUser implements KioskService{
 
 //		System.out.println("시간설정값 추가 및 관리용으로 값을 넘겨줌");	 study_timeset
 		dao.manageCopy(dto);
-
 
 		final String getUniqueUser = dao.getUniqueUser();
 		System.out.println("#결제된 코드 값 : "+getUniqueUser);

@@ -21,16 +21,15 @@
  
  .reserve_List span{color: gray;}
 </style>
-
 </head>
 <body>
 <c:import url="/WEB-INF/views/default/header.jsp"/>
 
 <div class="reserve_List">
 <c:choose>
-<c:when test="${result == null }">
+<c:when test="${result == '[]' }">
 <h4>입력하신 휴대폰 번호와 일치하는 예약 내역이 없습니다.</h4>
-<button type="button" onclick="location.href='main'" class="checkBtn">돌아가기</button>
+<button type="button" onclick="location.href='reserveChk?title=c'" class="checkBtn">돌아가기</button>
 </c:when>
 
 <c:otherwise>
@@ -40,7 +39,7 @@
 	<tr><th>좌석 번호</th><th>예약 날짜</th><th>시작 시간</th></tr>
 	
 	<c:forEach var="dto" items="${result }">
-	<tr class="trList"><td><a href="reserveChkResult?seatNum='${dto.getSeatNum() }'">${dto.getSeatNum() }</a></td><td>${dto.getToDate() }</td><td>${dto.getStartTime() }</td></tr>
+	<tr class="trList"><td><a href="reserveChkResult?uniqueUser='${dto.getUniqueUser() }'">${dto.getSeatNum() }</a></td><td>${dto.getReDate() }</td><td>${dto.getStartTime() }</td></tr>
 	</c:forEach>
 	
 	<tr><td colspan="3"><button type="button" onclick="location.href='main'" class="checkBtn">메인으로</button></td></tr>	

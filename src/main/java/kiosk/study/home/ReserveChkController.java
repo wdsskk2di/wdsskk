@@ -13,6 +13,7 @@ import com.care.template.Constant;
 import kiost.study.service.KioskService;
 import kiost.study.service.UserSeatSelectService;
 import kiost.study.service.reservePayUser.ReserveChk;
+import kiost.study.service.reservePayUser.ReserveChkDetail;
 
 @Controller
 public class ReserveChkController {
@@ -59,8 +60,8 @@ public class ReserveChkController {
 		model.addAttribute("title", request.getParameter("title"));
 		
 		//사용자가 클릭한 좌석 번호에 맞는 상세 정보 가져오기
-		model.addAttribute("seatNum", request.getParameter("seatNum"));
-		ks = new ReserveChk();
+		model.addAttribute("uniqueUser", request.getParameter("uniqueUser"));
+		ks = new ReserveChkDetail();
 		ks.execute(model);	
 		
 		return "reserveJSP/reserveChkResult";
