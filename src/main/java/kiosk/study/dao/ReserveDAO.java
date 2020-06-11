@@ -316,7 +316,7 @@ public class ReserveDAO {
 	public void reserveTotalSeat_Insert() {
 		String sql ="insert into reserveTotalSeat(toDate, startTime, endTime, seatNum) " + 
 				"select toDate, startTime, endTime, seatNum " + 
-				"from study_timeSet " + 
+				"from RESERVE_TIMESET " + 
 				"where RESERVE_TIMESET.todate=(to_char(sysdate,'yyyy/mm/dd'))";
 				
 		template.update(sql);
