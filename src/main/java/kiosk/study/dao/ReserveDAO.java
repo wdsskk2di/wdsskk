@@ -28,7 +28,7 @@ public class ReserveDAO {
 			if(result == 0) {
 				sql = "BEGIN\n" + 
 						"  FOR i IN 21..40 LOOP\n" + 
-						"       insert into TEST_RESERVE VALUES(i, to_char(sysdate+1, 'yyyy/MM/dd'), null, null, null, null, null, null, null, null);\n" + 
+						"       insert into TEST_RESERVE VALUES(i, to_char(sysdate+1, 'yyyy/MM/dd'), null, null, null, null, null, null, null);\n" + 
 						"      END LOOP;\n" + 
 						"END;";
 				template.update(sql);
@@ -49,7 +49,7 @@ public class ReserveDAO {
 			if(result == 0) {
 				sql = "BEGIN\n" + 
 						"  FOR i IN 41..43 LOOP\n" + 
-						"       insert into test_studyroom VALUES(i, to_char(sysdate+1, 'yyyy/MM/dd'), null, null, null, null, null, null, null, null);\n" + 
+						"       insert into test_studyroom VALUES(i, to_char(sysdate+1, 'yyyy/MM/dd'), null, null, null, null, null, null, null);\n" + 
 						"      END LOOP;\n" + 
 						"END;";
 				template.update(sql);

@@ -39,7 +39,7 @@
 	<tr><th>좌석 번호</th><th>예약 날짜</th><th>시작 시간</th></tr>
 	
 	<c:forEach var="dto" items="${result }">
-	<tr class="trList"><td><a href="reserveChkResult?uniqueUser='${dto.getUniqueUser() }'">${dto.getSeatNum() }</a></td><td>${dto.getReDate() }</td><td>${dto.getStartTime() }</td></tr>
+	<tr class="trList"><td><a href="reserveChkResult?title=c&uniqueUser='${dto.getUniqueUser() }'">${dto.getSeatNum() }</a></td><td>${dto.getReDate() }</td><td>${dto.getStartTime() }</td></tr>
 	</c:forEach>
 	
 	<tr><td colspan="3"><button type="button" onclick="location.href='main'" class="checkBtn">메인으로</button></td></tr>	

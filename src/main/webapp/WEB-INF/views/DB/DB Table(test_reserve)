@@ -126,12 +126,16 @@ PaymentController의 reservePaymentChk 로 매핑.
 ShowSeatTableDTO에 startTime과 timeNum 변수를 추가.
 ReserveChkController를 새로 만들어 예약 확인 매핑은 모두 여기를 통한다.
 	reserveChk -> 예약 확인 페이지를 보여주는 용
-	reserveChkList -> 사용자가 입력한 번호로 study_timeset 테이블에 값이 있는지 검색해서 reserveChkList 페이지로 넘어가는 용.	<== 현재 여기까지 구현 ==
-	reserveChkResult-> 사용자가 예약 목록을 자세히 보고 싶어 좌석 번호 클릭시 해당 좌석 번호로  study_timeset 테이블에서 자세한 값을 가져와서 reserveChkResult 페이지로 넘어가는 용.
+	reserveChkList -> 사용자가 입력한 번호로 reserve_timeset 테이블에 값이 있는지 검색해서 reserveChkList 페이지로 넘어가는 용.
+		컨트롤러에서 ReserveChk.java -> ReserveChkDAO -> reserveChk_list메소드 실행
+		
+	reserveChkResult-> 사용자가 예약 목록을 자세히 보고 싶어 좌석 번호 클릭시 해당 좌석 번호로  reserve_timeset 테이블에서 자세한 값을 가져와서 reserveChkResult 페이지로 넘어가는 용.
 	
 			============예약 확인시 상세 내역 표시는 어떻게?========================
 			reserveChkResult를 할때 조건을 많이 달아서 서 다시 검색?
-				-> 유저 유니크 코드를 들고와서 좌석a태그에 달아주자. -->이걸로 reserve_timeSet를 검색해서 상세 내용 표시
+				-> 유저 유니크 코드를 들고와서 좌석a태그에 달아주자. -->이걸로 reserve_timeSet을 검색해서 상세 내용 표시
+				컨트롤러에서 ReserveChkDetail.java -> ReserveChkDAO -> reserveChkDetail메소드 실행
+			
 
 
 
