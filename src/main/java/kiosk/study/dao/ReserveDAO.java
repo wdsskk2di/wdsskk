@@ -312,14 +312,35 @@ public class ReserveDAO {
 		}
 	}
 
-	//위치 몰라서 테스트 위해 개인 추가 . KioskController -> dayPayUser -> studyDAO ////중복값이 생기는 문제?
+	//위치 몰라서 테스트 위해 개인 추가 . KioskController -> dayPayUser -> studyDAO ////중복값이 생기는 문제? --> 예약 좌석이니 속성에 reDate를 추가해야 할지도
 	public void reserveTotalSeat_Insert() {
-		String sql ="insert into reserveTotalSeat(toDate, startTime, endTime, seatNum) " + 
-				"select toDate, startTime, endTime, seatNum " + 
+		String sql ="insert into reserveTotalSeat(toDate, reDate, startTime, endTime, seatNum) " + 
+				"select toDate, reDate, startTime, endTime, seatNum " + 
 				"from RESERVE_TIMESET " + 
 				"where RESERVE_TIMESET.todate=(to_char(sysdate,'yyyy/mm/dd'))";
 				
 		template.update(sql);
 	}
+	
+	//reserveTotalSeat 테이블 내 중복값 삭제 sql 또는 트리거?
+	/*
+	 * 중복을 제거하는 sql문
+		delete from RESERVETOTALSEAT a
+		where ROWID>(select min(ROWID) from RESERVETOTALSEAT b 
+		where b.TODATE = a.TODATE and b.STARTTIME = a.STARTTIME
+		and b.endTime = a.ENDTIME and b.SEATNUM = a.seatNum);
+		
+		
+		!!오라클에 트리거 만들어서 reserveTotalSeat에 insert 작동 시 중복 값은 삭제하도록 만듦!!
+		create or REPLACE trigger deldupplidata after
+		insert on reserveTotalSeat
+		BEGIN
+		  delete from RESERVETOTALSEAT a
+		  where ROWID>(select min(ROWID) from RESERVETOTALSEAT b 
+		  where b.TODATE = a.TODATE and b.redate = a.redate
+		  and b.STARTTIME = a.STARTTIME and b.endTime = a.ENDTIME
+		  and b.SEATNUM = a.seatNum);
+		End;
+	*/
 
 }

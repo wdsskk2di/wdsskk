@@ -16,7 +16,6 @@ public class ReservePayUser implements KioskService{
 		Map<String, Object> map = model.asMap();
 		studyDTO dto = (studyDTO)map.get("dto");		
 
-		System.out.println(dto.getReDate());
 		// DAO 생성자 사용
 		ReserveDAO dao = new ReserveDAO();
 

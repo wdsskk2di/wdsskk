@@ -94,11 +94,11 @@ PaymentController의 reservePaymentChk 로 매핑.
 
 	----------예약자들용 reserveTotalSeat 테이블. 당일 좌석의 todaytotalSeat 테이블 역할.
 	create table reserveTotalSeat(
-	toDate varchar2(14), startTime varchar2(8),
+	toDate varchar2(14), *reDate varchar2(14)*, startTime varchar2(8),	<==추가!
 	endTime varchar2(8), seatNum number(2));
 	
 			=====================reserve_timeSet 테이블 생성===================
-			create table study_timeSet(
+			create table  reserve_timeSet(
 			toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')),
 			reDate varchar2(14),	<-- 예약일 추가
 			startTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')),
@@ -118,7 +118,18 @@ PaymentController의 reservePaymentChk 로 매핑.
 		-> STUDY_RESULTSET 테이블에서 uniqueUser 값 가져옴
 		-> STUDY_RESULTSET 테이블에 들어가 있는 값 삭제
 			-> reserve_timeSet 테이블에 들어온, 결제한 사용자의 정보 화면에 출력
-		-> reserveTotalSeat 테이블에 (toDate, startTime, endTime, seatNum) 저장
+		-> reserveTotalSeat 테이블에 (toDate, reDate, startTime, endTime, seatNum) 저장
+		
+		-->reserveTotalSeat 테이블에 insert 일어나면 오라클에서 중복값을 제거하도록 트리거를 생성했음
+			create or REPLACE trigger deldupplidata after
+			insert on reserveTotalSeat
+			BEGIN
+			  delete from RESERVETOTALSEAT a
+			  where ROWID>(select min(ROWID) from RESERVETOTALSEAT b 
+			  where b.TODATE = a.TODATE and b.redate = a.redate
+			  and b.STARTTIME = a.STARTTIME and b.endTime = a.ENDTIME
+			  and b.SEATNUM = a.seatNum);
+			End;
 	
 
 	
