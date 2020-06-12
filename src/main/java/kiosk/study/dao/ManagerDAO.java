@@ -2,6 +2,7 @@ package kiosk.study.dao;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.aspectj.apache.bcel.generic.ReturnaddressType;
@@ -105,8 +106,7 @@ public class ManagerDAO {
 				for(int i = 1; i<=monthLength ; i++) {
 					String sql =  "select sum(totalmoney) from study_TIMESET where todate like '2020/0"+i+"%'";
 					String result = template.queryForObject(sql, String.class);
-					System.out.println("1"+result);
-					
+
 					if(result == null) {
 						month_totalList.add("0");
 					}else {
@@ -156,4 +156,49 @@ public class ManagerDAO {
 			select todate, totalmoney from RESERVE_TIMESET 
 			where todate like '2020/06%';
 		 */
+		
+		public ArrayList<String> day_total() {
+			ArrayList<String> list = new ArrayList<String>();
+			try {
+				Calendar oCalendar = Calendar.getInstance( );
+				int whatDay = (oCalendar.get(Calendar.DAY_OF_WEEK) - 2);
+
+				String sql_day = "select sum(totalmoney) as dayTotal from study_timeset " + 
+						"where todate=(SELECT TRUNC(SYSDATE, 'IW')+"+whatDay+" as weekday FROM DUAL)";
+				
+				String sql_reserve = "select sum(totalmoney) as daytotal from reserve_timeset " + 
+						"where todate=(SELECT TRUNC(SYSDATE, 'IW')+"+whatDay+" as weekday FROM DUAL) and seatNum<41";
+				
+				String sql_studyroom = "select sum(totalmoney) as daytotal from reserve_timeset " + 
+						"where todate=(SELECT TRUNC(SYSDATE, 'IW')+"+whatDay+" as weekday FROM DUAL) and seatNum>40";
+				
+				String result1 = template.queryForObject(sql_day, String.class);
+				if(result1==null) {list.add("0");}
+				else {list.add(result1);}
+				
+				String result2 = template.queryForObject(sql_reserve, String.class);
+				if(result2==null) {list.add("0");}
+				else {list.add(result2);}
+				
+				String result3 = template.queryForObject(sql_studyroom, String.class);
+				if(result3==null) {list.add("0");}
+				else {list.add(result3);}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("일간 매출액 오류");
+			}
+			
+			return list;
+		}
+		/*
+			select sum(totalmoney) as dayTotal from study_timeset 
+			where todate=(SELECT TRUNC(SYSDATE, 'IW') as weekday FROM DUAL);
+			
+			select sum(totalmoney) as daytotal from reserve_timeset 
+			where todate=(SELECT TRUNC(SYSDATE, 'IW') as weekday FROM DUAL) and seatNum<41;
+			
+			select sum(totalmoney) as daytotal from reserve_timeset 
+			where todate=(SELECT TRUNC(SYSDATE, 'IW') as weekday FROM DUAL) and seatNum>40;
+		 * */
 }

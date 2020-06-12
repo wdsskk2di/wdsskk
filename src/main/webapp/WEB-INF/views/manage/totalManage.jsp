@@ -38,8 +38,7 @@
 <c:choose>
 
 <c:when test="${loginResult == 'true' }">
-<p><span> > 일일 매출</span></p>
-<p><span> > 주간 매출</span></p>
+<p><c:import url="/WEB-INF/views/graph/day_graph.jsp"/></p>
 <p><c:import url="/WEB-INF/views/graph/month_graph.jsp"/></p>
 
 </c:when>

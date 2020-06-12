@@ -38,14 +38,28 @@
 	<div>
 		<table class="month_total_table">
 		<tr>
-			<th>1월</th><th>2월</th><th>3월</th><th>4월</th><th>5월</th><th>6월</th>
+			<th>월</th><th>1월</th><th>2월</th><th>3월</th><th>4월</th><th>5월</th><th>6월</th>
 			<th>7월</th><th>8월</th><th>9월</th><th>10월</th><th>11월</th><th>12월</th>
 		</tr>
 		
-		<tr>
+		<tr><th>총액</th>
 		<c:forEach var="result" begin="0" end="11">
 			<c:if test="${month_total[result] == null}"><td>--</td></c:if>
 			<c:if test="${month_total[result] != null}"><td>${month_total[result]}원</td></c:if>		
+		</c:forEach>
+		</tr>
+		
+		<tr><th>당일 좌석</th>
+		<c:forEach var="result" begin="0" end="11">
+			<c:if test="${month_D[result] == null}"><td>--</td></c:if>
+			<c:if test="${month_D[result] != null}"><td>${month_D[result]}원</td></c:if>		
+		</c:forEach>
+		</tr>
+		
+		<tr><th>예약 좌석<br>스터디룸</th>
+		<c:forEach var="result" begin="0" end="11">
+			<c:if test="${month_R[result] == null}"><td>--</td></c:if>
+			<c:if test="${month_R[result] != null}"><td>${month_R[result]}원</td></c:if>		
 		</c:forEach>
 		</tr>
 		
@@ -62,7 +76,7 @@ var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {  type: 'line', 
 	data: { labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
 		datasets: [{ 
-			label: 'My First dataset', 
+			label: '월 매출 총액:', 
 			backgroundColor: 'transparent', 
 			borderColor: 'red', 
 			data: ${month_total}  }]
