@@ -9,6 +9,10 @@
  <!-- 차트 링크 --> 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> 
+<style type="text/css">
+.month_total_table {margin: 0 auto; text-align: center;}
+.month_total_table th, td{width:100px; border: 3px solid #EAEAEA;}
+</style>
 </head>
 
 <body>
@@ -17,7 +21,7 @@
 
 	<div class="row my-3"> 
 		<div class="col">
-		<h4>Bootstrap 4 Chart.js - Line Chart</h4> 
+		<h4>Study R 월간 매출</h4> 
 		</div> 
 	</div> 
 
@@ -31,6 +35,22 @@
 		</div>
 	</div>
 	
+	<div>
+		<table class="month_total_table">
+		<tr>
+			<th>1월</th><th>2월</th><th>3월</th><th>4월</th><th>5월</th><th>6월</th>
+			<th>7월</th><th>8월</th><th>9월</th><th>10월</th><th>11월</th><th>12월</th>
+		</tr>
+		
+		<tr>
+		<c:forEach var="result" begin="0" end="11">
+			<c:if test="${month_total[result] == null}"><td>--</td></c:if>
+			<c:if test="${month_total[result] != null}"><td>${month_total[result]}원</td></c:if>		
+		</c:forEach>
+		</tr>
+		
+		</table>
+	</div>
 </div>
 <!-- 부트스트랩 -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -49,7 +69,7 @@ var chart = new Chart(ctx, {  type: 'line',
 	},
 	options: { 
 		legend: { display: false }, 
-		title: { display : true, text: '월간 매출' }
+		title: { display : false, text: '' }
 	}
 });
 </script>

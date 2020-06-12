@@ -93,26 +93,53 @@ public class ManagerDAO {
 		}
 		
 //////////////////////////////////////////////totalManage.jsp 매출 관리
-		
-		public ArrayList<String> month_total() {
+		//당일 월간 매출액
+		public ArrayList<String> month_total_D() {
 			ArrayList<String> month_totalList = new ArrayList<String>();
 
 			try {
 				Date date = new Date();
 				SimpleDateFormat sdfTime = new SimpleDateFormat("MM");	
 				int monthLength = Integer.parseInt(sdfTime.format(date));
+
 				for(int i = 1; i<=monthLength ; i++) {
-					String sql =  "select sum(totalmoney) from RESERVE_TIMESET where todate like '2020/0"+i+"%'";
+					String sql =  "select sum(totalmoney) from study_TIMESET where todate like '2020/0"+i+"%'";
 					String result = template.queryForObject(sql, String.class);
+					System.out.println("1"+result);
+					
 					if(result == null) {
 						month_totalList.add("0");
 					}else {
 						month_totalList.add(result);
 					}
 				}
-			} catch (Exception e) {e.printStackTrace(); System.out.println("월간 매출액 오류");}
+			}catch (Exception e) {e.printStackTrace(); System.out.println("월간 매출액 오류");}
 			return month_totalList;
 		}
+		
+		//예약, 스터디룸 월간 매출액
+		public ArrayList<String> month_total_R() {
+			ArrayList<String> month_totalList = new ArrayList<String>();
+
+			try {
+				Date date = new Date();
+				SimpleDateFormat sdfTime = new SimpleDateFormat("MM");	
+				int monthLength = Integer.parseInt(sdfTime.format(date));
+
+				for(int i = 1; i<=monthLength ; i++) {
+					String sql =  "select sum(totalmoney) from RESERVE_TIMESET where todate like '2020/0"+i+"%'";
+					String result = template.queryForObject(sql, String.class);
+
+					if(result == null) {
+						month_totalList.add("0");
+					}else {
+						month_totalList.add(result);
+					}
+				}
+			}catch (Exception e) {e.printStackTrace(); System.out.println("월간 매출액 오류");}
+			return month_totalList;
+		}
+		
 		//매출액 관리
 		/*
 		 * select sum(totalmoney) from RESERVE_TIMESET where todate like '2020/06%';	->6월 총매출
