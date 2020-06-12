@@ -84,7 +84,7 @@
 		</c:when>
 		<c:otherwise>
 			<td id="useingTd"><a href="#?seatNum='${seatR_State[i].seatNum}'"><b>${seatR_State[i].seatNum}</b>번</a>
-			<br>사용중<br>${seatR_State[i].endTime}시 종료</td>
+			<br>사용중<br>${seatR_State[i].endTime} 종료</td>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
@@ -98,7 +98,7 @@
 		</c:when>
 		<c:otherwise>
 			<td id="useingTd"><a href="#?seatNum='${seatR_State[i].seatNum}'"><b>${seatR_State[i].seatNum}</b>번</a>
-			<br>사용중<br>${seatR_State[i].endTime}시 종료</td>
+			<br>사용중<br>${seatR_State[i].endTime} 종료</td>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
