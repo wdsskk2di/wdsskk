@@ -55,10 +55,10 @@ public class ShowSeatTableDAO {
 	public ArrayList<ShowReserveDTO> roomPState() {
 		ArrayList<ShowReserveDTO> list = null;
 		try {
-			Date date = new Date();
-			SimpleDateFormat sdfTime = new SimpleDateFormat("HH");			
+//			Date date = new Date();
+//			SimpleDateFormat sdfTime = new SimpleDateFormat("HH");			
 
-			String sql = "select seatNum, nullChk, p"+sdfTime.format(date)+" from test_studyRoom where redate=(to_char(sysdate, 'yyyy/mm/dd')) order by seatNum asc";
+			String sql = "select seatNum, nullChk from test_studyRoom where redate=(to_char(sysdate, 'yyyy/mm/dd')) order by seatNum asc";
 			list = (ArrayList<ShowReserveDTO>)template.query(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
 		} catch (Exception e) {}
 
@@ -69,10 +69,10 @@ public class ShowSeatTableDAO {
 	public ArrayList<ShowReserveDTO> seatRState() {
 		ArrayList<ShowReserveDTO> list = null;
 		try {
-			Date date = new Date();
-			SimpleDateFormat sdfTime = new SimpleDateFormat("HH");
+//			Date date = new Date();
+//			SimpleDateFormat sdfTime = new SimpleDateFormat("HH");
 
-			String sql = "select seatNum, nullChk, p"+sdfTime.format(date)+" from test_reserve where redate=(to_char(sysdate, 'yyyy/mm/dd')) order by seatNum asc";
+			String sql = "select seatNum, nullChk from test_reserve where redate=(to_char(sysdate, 'yyyy/mm/dd')) order by seatNum asc";
 			list = (ArrayList<ShowReserveDTO>)template.query(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
 		} catch (Exception e) {}
 

@@ -28,6 +28,15 @@ public class ReservePayUser implements KioskService{
 		final String getUniqueUser = dao.getUniqueUser();
 		System.out.println("#결제된 코드 값 : "+getUniqueUser);
 
+		//사용자의 좌석 번호에 따라
+		if(dto.getSeatNum()<41) {
+			//예약 결제일 시
+					dao.reserveInfoUpdate(dto, getUniqueUser);
+		}else {
+		//스터디룸 결제일 시
+		dao.studyInfoUpdate(dto, getUniqueUser);
+		}
+		
 //		System.out.println("결제 내역에 대한 모든 입력값들 삭제 완료");  study_resultset 테이블 내역 삭제
 		dao.deleteBeforeInfo2();
 

@@ -10,8 +10,8 @@
 <style type="text/css">
  .payment_success{background-color: white; height:500px; width:600px; text-align: center; text-align: center; margin:0 auto; margin-top: 20%;}
  .payment_success table{margin: 0 auto; width: 270px; border-collapse: collapse; margin-bottom: 10px;}
- .payment_success table th{padding-bottom: 10px; padding-top: 10px;}
- .payment_success table td{padding-bottom: 10px; padding-top: 10px;}
+ .payment_success table th{padding-left:25px; padding-bottom: 10px; padding-top: 10px;}
+ .payment_success table td{text-align:left; padding-left:30px; padding-bottom: 10px; padding-top: 10px;}
  .trList:nth-child(2n+1) th{border-bottom: 1px solid #005766; border-top: 1px solid #005766;}
  .trList:nth-child(2n+1) td{border-bottom: 1px solid #005766; border-top: 1px solid #005766;}
 
@@ -43,7 +43,7 @@
 	
 	<tr class="trList"><th>시작 시간: </th><td>${result.getStartTime() }</td></tr>
 	<tr class="trList"><th>종료 시간: </th><td>${result.getEndTime() }</td></tr>
-	<tr class="trList"><td colspan="2" style="border-bottom:none;">(총 ${result.getTimeNum() } 시간)</td></tr>
+	<tr class="trList"><td colspan="2" style="padding-left:95px; border-bottom:none;">(총 ${result.getTimeNum() } 시간)</td></tr>
 
 	</table>
 		<button type="button" onclick="location.href='main'" class="checkBtn">메인으로</button>

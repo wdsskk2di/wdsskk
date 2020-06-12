@@ -5,6 +5,7 @@ public class ShowReserveDTO {
 	private int seatNum;
 	private String reDate;//예약일(yyyy/MM/dd로)
 	private String nullChk;
+	private String endTime;
 	
 	private String p17;	private String p18;	private String p19;
 	private String p20;	private String p21;	private String p22;
@@ -18,6 +19,9 @@ public class ShowReserveDTO {
 	public String getReDate() {return reDate;}
 	public void setReDate(String reDate) {this.reDate = reDate;}
 
+	public String getEndTime() {return endTime;}
+	public void setEndTime(String endTime) {this.endTime = endTime;}
+	
 	public String getP17() {return p17;}
 	public void setP17(String p17) {this.p17 = p17;}
 	public String getP18() {return p18;}

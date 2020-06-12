@@ -20,10 +20,10 @@ public class ReserveInfoUpdate implements KioskService {
 		//사용자의 좌석 번호에 따라
 		if(dto.getSeatNum()<41) {
 			//예약 결제일 시
-			dao.reserveInfoUpdate(dto);
+			//dao.reserveInfoUpdate(dto);
 		}else {
 			//스터디룸 결제일 시
-			dao.studyInfoUpdate(dto);
+			//dao.studyInfoUpdate(dto);
 		}
 		
 	}

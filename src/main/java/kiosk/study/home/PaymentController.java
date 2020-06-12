@@ -155,11 +155,11 @@ public class PaymentController {
 	public String reservePaymentChk(studyDTO dto, Model model) {
 		model.addAttribute("dto", dto);
 		
-		//타임 테이블 저장
-		ks = new ReserveInfoUpdate();
-		ks.execute(model);
+		//타임 테이블 저장 -> 결제 담당 ReservePayUser 안으로 옮김
+		//ks = new ReserveInfoUpdate();
+		//ks.execute(model);
 		
-		////ReservePayUser: 예약 사용자 결제 값 저장 ->ajax 로 내일 날짜 결제할 시 오류 발생 / resultSet에서 결제고유키값 받아오기 실패 -> 여기서부터 쭉 오류
+		////ReservePayUser: 예약 사용자 결제 값 저장
 		ks = new ReservePayUser();
 		ks.execute(model);
 				

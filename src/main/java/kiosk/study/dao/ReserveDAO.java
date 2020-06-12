@@ -134,7 +134,7 @@ public class ReserveDAO {
 
 /////////////////////////////////////사용자가 사용하려는 시간대를 타임테이블에 update
 	//예약 타임 테이블에 update 
-	public void reserveInfoUpdate(studyDTO dto) {
+	public void reserveInfoUpdate(studyDTO dto, String getUniqueUser) {
 		int timeNum = dto.getTimeNum();	//사용시간
 		int startTime = Integer.parseInt(dto.getStartTime());	//시작 시간
 		int endTime = Integer.parseInt(dto.getEndTime());	//종료 시간
@@ -143,38 +143,38 @@ public class ReserveDAO {
 		try {
 			if(timeNum==1) {
 				if(endTime==23) {
-					sql ="update test_Reserve set p"+startTime+"="+endTime+
+					sql ="update test_Reserve set p"+startTime+"="+getUniqueUser+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_Reserve set p"+startTime+"="+endTime+", p"+endTime+"="+endTime+
+					sql ="update test_Reserve set p"+startTime+"="+getUniqueUser+", p"+endTime+"="+getUniqueUser+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==2) {
 				if(endTime==23) {
-					sql ="update test_Reserve set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+
+					sql ="update test_Reserve set p"+startTime+"="+getUniqueUser+", p"+(startTime+1)+"="+getUniqueUser+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_Reserve set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+
-						", p"+endTime+"="+endTime+
+					sql ="update test_Reserve set p"+startTime+"="+getUniqueUser+", p"+(startTime+1)+"="+getUniqueUser+
+						", p"+getUniqueUser+"="+endTime+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==3) {
 				if(endTime==23) {
-					sql ="update test_Reserve set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
+					sql ="update test_Reserve set p"+startTime+"="+getUniqueUser+", p"+(startTime+1)+"="+getUniqueUser+", p"+(startTime+2)+"="+getUniqueUser+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_Reserve set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
-						", p"+endTime+"="+endTime+
+					sql ="update test_Reserve set p"+startTime+"="+getUniqueUser+", p"+(startTime+1)+"="+getUniqueUser+", p"+(startTime+2)+"="+getUniqueUser+
+						", p"+endTime+"="+getUniqueUser+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==4) {
 				if(endTime==23) {
-					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
-							", p"+(startTime+3)+"="+endTime+
+					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+getUniqueUser+", p"+(startTime+2)+"="+getUniqueUser+
+							", p"+(startTime+3)+"="+getUniqueUser+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
-						", p"+(startTime+3)+"="+endTime+", p"+endTime+"="+endTime+
+					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+getUniqueUser+", p"+(startTime+2)+"="+getUniqueUser+
+						", p"+(startTime+3)+"="+getUniqueUser+", p"+getUniqueUser+"="+getUniqueUser+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}
@@ -186,7 +186,7 @@ public class ReserveDAO {
 	}
 	
 	////스터디룸 타임 테이블에 update 
-	public void studyInfoUpdate(studyDTO dto) {
+	public void studyInfoUpdate(studyDTO dto, String getUniqueUser) {
 		int timeNum = dto.getTimeNum();	//사용시간
 		int startTime = Integer.parseInt(dto.getStartTime());	//시작 시간
 		int endTime = Integer.parseInt(dto.getEndTime());	//종료 시간
@@ -195,38 +195,38 @@ public class ReserveDAO {
 		try {
 			if(timeNum==1) {
 				if(endTime==23) {
-					sql ="update test_studyRoom set p"+startTime+"="+endTime+
+					sql ="update test_studyroom set p"+startTime+"="+getUniqueUser+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+endTime+"="+endTime+
+					sql ="update test_studyroom set p"+startTime+"="+getUniqueUser+", p"+endTime+"="+getUniqueUser+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==2) {
 				if(endTime==23) {
-					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+
+					sql ="update test_studyroom set p"+startTime+"="+getUniqueUser+", p"+(startTime+1)+"="+getUniqueUser+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+
-						", p"+endTime+"="+endTime+
+					sql ="update test_studyroom set p"+startTime+"="+getUniqueUser+", p"+(startTime+1)+"="+getUniqueUser+
+						", p"+getUniqueUser+"="+endTime+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==3) {
 				if(endTime==23) {
-					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
+					sql ="update test_studyroom set p"+startTime+"="+getUniqueUser+", p"+(startTime+1)+"="+getUniqueUser+", p"+(startTime+2)+"="+getUniqueUser+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
-						", p"+endTime+"="+endTime+
+					sql ="update test_studyroom set p"+startTime+"="+getUniqueUser+", p"+(startTime+1)+"="+getUniqueUser+", p"+(startTime+2)+"="+getUniqueUser+
+						", p"+endTime+"="+getUniqueUser+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==4) {
 				if(endTime==23) {
-					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
-							", p"+(startTime+3)+"="+endTime+
+					sql ="update test_studyroom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+getUniqueUser+", p"+(startTime+2)+"="+getUniqueUser+
+							", p"+(startTime+3)+"="+getUniqueUser+
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
-					sql ="update test_studyRoom set p"+startTime+"="+endTime+", p"+(startTime+1)+"="+endTime+", p"+(startTime+2)+"="+endTime+
-						", p"+(startTime+3)+"="+endTime+", p"+endTime+"="+endTime+
+					sql ="update test_studyroom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+getUniqueUser+", p"+(startTime+2)+"="+getUniqueUser+
+						", p"+(startTime+3)+"="+getUniqueUser+", p"+getUniqueUser+"="+getUniqueUser+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}

@@ -1,15 +1,15 @@
 DB Table
 ------------test_reserve 테이블-------------------
-create table test_reserve(seatNum number not null, reDate varchar2(10), nullChk varchar2(8),
-p17 varchar2(8), P18 varchar2(8), P19 varchar2(8),P20 varchar2(8),
-P21 varchar2(8), P22 varchar2(8));
+create table test_reserve(seatNum number not null, reDate varchar2(10), nullChk varchar2(12),
+p17 varchar2(12), P18 varchar2(12), P19 varchar2(12),P20 varchar2(12),
+P21 varchar2(12), P22 varchar2(12));
 
 ==> 좌석번호, 날짜, nullChk(현재 좌석 사용 유무 체크 위한 속성), 17~22시
 
 	=============test_studyroom 테이블 추가==================
-	create table test_studyroom(seatNum number not null, reDate varchar2(10), nullChk varchar2(8),
-	p17 varchar2(8), P18 varchar2(8), P19 varchar2(8),P20 varchar2(8),
-	P21 varchar2(8), P22 varchar2(8));
+	create table test_studyroom(seatNum number not null, reDate varchar2(10), nullChk varchar2(12),
+	p17 varchar2(12), P18 varchar2(12), P19 varchar2(12),P20 varchar2(12),
+	P21 varchar2(12), P22 varchar2(12));
 
 ----------------DB에 내일 날짜 생성---------------------------------
 kioskController에서 reserve.jsp 접속시 페이지로 넘어가기 전에 DB에 내일 날짜 없으면 생성(예약 사용자가 처음 접속하는 경우에만 실행)
@@ -217,13 +217,13 @@ primary key(seatNum)
 insert into showtodaystudyseat(seatNum) values(1);
 
 ------------test_reserve, test_studyroom 테이블-------------------
-create table test_reserve(seatNum number not null, reDate varchar2(10), nullChk varchar2(8),
-p17 varchar2(8), P18 varchar2(8), P19 varchar2(8),P20 varchar2(8),
-P21 varchar2(8), P22 varchar2(8));
+create table test_reserve(seatNum number not null, reDate varchar2(10), nullChk varchar2(12),
+p17 varchar2(12), P18 varchar2(12), P19 varchar2(12),P20 varchar2(12),
+P21 varchar2(12), P22 varchar2(12));
 
-create table test_studyroom(seatNum number not null, reDate varchar2(10), nullChk varchar2(8),
-p17 varchar2(8), P18 varchar2(8), P19 varchar2(8),P20 varchar2(8),
-P21 varchar2(8), P22 varchar2(8));
+create table test_studyroom(seatNum number not null, reDate varchar2(10), nullChk varchar2(12),
+p17 varchar2(12), P18 varchar2(12), P19 varchar2(12),P20 varchar2(12),
+P21 varchar2(12), P22 varchar2(12));
 
 ----------예약자들용 reserveTotalSeat 테이블. 당일 좌석의 todaytotalSeat 테이블 역할.
 create table reserveTotalSeat(

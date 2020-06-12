@@ -78,13 +78,13 @@
 <tr>
 <c:forEach var="i" begin="0" end="9">
 	<c:choose>
-		<c:when test="${seatR_State[i].nullChk == null}">
+		<c:when test="${seatR_State[i].endTime == null}">
 			<td><a href="#?seatNum='${seatR_State[i].seatNum}'"><b>${seatR_State[i].seatNum}</b>번</a>
 			<br>사용가능<br>--</td>
 		</c:when>
 		<c:otherwise>
 			<td id="useingTd"><a href="#?seatNum='${seatR_State[i].seatNum}'"><b>${seatR_State[i].seatNum}</b>번</a>
-			<br>사용중<br>${seatR_State[i].nullChk}시 종료</td>
+			<br>사용중<br>${seatR_State[i].endTime}시 종료</td>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
@@ -92,13 +92,13 @@
 <tr>
 <c:forEach var="i" begin="10" end="19">	
 	<c:choose>
-		<c:when test="${seatR_State[i].nullChk == null}">
+		<c:when test="${seatR_State[i].endTime == null}">
 			<td><a href="#?seatNum='${seatR_State[i].seatNum}'"><b>${seatR_State[i].seatNum}</b>번</a>
 			<br>사용가능<br>--</td>
 		</c:when>
 		<c:otherwise>
 			<td id="useingTd"><a href="#?seatNum='${seatR_State[i].seatNum}'"><b>${seatR_State[i].seatNum}</b>번</a>
-			<br>사용중<br>${seatR_State[i].nullChk}시 종료</td>
+			<br>사용중<br>${seatR_State[i].endTime}시 종료</td>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
@@ -112,13 +112,13 @@
 <tr>
 <c:forEach var="i" begin="0" end="2">	
 	<c:choose>
-		<c:when test="${seatS_State[i].nullChk == null}">
+		<c:when test="${seatS_State[i].endTime == null}">
 			<td style="width: 160px;"><a href="#?seatNum='${seatS_State[i].seatNum}'"><b>${seatS_State[i].seatNum}</b>번</a>
 			<br>사용가능<br>--</td>
 		</c:when>
 		<c:otherwise>
 			<td id="useingTd" style="width: 160px;"><a href="#?seatNum='${seatS_State[i].seatNum}'"><b>${seatS_State[i].seatNum}</b>번</a>
-			<br>사용중<br>${seatS_State[i].nullChk}시 종료</td>
+			<br>사용중<br>${seatS_State[i].endTime} 종료</td>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
