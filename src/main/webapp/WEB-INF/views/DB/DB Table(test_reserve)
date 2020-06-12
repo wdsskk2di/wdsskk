@@ -154,6 +154,108 @@ ReserveChkController를 새로 만들어 예약 확인 매핑은 모두 여기�
 
 
 
+-=-=-=-=-=-=-=-=-=-= 처음 프로젝트 작동 시 오라클 DB에 만들어야할 테이블들 아래에 정리=-=-=-=-=-=-=-=-=-=-=-=-=-
+-- #1  당일 시간제 좌석(통계용) chooseSeatNum -> payment --
+-- 입력값  seatNum Table저장용(사용자 선호도 통계) --
+create table kiosk_day(
+toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')),
+toTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')),
+seatNum number(2) null
+);
+
+-- #2  당일 시간제 좌석(사용자선택) payment -> paymentCheck --
+-- 세션값(seatNum) 입력값 timeNum, timeUseMoney, phoneNum --
+-- dto 값 저장 이후  다음 페이지 계산 시에 저장하는 용도 --
+create table kiosk_dayuser(
+toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')),
+toTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')),
+seatNum number(2) null,
+timeNum number(2) not null,
+TotalMoney number(10) not null,
+phoneNum number(8) not null
+);
+
+-- #3 결제 후 사용자 값 출력 전에  uniqueUser 값 추가 , study_timeSet에  고유키값 제거 --
+create table study_resultSet(
+seatNum number(2) null,
+timeNum number(2) not null,
+TotalMoney number(10) not null,
+PeopleNum number(1) default 1,
+phoneNum number(8) not null,
+uniqueUser varchar2(14) default (to_char(sysdate,'yymmddhh24miss'))
+);
+
+-- #5  결제 후 사용자 값 출력 paymentCheck -> main --
+-- uniqueUser : 사용자 결제후 고유키값 부여, 환불 내역 확인용 --
+create table study_timeSet(
+toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')),
+startTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')),
+endTime varchar2(8),
+seatNum number(2) null,
+timeNum number(2) not null,
+TotalMoney number(10) not null,
+PeopleNum number(1) default 1,
+phoneNum number(8) not null,
+uniqueUser varchar2(14) default (to_char(sysdate,'yymmddhh24miss'))
+);
+
+--좌석 배치
+create table todaytotalSeat(
+toDate varchar2(14),
+startTime varchar2(8),
+endTime varchar2(8),
+seatNum number(2)
+);
+
+create table showtodaystudyseat(
+seatNum number(2),
+endTime varchar2(8) null,
+primary key(seatNum)
+);
+
+--1~20
+insert into showtodaystudyseat(seatNum) values(1);
+
+------------test_reserve, test_studyroom 테이블-------------------
+create table test_reserve(seatNum number not null, reDate varchar2(10), nullChk varchar2(8),
+p17 varchar2(8), P18 varchar2(8), P19 varchar2(8),P20 varchar2(8),
+P21 varchar2(8), P22 varchar2(8));
+
+create table test_studyroom(seatNum number not null, reDate varchar2(10), nullChk varchar2(8),
+p17 varchar2(8), P18 varchar2(8), P19 varchar2(8),P20 varchar2(8),
+P21 varchar2(8), P22 varchar2(8));
+
+----------예약자들용 reserveTotalSeat 테이블. 당일 좌석의 todaytotalSeat 테이블 역할.
+create table reserveTotalSeat(
+toDate varchar2(14), reDate varchar2(14), startTime varchar2(8),
+endTime varchar2(8), seatNum number(2));
+
+--reserve_timeSet 테이블 생성--
+create table  reserve_timeSet(
+toDate varchar2(14) default (to_char(sysdate,'yyyy/mm/dd')),
+reDate varchar2(14),
+startTime varchar2(8) default (to_char(sysdate,'hh24:mi:ss')),
+endTime varchar2(8),
+seatNum number(2) null,
+timeNum number(2) not null,
+TotalMoney number(10) not null,
+PeopleNum number(1) default 1,
+phoneNum number(8) not null,
+uniqueUser number(12) default (to_char(sysdate,'yymmddhh24miss'))
+);
+      
+-->reserveTotalSeat 테이블에 insert 일어나면 오라클에서 중복값을 제거하도록 트리거를 생성했음
+create or REPLACE trigger deldupplidata after
+insert on reserveTotalSeat
+BEGIN
+delete from RESERVETOTALSEAT a
+where ROWID>(select min(ROWID) from RESERVETOTALSEAT b 
+where b.TODATE = a.TODATE and b.redate = a.redate
+and b.STARTTIME = a.STARTTIME and b.endTime = a.ENDTIME
+and b.SEATNUM = a.seatNum);
+End;
+
+commit;
 
 
 
