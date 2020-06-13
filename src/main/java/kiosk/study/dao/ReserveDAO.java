@@ -155,7 +155,7 @@ public class ReserveDAO {
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
 					sql ="update test_Reserve set p"+startTime+"="+getUniqueUser+", p"+(startTime+1)+"="+getUniqueUser+
-						", p"+getUniqueUser+"="+endTime+
+						", p"+endTime+"="+getUniqueUser+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==3) {
@@ -174,7 +174,7 @@ public class ReserveDAO {
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
 					sql ="update test_Reserve set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+getUniqueUser+", p"+(startTime+2)+"="+getUniqueUser+
-						", p"+(startTime+3)+"="+getUniqueUser+", p"+getUniqueUser+"="+getUniqueUser+
+						", p"+(startTime+3)+"="+getUniqueUser+", p"+endTime+"="+getUniqueUser+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}
@@ -207,7 +207,7 @@ public class ReserveDAO {
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
 					sql ="update test_studyroom set p"+startTime+"="+getUniqueUser+", p"+(startTime+1)+"="+getUniqueUser+
-						", p"+getUniqueUser+"="+endTime+
+						", p"+endTime+"="+getUniqueUser+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}else if(timeNum==3) {
@@ -226,7 +226,7 @@ public class ReserveDAO {
 							" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}else{
 					sql ="update test_studyroom set p"+startTime+"="+startTime+", p"+(startTime+1)+"="+getUniqueUser+", p"+(startTime+2)+"="+getUniqueUser+
-						", p"+(startTime+3)+"="+getUniqueUser+", p"+getUniqueUser+"="+getUniqueUser+
+						", p"+(startTime+3)+"="+getUniqueUser+", p"+endTime+"="+getUniqueUser+
 						" where seatNum="+dto.getSeatNum()+" and reDate='"+dto.getReDate()+"'";
 				}
 			}

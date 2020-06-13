@@ -11,8 +11,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.care.template.Constant;
 
+import kiosk.study.dto.ManagerDTO;
 import kiosk.study.dto.ShowReserveDTO;
 import kiosk.study.dto.ShowSeatTableDTO;
+import kiosk.study.dto.studyDTO;
 
 public class ManagerDAO {
 	private JdbcTemplate template;
@@ -157,33 +159,30 @@ public class ManagerDAO {
 			where todate like '2020/06%';
 		 */
 		
-		public ArrayList<String> day_total() {
-			ArrayList<String> list = new ArrayList<String>();
+		public ArrayList<ManagerDTO> day_total() {
+			ArrayList<ManagerDTO> list = new ArrayList<ManagerDTO>();
 			try {
 				Calendar oCalendar = Calendar.getInstance( );
 				int whatDay = (oCalendar.get(Calendar.DAY_OF_WEEK) - 2);
 
-				String sql_day = "select sum(totalmoney) as dayTotal from study_timeset " + 
+				String sql_day = "select sum(totalmoney) as dayTotal, count(*) as userTotal from study_timeset " + 
 						"where todate=(SELECT TRUNC(SYSDATE, 'IW')+"+whatDay+" as weekday FROM DUAL)";
 				
-				String sql_reserve = "select sum(totalmoney) as daytotal from reserve_timeset " + 
+				String sql_reserve = "select sum(totalmoney) as daytotal, count(*) as userTotal from reserve_timeset " + 
 						"where todate=(SELECT TRUNC(SYSDATE, 'IW')+"+whatDay+" as weekday FROM DUAL) and seatNum<41";
 				
-				String sql_studyroom = "select sum(totalmoney) as daytotal from reserve_timeset " + 
+				String sql_studyroom = "select sum(totalmoney) as daytotal, count(*) as userTotal from reserve_timeset " + 
 						"where todate=(SELECT TRUNC(SYSDATE, 'IW')+"+whatDay+" as weekday FROM DUAL) and seatNum>40";
 				
-				String result1 = template.queryForObject(sql_day, String.class);
-				if(result1==null) {list.add("0");}
-				else {list.add(result1);}
+				ManagerDTO result1 = template.queryForObject(sql_day, new BeanPropertyRowMapper<ManagerDTO>(ManagerDTO.class));
+				list.add(result1);
 				
-				String result2 = template.queryForObject(sql_reserve, String.class);
-				if(result2==null) {list.add("0");}
-				else {list.add(result2);}
+				ManagerDTO result2 = template.queryForObject(sql_reserve, new BeanPropertyRowMapper<ManagerDTO>(ManagerDTO.class));
+				list.add(result2);
 				
-				String result3 = template.queryForObject(sql_studyroom, String.class);
-				if(result3==null) {list.add("0");}
-				else {list.add(result3);}
-
+				ManagerDTO result3 = template.queryForObject(sql_studyroom, new BeanPropertyRowMapper<ManagerDTO>(ManagerDTO.class));
+				list.add(result3);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("일간 매출액 오류");
@@ -201,4 +200,31 @@ public class ManagerDAO {
 			select sum(totalmoney) as daytotal from reserve_timeset 
 			where todate=(SELECT TRUNC(SYSDATE, 'IW') as weekday FROM DUAL) and seatNum>40;
 		 * */
+		
+////////////////////////////예약 테이블
+		public ArrayList<ShowReserveDTO> search_reserveTable(String reDate) {
+			ArrayList<ShowReserveDTO> list = new ArrayList<ShowReserveDTO>();
+			try {
+				String sql = "select seatNum, p17, p18, p19, p20, p21, p22 from TEST_RESERVE where redate='"+reDate+"' order by SEATNUM";
+				list = (ArrayList<ShowReserveDTO>)template.query(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(reDate+": 예약 테이블 조회 실패");
+			}
+			return list;
+			
+		}
+		
+		public ArrayList<ShowReserveDTO> search_studyTable(String reDate) {
+			ArrayList<ShowReserveDTO> list = new ArrayList<ShowReserveDTO>();
+			try {
+				String sql = "select seatNum, p17, p18, p19, p20, p21, p22 from TEST_studyroom where redate='"+reDate+"' order by SEATNUM";
+				list = (ArrayList<ShowReserveDTO>)template.query(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println(reDate+": 스터디룸 테이블 조회 실패");
+			}
+			return list;
+			
+		}
 }

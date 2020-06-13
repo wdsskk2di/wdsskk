@@ -37,7 +37,7 @@
 <div class="main">
 <c:choose>
 <c:when test="${loginResult == 'true' }">
-<h2 style="color: #225ea7;">좌석관리 페이지</h2>
+<h2 style="color: #225ea7;">좌석 관리 페이지</h2>
 <div class="seatDiv">
 <h3>>당일 좌석</h3>
 <table>

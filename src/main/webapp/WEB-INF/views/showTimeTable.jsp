@@ -79,7 +79,7 @@ function get_toDate() {
 	try {
 		if(reDate != dateT){
 			$.ajax({
-				url:"reserveToday",
+				url:"reserveDate",
 				type: "GET",	//방식
 				data: {
 					seatNum: '${seatNum }',

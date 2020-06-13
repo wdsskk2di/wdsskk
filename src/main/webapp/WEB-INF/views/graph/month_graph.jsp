@@ -10,8 +10,8 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> 
 <style type="text/css">
-.month_total_table {margin: 0 auto; text-align: center;}
-.month_total_table th, td{width:100px; border: 3px solid #EAEAEA;}
+.total_table {margin: 0 auto; text-align: center;}
+.total_table th, td{width:100px; border: 2px solid #EAEAEA;}
 </style>
 </head>
 
@@ -36,7 +36,7 @@
 	</div>
 	
 	<div>
-		<table class="month_total_table">
+		<table class="total_table">
 		<tr>
 			<th>월</th><th>1월</th><th>2월</th><th>3월</th><th>4월</th><th>5월</th><th>6월</th>
 			<th>7월</th><th>8월</th><th>9월</th><th>10월</th><th>11월</th><th>12월</th>

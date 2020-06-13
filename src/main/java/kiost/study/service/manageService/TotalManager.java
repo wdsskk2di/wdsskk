@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.ui.Model;
 
 import kiosk.study.dao.ManagerDAO;
+import kiosk.study.dto.ManagerDTO;
 
 public class TotalManager implements Manager {
 
@@ -12,14 +13,15 @@ public class TotalManager implements Manager {
 	public void execute(Model model) {
 		ManagerDAO dao = new ManagerDAO();
 		//일간 매출
-		ArrayList<String> day =  dao.day_total();
-		int day_R = Integer.parseInt(day.get(1));
-		int day_S = Integer.parseInt(day.get(2));
+		ArrayList<ManagerDTO> day =  dao.day_total();
+		int day_totalmoney = day.get(0).getDayTotal()+day.get(1).getDayTotal()+day.get(2).getDayTotal();
+		int day_totaluser = day.get(0).getUserTotal()+day.get(1).getUserTotal()+day.get(2).getUserTotal();
 		
 		model.addAttribute("day_D", day.get(0));
-		model.addAttribute("day_R", day_R);
-		model.addAttribute("day_S", day_S);
-		model.addAttribute("day_T", day_R+day_S);
+		model.addAttribute("day_R", day.get(1));
+		model.addAttribute("day_S", day.get(2));
+		model.addAttribute("day_totalmoney", day_totalmoney);
+		model.addAttribute("day_totaluser", day_totaluser);
 		
 		//월간 매출
 		ArrayList<String> month_day = dao.month_total_D();

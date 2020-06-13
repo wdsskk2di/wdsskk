@@ -1,5 +1,9 @@
 package kiosk.study.home;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.SimpleFormatter;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -50,12 +54,46 @@ public class ManagerController {
 	public String reserveManage(HttpSession session, Model model) {
 		String LoginID = (String) session.getAttribute("LoginID");
 		
+		
 		if(LoginID != null) {
+			Date date = new Date();
+			SimpleDateFormat sdfTime = new SimpleDateFormat("yyyy/MM/dd");	
+			String reDate = sdfTime.format(date);
+			
+			model.addAttribute("reDate", reDate);
+			model.addAttribute("Contact", 1);
+
 			mn = new ReserveManager();
 			mn.execute(model);
 		}
 		
 		return "manage/reserveManage";
+	}
+	
+	@RequestMapping(value="select_reserveTable", produces = "application/json;charset=utf8")
+	public String select_reserveTable(@RequestParam("searchDate") String searchDate, Model model) {
+		
+		String date = searchDate.replace("-", "/");
+		model.addAttribute("reDate", date);
+		model.addAttribute("Contact", 2);
+		
+		mn = new ReserveManager();
+		mn.execute(model);
+
+		return "manage/showReserveTable";
+	}
+	
+	@RequestMapping(value="select_studyTable", produces = "application/json;charset=utf8")
+	public String select_study(@RequestParam("searchDate") String searchDate, Model model) {
+		
+		String date = searchDate.replace("-", "/");
+		model.addAttribute("reDate", date);
+		model.addAttribute("Contact", 3);
+		
+		mn = new ReserveManager();
+		mn.execute(model);
+
+		return "manage/showStudyRTable";
 	}
 	
 	@RequestMapping("totalManage")
