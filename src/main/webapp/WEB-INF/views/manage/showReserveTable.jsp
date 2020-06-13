@@ -96,7 +96,7 @@ function popOpen(code) {
 			</c:choose></td>
 			<td><c:choose>
 				<c:when test="${reRDate.p20 == null }">--</c:when>
-				<c:otherwise><a href="#" onclick='popOpen(${reRDate.p10})'>예약 완료</a></c:otherwise>
+				<c:otherwise><a href="#" onclick='popOpen(${reRDate.p20})'>예약 완료</a></c:otherwise>
 			</c:choose></td>
 			<td><c:choose>
 				<c:when test="${reRDate.p21 == null }">--</c:when>
