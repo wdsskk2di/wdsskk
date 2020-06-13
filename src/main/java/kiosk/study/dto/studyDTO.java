@@ -14,6 +14,7 @@ public class studyDTO {
     
     ////예약, 스터디룸 예약날짜 insert위한 변수
     private String reDate;
+    private String toDate;
     
 	public String getTitle() {return title;}
 	public void setTitle(String title) {this.title = title;}
@@ -47,6 +48,9 @@ public class studyDTO {
     ////예약, 스터디룸 예약날짜 insert위한 변수
 	public String getReDate() {return reDate;}
 	public void setReDate(String reDate) {this.reDate = reDate;}
+	
+	public String getToDate() {return toDate;}
+	public void setToDate(String toDate) {this.toDate = toDate;}
 }
 /*
 kiosk 테이블

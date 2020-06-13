@@ -227,4 +227,17 @@ public class ManagerDAO {
 			return list;
 			
 		}
+		
+		//예약 테이블 상세 내용
+		public studyDTO reserve_detail(String uniqueuser) {
+			try {
+				String sql = "select seatNum, todate, redate, starttime, endtime, timenum, totalmoney, peoplenum, phonenum"
+						+ " from reserve_timeset where uniqueuser="+uniqueuser;
+				return template.queryForObject(sql, new BeanPropertyRowMapper<studyDTO>(studyDTO.class));
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("유니크유저 이용한 예약 상세 목록 조회 실패");
+				return null;
+			}
+		}
 }

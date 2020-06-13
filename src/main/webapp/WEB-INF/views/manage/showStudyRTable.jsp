@@ -7,6 +7,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<style type="text/css">
+#reserveDate{margin: 5px;}
+
+#timeTable3 {border-collapse: collapse;}
+#timeTable3 tr:nth-child(2n+1) th, td{border-bottom: 1px solid black; border-top: 1px solid black;}
+
+#timeTable3 th{width:70px; min-width:70px; padding: 2px 5px 2px 5px; }
+#timeTable3 th:nth-child(2n){background-color: #EAEAEA;}
+
+#timeTable3 td{width:70px; min-width:70px; text-align:center; font-size: 13px;}
+#timeTable3 td:nth-child(2n){background-color: #EAEAEA;}
+
+#timeTable3 a{text-decoration: none; color: white; background-color: #005766;}
+</style>
+
 <!-- ajax 사용을 위한 연결 -->
 <script type="text/javascript" src="resources/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="resources/jquery-1.12.1-ui.js"></script>
@@ -52,6 +67,14 @@ function get_StoDate() {
 	} catch (e) {}	
 }
 
+function popOpenS(code) {
+	url="detail_reserve?uniqueuser="+code;
+	name = "_blank";
+	specs="width=400, height=500, top=100, left=200, toolbar=no, menubar=no, resizable=no";
+	window.open(url, name, specs);
+	return false;
+}
+
 </script>
 </head>
 <body>
@@ -63,30 +86,30 @@ function get_StoDate() {
 	<c:forEach var="reSDate" items="${reSDate }">
 		<tr>
 		<th>${reSDate.seatNum }번</th>
-			<th><c:choose>
-				<c:when test="${reSDate.p17 == null }"><button id="17" name="startBtn" type="button" value="17">예약 가능</button></c:when>
-				<c:otherwise><span id="17">예약 완료</span></c:otherwise>
-			</c:choose></th>
-			<th><c:choose>
-				<c:when test="${reSDate.p18 == null }"><button id="18" name="startBtn" type="button" value="18">예약 가능</button></c:when>
-				<c:otherwise><span id="18">예약 완료</span></c:otherwise>
-			</c:choose></th>
-			<th><c:choose>
-				<c:when test="${reSDate.p19 == null }"><button id="19" name="startBtn" type="button" value="19">예약 가능</button></c:when>
-				<c:otherwise><span id="19">예약 완료</span></c:otherwise>
-			</c:choose></th>
-			<th><c:choose>
-				<c:when test="${reSDate.p20 == null }"><button id="20" name="startBtn" type="button" value="20">예약 가능</button></c:when>
-				<c:otherwise><span id="20">예약 완료</span></c:otherwise>
-			</c:choose></th>
-			<th><c:choose>
-				<c:when test="${reSDate.p21 == null }"><button id="21" name="startBtn" type="button" value="21">예약 가능</button></c:when>
-				<c:otherwise><span id="21">예약 완료</span></c:otherwise>
-			</c:choose></th>
-			<th><c:choose>
-				<c:when test="${reSDate.p22 == null }"><button id="22" name="startBtn" type="button" value="22">예약 가능</button></c:when>
-				<c:otherwise><span id="22">예약 완료</span></c:otherwise>
-			</c:choose></th>
+			<td><c:choose>
+				<c:when test="${reSDate.p17 == null }">--</c:when>
+				<c:otherwise><a href="#" onclick='popOpenS(${reSDate.p17})'>예약 완료</a></c:otherwise>
+			</c:choose></td>
+			<td><c:choose>
+				<c:when test="${reSDate.p18 == null }">--</c:when>
+				<c:otherwise><a href="#" onclick='popOpenS(${reSDate.p18})'>예약 완료</a></c:otherwise>
+			</c:choose></td>
+			<td><c:choose>
+				<c:when test="${reSDate.p19 == null }">--</c:when>
+				<c:otherwise><a href="#" onclick='popOpenS(${reSDate.p19})'>예약 완료</a></c:otherwise>
+			</c:choose></td>
+			<td><c:choose>
+				<c:when test="${reSDate.p20 == null }">--</c:when>
+				<c:otherwise><a href="#" onclick='popOpenS(${reSDate.p20})'>예약 완료</a></c:otherwise>
+			</c:choose></td>
+			<td><c:choose>
+				<c:when test="${reSDate.p21 == null }">--</c:when>
+				<c:otherwise><a href="#" onclick='popOpenS(${reSDate.p21})'>예약 완료</a></c:otherwise>
+			</c:choose></td>
+			<td><c:choose>
+				<c:when test="${reSDate.p22 == null }">--</c:when>
+				<c:otherwise><a href="#" onclick='popOpenS(${reSDate.p22})'>예약 완료</a></c:otherwise>
+			</c:choose></td>
 		</tr>
 	</c:forEach>
 	</table>

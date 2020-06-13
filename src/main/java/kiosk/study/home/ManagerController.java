@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.SimpleFormatter;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -18,6 +19,7 @@ import com.care.template.Constant;
 
 import kiost.study.service.manageService.Manager;
 import kiost.study.service.manageService.ManagerLogin;
+import kiost.study.service.manageService.ReserveDetailManager;
 import kiost.study.service.manageService.ReserveManager;
 import kiost.study.service.manageService.SeatManager;
 import kiost.study.service.manageService.TotalManager;
@@ -38,6 +40,7 @@ public class ManagerController {
 		}
 	}
 	
+	//좌석 관리 페이지
 	@RequestMapping("seatManage")
 	public String seatManage(HttpSession session, Model model) {
 		String LoginID = (String) session.getAttribute("LoginID");
@@ -50,6 +53,7 @@ public class ManagerController {
 		return "manage/seatManage";
 	}
 	
+	//예약 관리 페이지
 	@RequestMapping("reserveManage")
 	public String reserveManage(HttpSession session, Model model) {
 		String LoginID = (String) session.getAttribute("LoginID");
@@ -70,6 +74,7 @@ public class ManagerController {
 		return "manage/reserveManage";
 	}
 	
+	//예약 관리 페이지 -> 예약 ajax
 	@RequestMapping(value="select_reserveTable", produces = "application/json;charset=utf8")
 	public String select_reserveTable(@RequestParam("searchDate") String searchDate, Model model) {
 		
@@ -82,7 +87,7 @@ public class ManagerController {
 
 		return "manage/showReserveTable";
 	}
-	
+	//예약 관리 페이지 -> 스터디룸 ajax
 	@RequestMapping(value="select_studyTable", produces = "application/json;charset=utf8")
 	public String select_study(@RequestParam("searchDate") String searchDate, Model model) {
 		
@@ -96,6 +101,19 @@ public class ManagerController {
 		return "manage/showStudyRTable";
 	}
 	
+	//예약 관리 페이지 -> 예약자 있는 테이블 상세 내역 보기
+	@RequestMapping("detail_reserve")
+	public String detail_reserve(HttpServletRequest request, Model model) {
+		String uniqueuser = request.getParameter("uniqueuser");
+		model.addAttribute("uniqueuser", uniqueuser);
+
+		mn = new ReserveDetailManager();
+		mn.execute(model);
+		
+		return "manage/reserveDetailManage";
+	}
+	
+	//매출 관리 페이지
 	@RequestMapping("totalManage")
 	public String totalManage(HttpSession session, Model model) {
 		String LoginID = (String) session.getAttribute("LoginID");
