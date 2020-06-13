@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.aspectj.apache.bcel.generic.ReturnaddressType;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -32,10 +31,11 @@ public class ManagerDAO {
 	
 	//당일좌석 현재 배치도 확인
 	public ArrayList<ShowSeatTableDTO> seatPState() {	
-		ArrayList<ShowSeatTableDTO> list = null;
+		ArrayList<ShowSeatTableDTO> list = new ArrayList<ShowSeatTableDTO>();
 		try {
-			String sql = "select seatNum, endTime from showtodaystudyseat order by seatNum asc";
-			//String sql = "select seatNum, phoneNum, endTime from kiosk where seatNum<21 order by seatNum asc";
+			String sql = "select seatNum, endTime, (select uniqueuser from study_timeset st where st.ENDTIME = ss.ENDTIME) as uniqueuser " + 
+					"from showtodaystudyseat ss order by seatNum asc";
+			
 			list = (ArrayList<ShowSeatTableDTO>)template.query(sql, new BeanPropertyRowMapper<ShowSeatTableDTO>(ShowSeatTableDTO.class));
 		} catch (Exception e) {}
 		return list;
@@ -72,7 +72,7 @@ public class ManagerDAO {
 			Date date = new Date();
 			SimpleDateFormat sdfTime = new SimpleDateFormat("HH");	
 			
-			String sql = "select seatNum, p"+sdfTime.format(date)+", (select endtime from RESERVE_TIMESET where UNIQUEUSER = tr.NULLCHK) as endtime " + 
+			String sql = "select seatNum, p"+sdfTime.format(date)+", nullchk, (select endtime from RESERVE_TIMESET where UNIQUEUSER = tr.NULLCHK) as endtime " + 
 					"from test_studyroom tr where redate=(to_char(sysdate, 'yyyy/mm/dd')) order by seatNum asc";
 			list = (ArrayList<ShowReserveDTO>)template.query(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
 		} catch (Exception e) {e.printStackTrace(); System.out.println("관리자 스터디룸 현재 배치도 오류");}
@@ -87,12 +87,38 @@ public class ManagerDAO {
 				Date date = new Date();
 				SimpleDateFormat sdfTime = new SimpleDateFormat("HH");		
 				
-				String sql =  "select seatNum, p"+sdfTime.format(date)+", (select endtime from RESERVE_TIMESET where UNIQUEUSER = tr.NULLCHK) as endtime " + 
+				String sql =  "select seatNum, p"+sdfTime.format(date)+", nullchk, (select endtime from RESERVE_TIMESET where UNIQUEUSER = tr.NULLCHK) as endtime " + 
 						"from test_reserve tr where redate=(to_char(sysdate, 'yyyy/mm/dd')) order by seatNum asc";
 				list = (ArrayList<ShowReserveDTO>)template.query(sql, new BeanPropertyRowMapper<ShowReserveDTO>(ShowReserveDTO.class));
 			} catch (Exception e) {e.printStackTrace(); System.out.println("관리자 예약좌석 현재 배치도 오류");}
 
 			return list;
+		}
+		
+		//좌석 관리 페이지 상세 내용 - 당일
+		public studyDTO studyP_detail(String uniqueuser) {
+			try {
+				String sql = "select seatNum, todate, starttime, endtime, timenum, totalmoney, peoplenum, phonenum"
+						+ " from study_timeset where uniqueuser="+uniqueuser;
+				return template.queryForObject(sql, new BeanPropertyRowMapper<studyDTO>(studyDTO.class));
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("유니크유저 이용한 당일 현재 이용자 상세 목록 조회 실패");
+				return null;
+			}
+		}
+		
+		//좌석 관리 페이지 상세 내용 -예약, 스터디룸
+		public studyDTO studyRS_detail(String uniqueuser) {
+			try {
+				String sql = "select seatNum, todate, redate, starttime, endtime, timenum, totalmoney, peoplenum, phonenum"
+						+ " from reserve_timeset where uniqueuser="+uniqueuser;
+				return template.queryForObject(sql, new BeanPropertyRowMapper<studyDTO>(studyDTO.class));
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("유니크유저 이용한 예약,스터디룸 현재 이용자 상세 목록 조회 실패");
+				return null;
+			}
 		}
 		
 //////////////////////////////////////////////totalManage.jsp 매출 관리

@@ -21,6 +21,7 @@ import kiost.study.service.manageService.Manager;
 import kiost.study.service.manageService.ManagerLogin;
 import kiost.study.service.manageService.ReserveDetailManager;
 import kiost.study.service.manageService.ReserveManager;
+import kiost.study.service.manageService.SeatDetailManager;
 import kiost.study.service.manageService.SeatManager;
 import kiost.study.service.manageService.TotalManager;
 
@@ -51,6 +52,20 @@ public class ManagerController {
 		}
 		
 		return "manage/seatManage";
+	}
+	
+	//좌석 관리 페이지 상세 내용 보기
+	@RequestMapping("detail_seat")
+	public String detail_seat(HttpServletRequest request, Model model) {
+		String uniqueuser = request.getParameter("uniqueuser");
+		String title = request.getParameter("title");
+		model.addAttribute("uniqueuser", uniqueuser);
+		model.addAttribute("title", title);
+
+		mn = new SeatDetailManager();
+		mn.execute(model);
+		
+		return "manage/seatDetailManage";
 	}
 	
 	//예약 관리 페이지
