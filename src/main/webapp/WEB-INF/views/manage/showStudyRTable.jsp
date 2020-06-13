@@ -13,26 +13,38 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <script type="text/javascript">
+function getFormatDate(date){
+    var year = date.getFullYear();              //yyyy
+    var month = (1 + date.getMonth());          //M
+    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+    var day = date.getDate();                   //d
+    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+    return  year + '-' + month + '-' + day;
+}	
 
 $( document ).ready( function() {  
-	document.getElementById('ScurrentDate').value = new Date().toISOString().substring(0, 10);
+	//document.getElementById('ScurrentDate').value = new Date().toISOString().substring(0, 10);
+	document.getElementById('ScurrentDate').value = '${showReDate}';
 
+	//날짜 입력 가능 범위 제한
+	var toDay = new Date();	toDay.setDate(toDay.getDate()+1);
+	document.getElementById('ScurrentDate').setAttribute("max", getFormatDate(toDay));
+	
 });
 
 //특정날짜 타임테이블 보여주기
 function get_StoDate() {
-	var selectSDate = document.getElementById('ScurrentDate').value;
 	try {		
 			$.ajax({
 				url:"select_studyTable",
 				type: "GET",	//방식
 				data: {
-					searchDate: selectSDate
+					searchDate: document.getElementById('ScurrentDate').value
 				}				
 			})
 			.done(function(data){	//성공시				
 				$("#timeTable3").html(data);
-				document.getElementById('ScurrentDate').value = selectSDate;
+
 			})
 			.fail(function(){	//실패시
 				console.log("실패")

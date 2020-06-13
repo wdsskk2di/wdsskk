@@ -13,27 +13,36 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <script type="text/javascript">
+function getFormatDate(date){
+    var year = date.getFullYear();              //yyyy
+    var month = (1 + date.getMonth());          //M
+    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+    var day = date.getDate();                   //d
+    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+    return  year + '-' + month + '-' + day;
+}	
 
-$( document ).ready( function() {  
-	document.getElementById('RcurrentDate').value = new Date().toISOString().substring(0, 10);
+$( document ).ready( function() { 
 
+	document.getElementById('RcurrentDate').value = '${showReDate}';
+	
+	//날짜 입력 가능 범위 제한
+	var toDay = new Date();	toDay.setDate(toDay.getDate()+1);
+	document.getElementById('RcurrentDate').setAttribute("max", getFormatDate(toDay));
 });
 
 //특정날짜 타임테이블 보여주기
 function get_RtoDate() {
-	var selectRDate = document.getElementById('RcurrentDate').value;
-	try {		
-		
+	try {				
 			$.ajax({
 				url:"select_reserveTable",
 				type: "GET",	//방식
 				data: {
-					searchDate: selectRDate
+					searchDate: document.getElementById('RcurrentDate').value
 				}				
 			})
 			.done(function(data){	//성공시				
 				$("#timeTable2").html(data);
-				document.getElementById('RcurrentDate').value = selectRDate;
 			})
 			.fail(function(){	//실패시
 				console.log("실패")
