@@ -2,13 +2,13 @@ package kiost.study.service;
 
 import org.springframework.ui.Model;
 
-import kiosk.study.dao.studyDAO;
+import kiosk.study.dao.studySeatDAO;
 
 public class UpdateSeatInfo implements KioskService {
 
 	@Override
 	public void execute(Model model) {
-		studyDAO dao = new studyDAO();
+		studySeatDAO dao = new studySeatDAO();
 		dao.updateSeatInfo();
 	}
 
