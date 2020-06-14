@@ -26,8 +26,8 @@ public class StudySeat {
 			model.addAttribute("result", 1);
 		} 
 	}
-	public void UpdateSeatInfo(Model model) {
-		// 당일 좌석 좌석 확인 구현하기
+	public void UpdateSeatInfo() {
+		// 당일 좌석 좌석 확인 구현하기(받을 필요 없는 model값 삭제)
 		studySeatDAO dao = new studySeatDAO();
 		dao.updateSeatInfo();
 	}
