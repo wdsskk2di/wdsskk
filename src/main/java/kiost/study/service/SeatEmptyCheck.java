@@ -1,12 +1,9 @@
 package kiost.study.service;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.ui.Model;
-
-import kiosk.study.dao.studyDAO;
+import kiosk.study.dao.studySeatDAO;
 
 public class SeatEmptyCheck implements KioskService{
 
@@ -17,7 +14,7 @@ public class SeatEmptyCheck implements KioskService{
 		
 		String seatNum = request.getParameter("seatNum");
 		
-		studyDAO dao = new studyDAO();
+		studySeatDAO dao = new studySeatDAO();
 		
 		if(dao.seatEmptyCheck(seatNum)==0) {
 			model.addAttribute("result", 0);
