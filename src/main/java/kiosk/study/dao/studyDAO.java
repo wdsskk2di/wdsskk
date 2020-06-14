@@ -139,8 +139,6 @@ public class studyDAO {
 		}
 	}
 
-	
-	
 	//위치 몰라서 테스트 위해 개인 추가 . KioskController -> dayPayUser -> studyDAO
 	public void todaytotalSeat_Insert() {
 		String sql ="insert into todaytotalSeat(toDate, startTime, endTime, seatNum) " + 
@@ -151,22 +149,6 @@ public class studyDAO {
 		template.update(sql);
 	}
 	
-	
-	
-
-
-	//관리자 결제확인 내역 저장(오류)
-	public int dbManager(studyDTO dto) {
-		try {
-			String sql = "insert into totalManager (select * from study_timeSet where study_timeSet.uniqueUser ="+dto.getUniqueUser();
-			template.update(sql);
-			return 1;
-		}catch(Exception e) {
-			e.printStackTrace();
-			return 0;
-		}
-	}
-
 	//사용자가 선택한 자리 정보 확인
 	public ShowSeatTableDTO checkSeatInfo() {
 		String sql = "select seatNum, toDate, endTime from todaytotalSeat where toDate=(to_char(sysdate,'yyyy/mm/dd'))";
@@ -174,13 +156,6 @@ public class studyDAO {
 		return template.queryForObject(sql, new BeanPropertyRowMapper<ShowSeatTableDTO>(ShowSeatTableDTO.class));
 	}
 
-	//당일 좌석 카테고리 선택 시(배치도 보여줄때마다 작동) 좌석 사용중인지 확인해서 시간 지난건 지우고, 시간 지나지 않은건 그대로..
-	//select EndTIME from kiosk where EndTIME<to_char(sysdate, 'yy/MM/dd hh:mi');
-//	public void updateSeatInfo() {
-//		String sql ="update kiosk set timeNum = null, peopleNum = null, totalMoney = null, phoneNum = null, STARTTIME = null, EndTime = null "
-//				+ "where EndTIME < to_char(sysdate, 'yy/MM/dd hh:mi')";
-//		template.update(sql);
-//	}
 
 
 
