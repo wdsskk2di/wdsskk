@@ -13,13 +13,12 @@ public class DayStudyPay {
 	
 	public studyDAO dao = new studyDAO();
 	public Map<String, Object> map;
-	public HttpServletRequest request;
 	public studyDTO dto;
 	
 	// #1 사용자 좌석 선택 : 통계치
 	public void daySeat_common(Model model) {
 		map = model.asMap();
-		request = (HttpServletRequest)map.get("request");
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		// model 값 받아오기 위해서 두줄 사용
 
 		int seatNum = Integer.parseInt(request.getParameter("seatNum"));
