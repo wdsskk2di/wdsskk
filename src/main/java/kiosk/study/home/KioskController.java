@@ -7,16 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.care.template.Constant;
+
+import kiosk.study.service.dayTime.StudySeat;
 import kiost.study.service.KioskService;
-import kiost.study.service.UpdateSeatInfo;
-//import kiost.study.service.UserSeatSelectService;
-// ***   Service 의 간편성을 높이기 위해서  implement받지 않음   *** //
 import kiost.study.service.UserSeatSelectService;
 
 @Controller
 public class KioskController {
 
-	private KioskService ks;
+	public StudySeat ss = new StudySeat();
 	public UserSeatSelectService us = new UserSeatSelectService();
 
 	public KioskController() {
@@ -54,8 +53,7 @@ public class KioskController {
 		model.addAttribute("title", request.getParameter("title"));
 
 		// 당일 좌석 좌석 확인 구현하기
-		ks = new UpdateSeatInfo();
-		ks.execute(model);
+		ss.UpdateSeatInfo();
 
 		if(request.getParameter("title").equals("p")) {
 			//당일좌석 사용자 유무
@@ -72,8 +70,7 @@ public class KioskController {
 		model.addAttribute("title", request.getParameter("title"));
 
 		// 당일 좌석 좌석 확인 구현하기
-		ks = new UpdateSeatInfo();
-		ks.execute(model);
+		ss.UpdateSeatInfo();
 
 		if(request.getParameter("title").equals("s")) {
 			//당일좌석 사용자 유무
@@ -94,9 +91,8 @@ public class KioskController {
 		////test_studyRoom 테이블에 내일 날짜 없으면 insert(41~43번 좌석)
 		us.studyRoomTable_Chk();
 		
-		//좌석 정보
-//		ks = new UpdateSeatInfo();
-//		ks.execute(model);
+		// 당일 좌석 좌석 확인 구현하기
+//		ss.UpdateSeatInfo();
 
 		if(request.getParameter("title").equals("r")) {
 			//예약좌석 사용자 유무
