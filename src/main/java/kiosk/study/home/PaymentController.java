@@ -12,18 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.care.template.Constant;
 
 import kiosk.study.dto.studyDTO;
-import kiosk.study.service.dayTime.StudyStateService;
-import kiosk.study.service.dayTime.dayPayUser;
+import kiosk.study.service.dayTime.DayStudyPay;
 import kiost.study.service.KioskService;
-import kiost.study.service.ReserveInfoUpdate;
 import kiost.study.service.ReserveStateService;
 import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.reservePayUser.ReservePayUser;
 
 @Controller
 public class PaymentController {
-	
+
 	private KioskService ks;
+	public DayStudyPay dsp = new DayStudyPay();
 	public ReserveStateService rs = new ReserveStateService();
 	
 	public PaymentController() {
@@ -61,8 +60,7 @@ public class PaymentController {
 				model.addAttribute("seatNum", num);
 				
 				// 좌석 선택시 값을  DB저장 
-				ks = new StudyStateService();
-				ks.execute(model);
+				dsp.daySeat_common(model);
 				
 				return "payment";	//결제 페이지로
 				
@@ -101,9 +99,15 @@ public class PaymentController {
 	public String paymenyCheck(Model model, studyDTO dto) {
 		model.addAttribute("dto", dto);
 		
-		// dayPayUser : 사용자 결제 값 저장
-		ks = new dayPayUser();
-		ks.execute(model);
+		// 당일시간제 #2 사용자 입력값 처리 function
+		dsp.daySeatSelect(model);
+		
+		// 당일시간제 #3 사용자 결제 고유값 생성 및 테이블 처리
+		dsp.dayUser_unique(model);
+		
+		// 당일시간제 #4 사용자 결제창 확인용 + 좌석상태값 처리
+		dsp.dayUser_final(model);
+		
 		
 		// : 사용자 결제 내역 출력
 		
