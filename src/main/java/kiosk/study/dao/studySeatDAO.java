@@ -13,6 +13,7 @@ public class studySeatDAO {
 
 	// 당일 좌석 카테고리 선택 시(배치도 보여줄때마다 작동) - 오류발생 가능성 : 날짜가 다양하면 값수령x
 	public void updateSeatInfo() {
+		try {
 		// 결제된 study_timeSet의 값을 todaytotalSeat에 복사해오고 그 값을 showtodaystudyseat에 업데이트
 		String updateSeatInfo = "update SHOWTODAYSTUDYSEAT set showtodaystudyseat.endtime =( "
 				+ "SELECT  TS.endtime FROM( "
@@ -24,6 +25,9 @@ public class studySeatDAO {
 
 		template.update(updateSeatInfo);
 		template.update(resetSeatInfo);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// (당일) 좌석에서 만일 사람이 있는 좌석을 선택했다면 결제창으로 넘어가지 못하게 하기 위한 sql문... -> 스터디룸과 예약좌석은 DB를
