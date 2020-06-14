@@ -13,9 +13,9 @@ import com.care.template.Constant;
 
 import kiosk.study.dto.studyDTO;
 import kiosk.study.service.dayTime.DayStudyPay;
+import kiosk.study.service.dayTime.StudySeat;
 import kiost.study.service.KioskService;
 import kiost.study.service.ReserveStateService;
-import kiost.study.service.SeatEmptyCheck;
 import kiost.study.service.reservePayUser.ReservePayUser;
 
 @Controller
@@ -24,6 +24,7 @@ public class PaymentController {
 	private KioskService ks;
 	public DayStudyPay dsp = new DayStudyPay();
 	public ReserveStateService rs = new ReserveStateService();
+	public StudySeat ss = new StudySeat();
 	
 	public PaymentController() {
 		String config = "classpath:applicationJDBC.xml";
@@ -51,9 +52,17 @@ public class PaymentController {
 			int num = Integer.parseInt(request.getParameter("seatNum"));
 			model.addAttribute("seatNum", request.getParameter("seatNum"));
 			
+			
+			
+			
 			//이미 누군가 있다면 입력되지 않게 돌려야..
-			ks = new SeatEmptyCheck();
-			ks.execute(model);	
+			ss.seatEmptyCheck(model);
+			
+			
+			
+			
+			
+			
 			
 			if(title.equals("p") && num > 0 && num < 21) {  //당일 좌석 + 입력값이 1~20 사이				
 				
@@ -85,8 +94,7 @@ public class PaymentController {
 	/*
 	 else if(title.equals("r") && num > 20 && num < 41){  //예약 좌석 + 입력값이21~40 사이				
 		//이미 누군가 있다면 입력되지 않게 돌려야..
-		ks = new SeatEmptyCheck();
-		ks.execute(model);	
+		ss.seatEmptyCheck(model);	
 				
 		model.addAttribute("seatNum", num);
 		return "payment";	//결제 페이지로
