@@ -40,7 +40,6 @@ public class dayPayUser implements KioskService{
 //		System.out.println("결제 내역에 대한 모든 입력값들 삭제 완료");
 
 		// dto에 TimeSet 테이블 값들 집어넣어줌
-		dao.daySelectUser(getUniqueUser);
 		model.addAttribute("dto",dao.daySelectUser(getUniqueUser));
 		
 //위치 몰라서 테스트 위해 개인 추가 . KioskController -> dayPayUser -> studyDAO

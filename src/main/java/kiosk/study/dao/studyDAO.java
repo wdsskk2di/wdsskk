@@ -128,9 +128,10 @@ public class studyDAO {
 		try {
 			String sql = "select * from study_timeSet where uniqueUser="+getUniqueUser;
 			// seatNum, startTime, endTime, timeNum, TotalMoney
-			System.out.println("사용자의 결제 정보 DTO에 저장 성공 #8");
+			System.out.println("사용자의 결제 정보 DTO에 저장 성공 #8");			
 			return template.queryForObject(sql, new BeanPropertyRowMapper<studyDTO>(studyDTO.class));
-
+			// return으로 저장하는 값이므로 따로 실행하는 것이 아니라 바로 model에 값 추가
+			
 		}catch(final DataAccessException e) {
 			e.printStackTrace();
 			System.out.println("사용자의 결제 정보 DTO에 저장 실패 $8");
@@ -147,6 +148,18 @@ public class studyDAO {
 				
 		template.update(sql);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	// 당일 좌석 카테고리 선택 시(배치도 보여줄때마다 작동)
 		////sql문 수정. 기존 sql은 좌석번호 기준으로 partition되어 날짜가 다양하면 값을 가지고 오지 못했음. PARTITION BY seatNum => PARTITION BY todate
