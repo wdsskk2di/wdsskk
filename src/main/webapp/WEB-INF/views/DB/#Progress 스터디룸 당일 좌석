@@ -1,0 +1,76 @@
+
+*********************************** PaymentController ************************************
+
+public class PaymentController {
+
+int num = Integer.parseInt(request.getParameter("seatNum"));
+			model.addAttribute("seatNum", request.getParameter("seatNum"));
+
+			// 기존에 사용중인 좌석에 대해서 값의 여부 확인하는 코드  ********
+			if(num <= 20) {
+				ss.seatEmptyCheck(model);
+			}else {
+				ss.seatEmptyCheck(model); 		*************************************************** 여기 
+			}
+			
+			
+*********************************** StudySeat ************************************
+			
+public void seatEmptyCheck(Model model) {
+		map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		studySeatDAO dao = new studySeatDAO();
+		
+		if(dao.seatEmptyCheck(request.getParameter("seatNum"))==0) { 			*************************************************** 여기 
+			model.addAttribute("result", 0);
+		}else {
+			model.addAttribute("result", 1);
+		} 
+	}			
+public void seatEmptyCheckR(Model model) {
+		map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		studySeatDAO dao = new studySeatDAO();
+		
+		if(dao.seatEmptyCheckR(request.getParameter("seatNum"))==0) { 			*************************************************** 여기 
+			model.addAttribute("result", 0);
+		}else {
+			model.addAttribute("result", 1);
+		} 
+	}	
+
+*********************************** studySeatDAO ************************************
+
+
+// (당일) 좌석에서 만일 사람이 있는 좌석을 선택했다면 결제창으로 넘어가지 못하게 하기 위한 sql문... -> 스터디룸과 예약좌석은 DB를
+	// 따로 둘거면 다른 메소드 생성 필요
+	public int seatEmptyCheck(String seatNum) {
+		try {
+			String sql = "select EndTIME from SHOWTODAYSTUDYSEAT where seatNum='" + seatNum + "'";
+			String result = template.queryForObject(sql, String.class); // null이면 비어있는 자리. 값이 있으면 사용자가 있는 자리
+
+			if (result.equals("null")) {
+				return 0;
+			} else {
+				return 1;
+			}
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	public int seatEmptyCheckR(String seatNum) {
+		try {
+			String sql = "select EndTIME from showtodayroomSeat where seatNum='" + seatNum + "'";
+			String result = template.queryForObject(sql, String.class); // null이면 비어있는 자리. 값이 있으면 사용자가 있는 자리
+
+			if (result.equals("null")) {
+				return 0;
+			} else {
+				return 1;
+			}
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	
+	
