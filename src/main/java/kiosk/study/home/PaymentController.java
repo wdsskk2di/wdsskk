@@ -52,8 +52,15 @@ public class PaymentController {
 			int num = Integer.parseInt(request.getParameter("seatNum"));
 			model.addAttribute("seatNum", request.getParameter("seatNum"));
 
-			// 기존에 사용중인 좌석에 대해서 값의 여부 확인하는 코드  ********
-			ss.seatEmptyCheck(model);
+			//사용중인 좌석 확인
+			if(num <= 20) {
+				// 좌석 번호가 1~20 : 당일 시간제
+				ss.seatEmptyCheck(model);
+			}else {
+				// 이외의 경우(당일 시간제와 스터디 룸으로 구분되어 있으므로)
+				ss.seatEmptyCheckR(model);
+			}
+			
 	
 			if(title.equals("p") && num > 0 && num < 21) {  //당일 좌석 + 입력값이 1~20 사이				
 				
