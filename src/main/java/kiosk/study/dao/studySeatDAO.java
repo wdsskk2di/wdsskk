@@ -30,11 +30,25 @@ public class studySeatDAO {
 		}
 	}
 
-	// (당일) 좌석에서 만일 사람이 있는 좌석을 선택했다면 결제창으로 넘어가지 못하게 하기 위한 sql문... -> 스터디룸과 예약좌석은 DB를
-	// 따로 둘거면 다른 메소드 생성 필요
+	// 시간제 당일 좌석 확인(SHOWTODAYSTUDYSEAT)
 	public int seatEmptyCheck(String seatNum) {
 		try {
 			String sql = "select EndTIME from SHOWTODAYSTUDYSEAT where seatNum='" + seatNum + "'";
+			String result = template.queryForObject(sql, String.class); // null이면 비어있는 자리. 값이 있으면 사용자가 있는 자리
+
+			if (result.equals("null")) {
+				return 0;
+			} else {
+				return 1;
+			}
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+	// 스터디룸 당일 좌석 확인(SHOWTODAYROOMSEAT)
+	public int seatEmptyCheckR(String seatNum) {
+		try {
+			String sql = "select EndTIME from showtodayroomSeat where seatNum='" + seatNum + "'";
 			String result = template.queryForObject(sql, String.class); // null이면 비어있는 자리. 값이 있으면 사용자가 있는 자리
 
 			if (result.equals("null")) {
