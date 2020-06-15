@@ -31,4 +31,9 @@ public class StudySeat {
 		studySeatDAO dao = new studySeatDAO();
 		dao.updateSeatInfo();
 	}
+	public void UpdateSeatInfo2() {
+		// 스터디룸 당일 좌석 확인 구현하기
+		studySeatDAO dao = new studySeatDAO();
+		dao.updateSeatInfo2();
+	}
 }
