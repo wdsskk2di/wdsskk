@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.ui.Model;
 
 import kiosk.study.dao.ReserveDAO;
+import kiosk.study.dao.StudyRoomDAO;
 import kiosk.study.dao.studyDAO;
 import kiosk.study.dto.studyDTO;
 import kiost.study.service.KioskService;
@@ -18,31 +19,28 @@ public class ReservePayUser implements KioskService{
 
 		// DAO 생성자 사용
 		ReserveDAO dao = new ReserveDAO();
+		StudyRoomDAO daoRo = new StudyRoomDAO();
+		
+		daoRo.reservePayUser(dto);		// 사용자 uniqueUser값 생성
 
-//		System.out.println("uniqueUser값 추가 완료"); study_resultset
-		dao.reservePayUser(dto);
+		daoRo.manageCopy(dto);			// 테이블 복사 + 시간 값 생성
 
-//		System.out.println("시간설정값 추가 및 관리용으로 값을 넘겨줌");	 study_timeset
-		dao.manageCopy(dto);
+		final String getUniqueUser = daoRo.getUniqueUser();	// 사용자 uniqueUser값 추출
 
-		final String getUniqueUser = dao.getUniqueUser();
-		System.out.println("#결제된 코드 값 : "+getUniqueUser);
-
-		//사용자의 좌석 번호에 따라
-		if(dto.getSeatNum()<41) {
-			//예약 결제일 시
-					dao.reserveInfoUpdate(dto, getUniqueUser);
-		}else {
-		//스터디룸 결제일 시
-		dao.studyInfoUpdate(dto, getUniqueUser);
+		// 사용자의 좌석 번호에 따라
+		if (dto.getSeatNum() < 41) {
+			// 예약 결제일 시
+			dao.reserveInfoUpdate(dto, getUniqueUser);
+		} else {
+			// 스터디룸 결제일 시
+			daoRo.studyInfoUpdate(dto, getUniqueUser);
 		}
 		
-//		System.out.println("결제 내역에 대한 모든 입력값들 삭제 완료");  study_resultset 테이블 내역 삭제
-		dao.deleteBeforeInfo2();
+		daoRo.deleteBeforeInfo2();	//STUDY_RESULTSET의 내용 삭제
 
 
 //		dto에 study_timeSet 테이블 중 해당 코드값에 해당하는 릴레이션 값을 집어넣어줌 -> 화면 출력
-		model.addAttribute("dto",dao.daySelectUser(getUniqueUser));
+		model.addAttribute("dto",daoRo.daySelectUser(getUniqueUser));
 		
 //		KioskController -> dayPayUser -> studyDAO
 		dao.reserveTotalSeat_Insert();
