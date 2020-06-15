@@ -15,6 +15,7 @@ public class StudySeat {
 	public Map<String, Object> map;
 	public studyDTO dto;
 	
+	// 당일 시간제 좌석 확인
 	public void seatEmptyCheck(Model model) {
 		map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
@@ -26,6 +27,19 @@ public class StudySeat {
 			model.addAttribute("result", 1);
 		} 
 	}
+	// 스터디룸 당일 좌석 확인
+	public void seatEmptyCheckR(Model model) {
+		map = model.asMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		studySeatDAO dao = new studySeatDAO();
+		
+		if(dao.seatEmptyCheckR(request.getParameter("seatNum"))==0) {
+			model.addAttribute("result", 0);
+		}else {
+			model.addAttribute("result", 1);
+		} 
+	}
+	
 	public void UpdateSeatInfo() {
 		// 당일 좌석 좌석 확인 구현하기(받을 필요 없는 model값 삭제)
 		studySeatDAO dao = new studySeatDAO();
