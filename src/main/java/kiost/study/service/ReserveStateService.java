@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.ui.Model;
 
 import kiosk.study.dao.ReserveDAO;
+import kiosk.study.dao.StudyRoomDAO;
 
 public class ReserveStateService {
 	
@@ -14,11 +15,16 @@ public class ReserveStateService {
 		String seatNum = (String) map.get("seatNum");
 		String title = (String) map.get("title");
 		
-		ReserveDAO dao = new ReserveDAO();
+		ReserveDAO daoRs = new ReserveDAO();
+		StudyRoomDAO daoRo = new StudyRoomDAO();
 		if(title.equals("r")) {
-			model.addAttribute("reState", dao.checkReserveInfo(seatNum));
+			model.addAttribute("reState", daoRs.checkReserveInfo(seatNum));
 		}else {
-			model.addAttribute("reState", dao.checkStudyRoomInfo(seatNum));
+			// 변경사항 수정중 #2 : studyRoom 당일 좌석 예약 하는 경우 
+			System.out.println("studyRomm 당일 좌석 예약 #1");
+			
+			model.addAttribute("reState", daoRo.checkStudyRoomInfo(seatNum));
+			
 		}
 	}
 	
@@ -28,11 +34,12 @@ public class ReserveStateService {
 		String seatNum = (String) map.get("seatNum");
 		String title = (String) map.get("title");
  
-		ReserveDAO dao = new ReserveDAO();
+		ReserveDAO daoRs = new ReserveDAO();
+		StudyRoomDAO daoRo = new StudyRoomDAO();
 		if(title.equals("r")) {
-			model.addAttribute("reState", dao.checkTmrReserveInfo(seatNum));
+			model.addAttribute("reState", daoRs.checkTmrReserveInfo(seatNum));
 		}else {
-			model.addAttribute("reState", dao.checkTmrStudyRoomInfo(seatNum));
+			model.addAttribute("reState", daoRo.checkTmrStudyRoomInfo(seatNum));
 		}
 	}
 
