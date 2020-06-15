@@ -70,11 +70,11 @@ public class KioskController {
 		model.addAttribute("title", request.getParameter("title"));
 
 		// 당일 좌석 좌석 확인 구현하기
-		ss.UpdateSeatInfo();
+		ss.UpdateSeatInfo2();
 
 		if(request.getParameter("title").equals("s")) {
 			//당일좌석 사용자 유무
-			us.roomPState(model);
+//			us.roomPState(model);
 		}
 
 		return "chooseSeatNum";
