@@ -66,7 +66,20 @@ public class PaymentController {
 				
 			}else if(title.equals("s") && num > 40 && num < 44){ // 스터디룸 + 입력값이 41~43 사이				
 				//스터디룸의 타임테이블				
-				rs.reserveToday(model);			
+				rs.reserveToday(model);		
+				
+				// 스터디룸과 예약제 시간 나눔 변경 수정중 
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				
 				model.addAttribute("seatNum", num);
 				return "payment";	//결제 페이지로
