@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.care.template.Constant;
 
 import kiosk.study.dto.studyDTO;
+import kiosk.study.service.dayTime.DayRoomPay;
 import kiosk.study.service.dayTime.DayStudyPay;
 import kiosk.study.service.dayTime.StudySeat;
 import kiost.study.service.KioskService;
@@ -23,6 +24,8 @@ public class PaymentController {
 
 	private KioskService ks;
 	public DayStudyPay dsp = new DayStudyPay();
+	public DayRoomPay drp = new DayRoomPay();
+	
 	public ReserveStateService rs = new ReserveStateService();
 	public StudySeat ss = new StudySeat();
 	
@@ -100,18 +103,32 @@ public class PaymentController {
 	
 	//당일 좌석, 당일 스터디룸 결제
 	@PostMapping("paymentCheck")
-	public String paymenyCheck(Model model, studyDTO dto) {
+	public String paymenyCheck(Model model, studyDTO dto, HttpServletRequest request) {
+
+		String title = request.getParameter("title");
 		model.addAttribute("dto", dto);
-		
-		// 당일시간제 #2 사용자 입력값 처리 function
-		dsp.daySeatSelect(model);
-		
-		// 당일시간제 #3 사용자 결제 고유값 생성 및 테이블 처리
-		dsp.dayUser_unique(model);
-		
-		// 당일시간제 #4 사용자 결제창 확인용 + 좌석상태값 처리
-		dsp.dayUser_final(model);
-		
+
+		if (title.equals("p")) {
+			// 당일시간제 #2 사용자 입력값 처리 function
+			dsp.daySeatSelect(model);
+
+			// 당일시간제 #3 사용자 결제 고유값 생성 및 테이블 처리
+			dsp.dayUser_unique(model);
+
+			// 당일시간제 #4 사용자 결제창 확인용 + 좌석상태값 처리
+			dsp.dayUser_final(model);
+			
+		} else if (title.equals("s")) {
+			// 당일룸 #2 사용자 입력값 처리 function
+			drp.dayRoomSelect(model);
+			
+			// 당일룸 #3 사용자 결제 고유값 생성 및 테이블 처리
+			drp.dayUser_unique(model);
+			
+			// 당일룸 #4 사용자 결제창 확인용 + 좌석상태값 처리
+			drp.dayUser_final(model);
+			
+		}
 		
 		// : 사용자 결제 내역 출력
 		
