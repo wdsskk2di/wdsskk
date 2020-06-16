@@ -11,21 +11,6 @@ import kiosk.study.dao.StudyRoomDAO;
 
 public class ReserveStateService {
 	
-	/*
-	public Map<String, Object> map;
-	
-	// #1 사용자 좌석 선택 : 통계치
-		public void daySeat_common(Model model) {
-			map = model.asMap();
-			HttpServletRequest request = (HttpServletRequest)map.get("request");
-			// model 값 받아오기 위해서 두줄 사용
-
-			int seatNum = Integer.parseInt(request.getParameter("seatNum"));
-	 
-			// 좌석 선택 값을 DB에 저장
-			dao.statSeat(seatNum);
-		}
-		*/
 	
 	// 예약 당일 좌석값
 	public void reserveToday(Model model) {
