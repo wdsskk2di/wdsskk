@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.care.template.Constant;
 
 import kiosk.study.dto.studyDTO;
-import kiosk.study.service.dayTime.DayRoomPay;
-import kiosk.study.service.dayTime.DayStudyPay;
-import kiosk.study.service.dayTime.StudySeat;
-import kiost.study.service.KioskService;
-import kiost.study.service.ReserveStateService;
+import kiosk.study.service.DayRoomPay;
+import kiosk.study.service.DayStudyPay;
+import kiosk.study.service.StudySeat;
 import kiost.study.service.reservePayUser.ReservePayUser;
+import kiost.study.service_old.KioskService;
+import kiost.study.service_old.ReserveStateService;
 
 @Controller
 public class PaymentController {

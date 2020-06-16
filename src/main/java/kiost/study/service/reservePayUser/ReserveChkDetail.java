@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.ui.Model;
 
 import kiosk.study.dao.ReserveChkDAO;
-import kiost.study.service.KioskService;
+import kiost.study.service_old.KioskService;
 
 public class ReserveChkDetail implements KioskService {
 

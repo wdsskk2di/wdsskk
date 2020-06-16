@@ -1,4 +1,4 @@
-package kiosk.study.service.dayTime;
+package kiosk.study.service;
 
 import java.util.Map;
 

@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.care.template.Constant;
 
-import kiost.study.service.KioskService;
-import kiost.study.service.UserSeatSelectService;
 import kiost.study.service.reservePayUser.ReserveChk;
 import kiost.study.service.reservePayUser.ReserveChkDetail;
+import kiost.study.service_old.KioskService;
+import kiost.study.service_old.UserSeatSelectService;
 
 @Controller
 public class ReserveChkController {

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.care.template.Constant;
 
-import kiost.study.service.KioskService;
-import kiost.study.service.ReserveStateService;
+import kiost.study.service_old.KioskService;
+import kiost.study.service_old.ReserveStateService;
 
 @Controller
 public class TimeTableController {

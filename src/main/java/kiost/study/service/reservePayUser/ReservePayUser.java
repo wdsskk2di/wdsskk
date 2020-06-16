@@ -9,7 +9,7 @@ import kiosk.study.dao.ReserveDAO;
 import kiosk.study.dao.StudyRoomDAO;
 import kiosk.study.dao.studyDAO;
 import kiosk.study.dto.studyDTO;
-import kiost.study.service.KioskService;
+import kiost.study.service_old.KioskService;
 
 public class ReservePayUser implements KioskService{
 	public void execute(Model model) {

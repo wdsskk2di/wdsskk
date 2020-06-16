@@ -8,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.care.template.Constant;
 
-import kiosk.study.service.dayTime.StudySeat;
-import kiost.study.service.KioskService;
-import kiost.study.service.UserSeatSelectService;
+import kiosk.study.service.StudySeat;
+import kiost.study.service_old.KioskService;
+import kiost.study.service_old.UserSeatSelectService;
 
 @Controller
 public class KioskController {
